@@ -1,0 +1,3 @@
+1492512796126	Encapsulate field 'lastEventTime'
+1492526969158	Encapsulate field 'elapstime'
+1492613220517	Extract method 'getProcessCasesIterator'

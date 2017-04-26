@@ -1,0 +1,7 @@
+package edu.cwi.espionage.views;
+
+import LabelProvider;
+
+public class ProcessCasesLabelProvider extends LabelProvider {
+
+}

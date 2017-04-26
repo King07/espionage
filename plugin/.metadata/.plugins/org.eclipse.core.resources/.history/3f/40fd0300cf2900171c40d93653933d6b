@@ -1,0 +1,52 @@
+package edu.cwi.espionage.util;
+
+import java.time.Instant;
+import java.util.Date;
+
+import javax.swing.JFrame;
+
+import edu.cwi.espionage.model.ProcessCase;
+
+public class LineChart extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	public LineChart(String applicationTitle) {
+		super(applicationTitle);
+		// This will create the dataset
+//		CategoryDataset dataset = createDataset(processCase);
+		// based on the dataset we create the chart
+//		JFreeChart chart = createChart(dataset, chartTitle);
+		// we put the chart into a panel
+//		ChartPanel chartPanel = new ChartPanel(chart);
+//		// default size
+//		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//		// add it to our application
+//		setContentPane(chartPanel);
+
+	}
+
+	/**
+	 * Creates a sample dataset
+	 */
+	private CategoryDataset createDataset(ProcessCase processCase) {
+		DefaultCategoryDataset result = new DefaultCategoryDataset();
+		for (ProcessCase p : processCase.getByDate()) {
+			result.addValue(DateManipulator.getHoursFromDiff(p.getTotalTime()), "Amount of Time", DateManipulator
+					.getFormatedDate(Date.from(Instant.ofEpochSecond(p.getLastEventTime())), "yyyy-MM-dd"));
+		}
+		return result;
+
+	}
+
+	/**
+	 * Creates a chart
+	 */
+	public JFreeChart createChart(String title, ProcessCase processCase) {
+		CategoryDataset dataset = createDataset(processCase);
+		JFreeChart chart = ChartFactory.createLineChart3D(title, "DATE", "EFFORT TIME", dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		return chart;
+
+	}
+}

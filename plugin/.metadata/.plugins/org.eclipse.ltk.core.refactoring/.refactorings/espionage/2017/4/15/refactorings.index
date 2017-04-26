@@ -1,0 +1,11 @@
+1491817539080	Encapsulate field 'caseId'
+1491817550702	Encapsulate field 'timestamp'
+1491817556457	Encapsulate field 'activity'
+1491817943868	Encapsulate field 'caseId'
+1491817953350	Encapsulate field 'events'
+1491817962647	Encapsulate field 'idleTime'
+1491817970445	Encapsulate field 'totalTime'
+1491913521227	Rename local variable 'com'
+1491937473447	Delete element
+1491937488468	Delete element
+1491946940429	Extract local variable 'epochSecond'

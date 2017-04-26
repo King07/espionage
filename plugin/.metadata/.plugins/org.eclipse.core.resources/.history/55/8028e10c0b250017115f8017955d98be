@@ -1,0 +1,9 @@
+package edu.cwi.espionage.util;
+
+public class Utils {
+	
+	public static String getClassName(String pathName){
+		return "";
+	}
+
+}

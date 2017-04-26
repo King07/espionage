@@ -1,0 +1,6 @@
+output.. = bin/
+bin.includes = plugin.xml,\
+               META-INF/,\
+               icons/,\
+               contexts.xml,\
+               lib/jfreechart-1.0.19.jar

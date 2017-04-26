@@ -1,0 +1,17 @@
+1492963097139	Rename method 'getCases'
+1492971248324	Rename local variable 'category'
+1492971261688	Rename local variable 'book'
+1492971703511	Rename local variable 'it'
+1492971717183	Rename local variable 'pair'
+1492971752467	Rename local variable 'it2'
+1492971767768	Rename local variable 'pair2'
+1493043082403	Rename local variable 'htmlView'
+1493043154779	Rename field 'htmlPane'
+1493106182826	Rename method 'displayURL'
+1493106428098	Rename type 'Date'
+1493106583829	Rename type 'DateFormatter'
+1493112801365	Rename type 'PieChart'
+1493145566668	Delete element
+1493210262217	Rename method 'getHoursFromDiff'
+1493210803386	Rename type 'TreeDemo'
+1493210868835	Delete element

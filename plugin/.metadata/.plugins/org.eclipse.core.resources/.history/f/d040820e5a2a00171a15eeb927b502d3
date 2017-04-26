@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Espionage
+Bundle-SymbolicName: edu.cwi.espionage;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: espionage.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/jcommon-1.0.23.jar,
+ lib/jfreechart-1.0.19-experimental.jar,
+ lib/jfreechart-1.0.19-swt.jar,
+ lib/jfreechart-1.0.19.jar

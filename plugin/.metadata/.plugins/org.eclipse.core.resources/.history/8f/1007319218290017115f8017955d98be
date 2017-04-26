@@ -1,0 +1,43 @@
+package edu.cwi.espionage.util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+public class Date {
+	
+	public static long add(long initialDate, long nextDate){
+		return initialDate + nextDate;
+	}
+	
+	public static long diff(long initialDate, long nextDate){
+		return nextDate - initialDate;
+	}
+	
+	public static String getFormatedDiff(long diff){
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		return diffDays + " days, "+diffHours + " hours, "+diffMinutes + " minutes, "+diffSeconds + " seconds.";
+	}
+	
+	public static String getFormatedDate(String date, String pattern) {
+//		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		java.util.Date d = new java.util.Date();
+		try {
+			d = simpleDateFormat.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return d.toString();
+	}
+	
+	
+	
+	
+
+}

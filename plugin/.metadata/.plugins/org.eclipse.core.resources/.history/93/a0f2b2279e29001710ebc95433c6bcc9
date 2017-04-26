@@ -1,0 +1,65 @@
+package edu.cwi.espionage.util;
+
+import java.time.Instant;
+import java.util.Date;
+
+import javax.swing.JFrame;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
+
+import edu.cwi.espionage.model.ProcessCase;
+
+
+public class LineChart extends JFrame {
+
+        private static final long serialVersionUID = 1L;
+
+        public LineChart(String applicationTitle, String chartTitle, ProcessCase processCase) {
+        super(applicationTitle);
+        // This will create the dataset
+        DefaultCategoryDataset dataset = createDataset(processCase);
+        // based on the dataset we create the chart
+        JFreeChart chart = createChart(dataset, chartTitle);
+        // we put the chart into a panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        // default size
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        // add it to our application
+        setContentPane(chartPanel);
+
+    }
+
+    /**
+     * Creates a sample dataset
+     */
+    private  DefaultCategoryDataset createDataset(ProcessCase processCase) {
+    	DefaultCategoryDataset result = new DefaultCategoryDataset();
+    	for (ProcessCase p : processCase.getByDate()) {
+//    		rowData[j][columnNames.length-2] = DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(processCase.getByDate().get(j).getLastEventTime())),"yyyy-MM-dd");
+//			rowData[j][columnNames.length-1] = DateManipulator.getFormatedDiff(processCase.getByDate().get(j).getTotalTime());
+    		result.addValue(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(p.getLastEventTime())),"yyyy-MM-dd"), 
+    				"Amount of Time", 
+    			 DateManipulator.getHoursFromDiff(p.getTotalTime()));
+		}
+        return result;
+
+    }
+
+    /**
+     * Creates a chart
+     */
+    private JFreeChart createChart(DefaultCategoryDataset dataset, String title) {
+
+        JFreeChart chart = ChartFactory.createLineChart3D(title, "DATE", "EFFORT TIME", dataset, PlotOrientation.VERTICAL, true,true,false);
+        return chart;
+
+    }
+}
