@@ -1,0 +1,4 @@
+1493627345559	Extract method 'getProjectName'
+1493634431539	Encapsulate field 'startTime'
+1493634734429	Extract local variable 'fDate'
+1493653102285	Extract method 'addPointToXY'

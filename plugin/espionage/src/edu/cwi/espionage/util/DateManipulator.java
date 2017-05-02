@@ -1,6 +1,8 @@
 package edu.cwi.espionage.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 public class DateManipulator {
 	
@@ -24,6 +26,26 @@ public class DateManipulator {
 		int diffHours = (int) (diff / (60 * 1000));
 		Integer format = new Integer(diffHours);
 		return format;
+	}
+	
+	public static Integer getSecondsFromDiff(long diff){
+		int diffMins = (int) (diff / 1000);
+		Integer format = new Integer(diffMins);
+		return format;
+	}
+	
+	public static Date getDateFromString(String aDate, String format){
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+
+        try {
+
+            Date date = formatter.parse(aDate);
+            return date;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+		return null;
 	}
 	
 	public static Integer getHoursFromDiff(long diff){

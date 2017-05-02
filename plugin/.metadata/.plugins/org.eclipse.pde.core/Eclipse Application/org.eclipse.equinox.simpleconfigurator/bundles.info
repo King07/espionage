@@ -21,8 +21,8 @@ com.ibm.icu,56.1.0.v201601250100,file:/Applications/Eclipse.app/Contents/Eclipse
 com.jcraft.jsch,0.1.53.v201508180515,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.jcraft.jsch_0.1.53.v201508180515.jar,4,false
 com.sun.el,2.2.0.v201303151357,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.sun.el_2.2.0.v201303151357.jar,4,false
 edu.cmu.scs.fluorite,0.11.0.201504031625,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/edu.cmu.scs.fluorite_0.11.0.201504031625/,4,false
-edu.cwi.espionage,1.0.0.qualifier,file:/Users/user/Documents/workspace/plugin/espionage/,4,false
-edu.cwi.espionage.jfreechart.libs,1.0.0,file:/Users/user/Documents/workspace/plugin/edu.cwi.espionage.jfreechart.libs/,4,false
+edu.cwi.espionage,1.0.0.qualifier,file:/Users/user/Documents/workspace/dev/espionage/plugin/espionage/,4,false
+edu.cwi.espionage.jfreechart.libs,1.0.0,file:/Users/user/Documents/workspace/dev/espionage/plugin/edu.cwi.espionage.jfreechart.libs/,4,false
 impulse,0.1.0.201510201930,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/impulse_0.1.0.201510201930.jar,4,false
 javaewah,0.7.9.v201605172130,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/javaewah_0.7.9.v201605172130.jar,4,false
 javax.annotation,1.2.0.v201602091430,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/javax.annotation_1.2.0.v201602091430.jar,4,false

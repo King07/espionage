@@ -9,6 +9,7 @@ import edu.cwi.espionage.util.Utils;
 public class ProcessCase {
 	private String caseId;
 	private List<Event> events;
+	private long startTime;
 	private long idleTime;
 	private long lastEventTime;
 	
@@ -46,8 +47,10 @@ public class ProcessCase {
 	}
 
 	public long getTotalTime() {
-		Event event = events.get(events.size() - 1);
-		return event.getElapstime();
+//		Event event = events.get(events.size() - 1);
+//		return event.getElapstime();
+		System.out.println(getStartTime()+"-"+getLastEventTime()+"="+DateManipulator.diff(getStartTime(), getLastEventTime()));
+		return DateManipulator.diff(getStartTime(), getLastEventTime())*1000;
 	}
 	
 	public List<ProcessCase> getByDate() {
@@ -58,18 +61,19 @@ public class ProcessCase {
 			ProcessCase pcTemp = new ProcessCase(getCaseId());
 			for (Event e : events) {
 				if(topEvent.compareTo(e) == 0){
-					System.out.println("\\====>"+e.getActivity());
-					System.out.println("\\====>"+e.getTimestamp());
-					System.out.println("\\====>"+e.getTimestamp().getTime()/1000);
+					if(pcTemp.getEvents().isEmpty()){
+						pcTemp.setStartTime(e.getTimestamp().getTime()/1000);
+					}
 					pcTemp.addEvents(e);
 					pcTemp.setLastEventTime(e.getTimestamp().getTime()/1000);
 					eventsTemp.remove(e);
 				}
 			}
-			System.out.println("NOU LA: ===> "+DateManipulator.getMinutesFromDiff(pcTemp.getTotalTime()));
+			System.out.println("getTotalTime: ===> "+DateManipulator.getMinutesFromDiff(pcTemp.getTotalTime()));
+//			System.out.println(pcTemp.getStartTime()+"<=====>"+pcTemp.getLastEventTime());
 			pc.add(pcTemp);
 		}
-		
+		System.out.println("getIdleTime: ===> "+DateManipulator.getMinutesFromDiff(getIdleTime()));
 		return pc;
 	}
 	
@@ -89,6 +93,14 @@ public class ProcessCase {
 
 	public void setLastEventTime(long lastEventTime) {
 		this.lastEventTime = lastEventTime;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
 	}
 	
 }

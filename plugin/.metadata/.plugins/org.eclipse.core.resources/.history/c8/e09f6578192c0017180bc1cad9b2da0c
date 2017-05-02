@@ -1,0 +1,5 @@
+package edu.cwi.espionage.util;
+
+public abstract class FileParser {
+
+}

@@ -15,3 +15,7 @@
 1493210262217	Rename method 'getHoursFromDiff'
 1493210803386	Rename type 'TreeDemo'
 1493210868835	Delete element
+1493220580457	Rename field 'file'
+1493398916896	Rename type 'XMLDomParser'
+1493400118530	Extract constant 'FLUORITE_LOGS_PATH'
+1493410772038	Extract constant 'FLUORITE_LOGS_PATH'

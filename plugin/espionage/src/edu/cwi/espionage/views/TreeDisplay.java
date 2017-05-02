@@ -109,6 +109,7 @@ public class TreeDisplay extends JPanel
         Object nodeInfo = node.getUserObject();
         if (node.isLeaf()) {
             ProcessCase processCase = (ProcessCase)nodeInfo;
+            System.out.println(processCase.getCaseId()+" => "+processCase.getTotalTime());
             infoPane.setChart(lineChart.createChart(processCase.getCaseId(), processCase));
         }
     }
