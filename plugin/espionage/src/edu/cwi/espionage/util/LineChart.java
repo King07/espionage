@@ -2,9 +2,6 @@ package edu.cwi.espionage.util;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.time.Instant;
-import java.util.Date;
-
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
@@ -41,8 +38,8 @@ public class LineChart extends JFrame {
 	private CategoryDataset createDataset(ProcessCase processCase) {
 		DefaultCategoryDataset result = new DefaultCategoryDataset();
 		for (ProcessCase p : processCase.getByDate()) {
-			result.addValue(DateManipulator.getMinutesFromDiff(p.getTotalTime()), "Amount of Time", DateManipulator
-					.getFormatedDate(Date.from(Instant.ofEpochSecond(p.getLastEventTime())), "yyyy-MM-dd"));
+			result.addValue(DateManipulator.getMinutesFromDiff(p.getDateTotalTime()), "Amount of Time", DateManipulator
+					.getFormatedDate(p.getLastEvent().getTimestamp(), "yyyy-MM-dd"));
 		}
 		return result;
 
@@ -62,6 +59,7 @@ public class LineChart extends JFrame {
 		return chart;
 
 	}
+	
 	public void addPointToXY(JFreeChart chart) {
 		final CategoryPlot plot = (CategoryPlot) chart.getPlot(); 
 		plot.setBackgroundPaint(Color.white); 
@@ -76,7 +74,8 @@ public class LineChart extends JFrame {
 		final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer(); 
 		renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator()); 
 		renderer.setSeriesStroke(0, new BasicStroke(2.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
-		renderer.setShapesVisible(true);
+		//renderer.setShapesVisible(true);
+		renderer.setBaseShapesVisible(true);
 	}
 	
 	public ChartPanel getLineChartPanel(String title, ProcessCase processCase) {

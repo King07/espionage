@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cwi.espionage.util.DateManipulator;
+import edu.cwi.espionage.util.IdleTimeTable;
 import edu.cwi.espionage.util.Utils;
 
-public class ProcessCase {
+public class ProcessCase implements Comparable<ProcessCase> {
+	private static final long MINIMUM_IDLE_TIME = 600000; //10 minutes as default.
 	private String caseId;
 	private List<Event> events;
 	private long startTime;
 	private long idleTime;
-	private long lastEventTime;
+	private Event lastEvent;
+	private IdleTimeTable idleTimeTable;
 	
 	public ProcessCase(String caseId) {
 		this.events = new ArrayList<Event>();
 		this.setCaseId(caseId);
+		this.setIdleTimeTable(new IdleTimeTable());
 	}
 
 	public String getCaseId() {
@@ -46,11 +50,28 @@ public class ProcessCase {
 		this.idleTime = idleTime;
 	}
 
-	public long getTotalTime() {
+	public long getDateTotalTime() {
 //		Event event = events.get(events.size() - 1);
 //		return event.getElapstime();
-		System.out.println(getStartTime()+"-"+getLastEventTime()+"="+DateManipulator.diff(getStartTime(), getLastEventTime()));
-		return DateManipulator.diff(getStartTime(), getLastEventTime())*1000;
+		long globalTime = DateManipulator.diff(getStartTime(), (getLastEvent().getTimestamp().getTime()/1000))*1000;
+		long processTime = DateManipulator.diff(globalTime, getIdleTime());
+		System.out.println("ProcessCase#getTotalTime");
+		System.out.println("GLOBAL :"+DateManipulator.getMinutesFromDiff(globalTime));
+		System.out.println("IDLE :"+DateManipulator.getMinutesFromDiff(getIdleTime()));
+		System.out.println("GOOD :"+DateManipulator.getMinutesFromDiff(processTime));
+		return processTime;
+	}
+	
+	public long getTotalIdleTime() {
+		return getIdleTimeTable().total();
+	}
+	
+	public long getTotalTime() {
+		long total = new Long(0);
+		for (ProcessCase p : getByDate()) {
+			total +=p.getDateTotalTime();
+		}
+		return total;
 	}
 	
 	public List<ProcessCase> getByDate() {
@@ -64,17 +85,51 @@ public class ProcessCase {
 					if(pcTemp.getEvents().isEmpty()){
 						pcTemp.setStartTime(e.getTimestamp().getTime()/1000);
 					}
+					else{
+						calculateIdleTime(pcTemp, e);
+						
+					}
 					pcTemp.addEvents(e);
-					pcTemp.setLastEventTime(e.getTimestamp().getTime()/1000);
+					pcTemp.setLastEvent(e);
 					eventsTemp.remove(e);
 				}
 			}
-			System.out.println("getTotalTime: ===> "+DateManipulator.getMinutesFromDiff(pcTemp.getTotalTime()));
-//			System.out.println(pcTemp.getStartTime()+"<=====>"+pcTemp.getLastEventTime());
+			pcTemp.setIdleTime(this.getIdleTimeTable().lookupIdleTime(DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy")));
 			pc.add(pcTemp);
 		}
-		System.out.println("getIdleTime: ===> "+DateManipulator.getMinutesFromDiff(getIdleTime()));
 		return pc;
+	}
+
+	private void calculateIdleTime(ProcessCase pcTemp, Event e) {
+		Event event2 = pcTemp.getEvents().get(pcTemp.getEvents().size()-1);
+		if (IsInactive(event2, e)) {
+			long idleTime = getInactiveTime(e, event2);
+			pcTemp.getIdleTimeTable().add(DateManipulator.getFormatedDate(e.getTimestamp(), "dd/MM/yyyy"),idleTime);
+		}
+	}
+	
+	/**
+	 * To calculate inactive time:
+	 * CONTEXT: The fluorite log all developers events. 
+	 * METHOD : Visualizing Developer Interactions by  Roberto Minelli, Andrea Mocci, Michele Lanza and Lorenzo Baracchi
+	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
+	 * 			that the user is inactive.
+	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
+	 * @param Event e1
+	 * @param Event e2
+	 * 
+	 * @return
+	 */
+	private long getInactiveTime(Event e1, Event e2){
+		return Math.abs(e2.getTimestamp().getTime() - e1.getTimestamp().getTime());
+	}
+	
+	private boolean IsInactive(Event e1, Event e2){
+		boolean isInactive = false;
+		if(getInactiveTime(e1,e2) > MINIMUM_IDLE_TIME){
+			isInactive = true;
+		}
+		return isInactive;
 	}
 	
 	@Override
@@ -84,15 +139,17 @@ public class ProcessCase {
 //			str.append(event.toString());
 //		}
 //		return str.toString();
-		return Utils.getClassName(getCaseId(), "/");
+		String className = Utils.getClassName(getCaseId(), "/");
+		String cNameEffort = className+" ("+DateManipulator.getMinutesFromDiff(getTotalTime())+")";
+		return cNameEffort;
 	}
 
-	public long getLastEventTime() {
-		return lastEventTime;
+	public Event getLastEvent() {
+		return lastEvent;
 	}
 
-	public void setLastEventTime(long lastEventTime) {
-		this.lastEventTime = lastEventTime;
+	public void setLastEvent(Event e) {
+		this.lastEvent = e;
 	}
 
 	public long getStartTime() {
@@ -102,5 +159,20 @@ public class ProcessCase {
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
+
+	public IdleTimeTable getIdleTimeTable() {
+		return idleTimeTable;
+	}
+
+	public void setIdleTimeTable(IdleTimeTable idleTimeTable) {
+		this.idleTimeTable = idleTimeTable;
+	}
+
+	@Override
+	public int compareTo(ProcessCase p) {
+		long ans = p.getTotalTime() - this.getTotalTime() ;
+		return new Long(ans).intValue();
+	}
+	
 	
 }

@@ -1,0 +1,79 @@
+<Events startTimestamp="1493732148714" logVersion="0.11.0.201504031625" osName="Mac OS X" osVersion="10.11.6" lineSeparator="\n" numMonitors="2" monitorBounds="[0, 0, 1280, 800], [0, -1080, 1920, 1080]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[238, -844, 1121, 725]" timestamp="27" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="212" docActiveCodeLength="1078" docExpressionCount="156" docLength="2181" projectName="espionage" timestamp="93">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/views/SampleView.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.views;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.part.*;
+import edu.cwi.espionage.model.ProcessCase;
+import edu.cwi.espionage.util.FileLogManager;
+import edu.cwi.espionage.util.FileType;
+import edu.cwi.espionage.util.FlouriteXMLParser;
+import edu.cwi.espionage.util.Utils;
+import java.awt.Frame;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
+
+
+
+/**
+ * This sample class demonstrates how to plug-in a new workbench view. The view
+ * shows data obtained from the model. The sample creates a dummy model on the
+ * fly, but a real implementation would connect to the model available either in
+ * this or another plug-in (e.g. the workspace). The view is connected to the
+ * model using a content provider.
+ * <p>
+ * The view uses a label provider to define how model objects should be
+ * presented in the view. Each view can present the same model objects using
+ * different labels and icons, if needed. Alternatively, a single label provider
+ * can be shared between views in order to ensure that objects of the same type
+ * are presented in the same way everywhere.
+ * <p>
+ */
+
+public class SampleView extends ViewPart {
+
+	/**
+	 * The ID of the view as specified by the extension.
+	 */
+	public static final String ID = "edu.cwi.espionage.views.SampleView";
+
+	/**
+	 * The constructor.
+	 */
+	public SampleView() {
+	}
+
+	/**
+	 * This is a callback that will allow us to create the viewer and initialize
+	 * it.
+	 */
+	public void createPartControl(Composite parent) {
+		FileLogManager logManager = new FileLogManager();
+//		Map<String, HashMap<String, ProcessCase>> mimec = logManager.getProject(FileType.MIMEC_CSV);
+//		System.out.println(mimec);
+		Composite composite = new Composite(parent, SWT.EMBEDDED | SWT.NO_BACKGROUND);
+		Frame frame = SWT_AWT.new_Frame(composite);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				TreeDisplay.createAndShowGUI(frame, logManager.getProject(FileType.MIMEC_CSV));
+			}
+		});
+	}
+
+	/**
+	 * Passing the focus request to the viewer's control.
+	 */
+	public void setFocus() {
+	}
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="MoveCaretCommand" caretOffset="1378" docOffset="1781" timestamp="184" />
+  <Command __id="3" _type="ShellBoundsCommand" bounds="[0, -1080, 1920, 1080]" repeat="3" timestamp="7637" timestamp2="7683" />
+  <Command __id="6" _type="EclipseCommand" commandID="org.eclipse.ui.window.preferences" timestamp="86420" />

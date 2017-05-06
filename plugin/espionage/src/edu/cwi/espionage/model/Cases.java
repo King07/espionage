@@ -35,8 +35,8 @@ public class Cases {
 	    while (it.hasNext()) {
 	        Map.Entry<String, ProcessCase> pair = (Map.Entry<String, ProcessCase>)it.next();
 	        System.out.println(pair.getKey());
-	        System.out.println("RAW === " + pair.getValue().getTotalTime());
-	        System.out.println("FORMATED === " + DateManipulator.getFormatedDiff(pair.getValue().getTotalTime()));
+	        System.out.println("RAW === " + pair.getValue().getDateTotalTime());
+	        System.out.println("FORMATED === " + DateManipulator.getFormatedDiff(pair.getValue().getDateTotalTime()));
 	        it.remove(); // avoids a ConcurrentModificationException
 	    }
 	}

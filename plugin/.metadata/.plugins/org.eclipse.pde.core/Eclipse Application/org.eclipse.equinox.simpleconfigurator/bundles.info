@@ -4,6 +4,7 @@ ambidexter,1.2.1.201510211533,file:/Applications/Eclipse.app/Contents/Eclipse/pl
 ch.qos.logback.classic,1.0.7.v20121108-1250,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar,4,false
 ch.qos.logback.core,1.0.7.v20121108-1250,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.core_1.0.7.v20121108-1250.jar,4,false
 ch.qos.logback.slf4j,1.0.7.v201505121915,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.slf4j_1.0.7.v201505121915.jar,4,false
+com.github.eclipseuitheme.themes.moonrise-ui,0.8.9.201404052318,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.github.eclipseuitheme.themes.moonrise-ui_0.8.9.201404052318.jar,4,false
 com.google.gerrit.common,2.1.5.v201112241444,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.common_2.1.5.v201112241444.jar,4,false
 com.google.gerrit.prettify,2.1.5.v201112241444,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.prettify_2.1.5.v201112241444.jar,4,false
 com.google.gerrit.reviewdb,2.1.5.v201112241444,file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.reviewdb_2.1.5.v201112241444.jar,4,false

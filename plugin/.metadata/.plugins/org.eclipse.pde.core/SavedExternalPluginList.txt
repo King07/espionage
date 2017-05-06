@@ -1,8 +1,9 @@
-# List of external plug-in models previously loaded. Timestamp: 1493730715185
+# List of external plug-in models previously loaded. Timestamp: 1493732254375
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ambidexter_1.2.1.201510211533.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.core_1.0.7.v20121108-1250.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.slf4j_1.0.7.v201505121915.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.github.eclipseuitheme.themes.moonrise-ui_0.8.9.201404052318.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.common_2.1.5.v201112241444.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.prettify_2.1.5.v201112241444.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/com.google.gerrit.reviewdb_2.1.5.v201112241444.jar

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="edu.cwi.espionage.views.TreeDemo"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.SWT"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="java.awt.BasicStroke"/>
 <fullyQualifiedTypeName name="edu.cwi.espionage.util.CSVUtils"/>
 <fullyQualifiedTypeName name="edu.cwi.espionage.util.DateManipulator"/>
+<fullyQualifiedTypeName name="edu.cwi.espionage.util.MimecCSVParser"/>
 </qualifiedTypeNameHistroy>

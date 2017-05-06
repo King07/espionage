@@ -11,7 +11,7 @@ public class DateManipulator {
 	}
 	
 	public static long diff(long initialDate, long nextDate){
-		return nextDate - initialDate;
+		return Math.abs(nextDate - initialDate);
 	}
 	
 	public static String getFormatedDiff(long diff){
@@ -54,7 +54,7 @@ public class DateManipulator {
 		return format;
 	}
 	
-	public static String getFormatedDate(java.util.Date date, String pattern) {
+	public static String getFormatedDate(Date date, String pattern) {
 //		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String fd = simpleDateFormat.format(date);

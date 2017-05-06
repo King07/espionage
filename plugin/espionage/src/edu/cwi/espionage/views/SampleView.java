@@ -2,15 +2,9 @@ package edu.cwi.espionage.views;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.*;
-import edu.cwi.espionage.model.ProcessCase;
 import edu.cwi.espionage.util.FileLogManager;
 import edu.cwi.espionage.util.FileType;
-import edu.cwi.espionage.util.FlouriteXMLParser;
-import edu.cwi.espionage.util.Utils;
 import java.awt.Frame;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
@@ -51,13 +45,11 @@ public class SampleView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		FileLogManager logManager = new FileLogManager();
-//		Map<String, HashMap<String, ProcessCase>> mimec = logManager.getProject(FileType.MIMEC_CSV);
-//		System.out.println(mimec);
 		Composite composite = new Composite(parent, SWT.EMBEDDED | SWT.NO_BACKGROUND);
 		Frame frame = SWT_AWT.new_Frame(composite);
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				TreeDisplay.createAndShowGUI(frame, logManager.getProject(FileType.MIMEC_CSV));
+				TreeDisplay.createAndShowGUI(frame, logManager.getProject(FileType.FLOURITE_XML));
 			}
 		});
 	}

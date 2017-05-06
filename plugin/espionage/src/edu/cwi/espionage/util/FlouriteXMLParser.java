@@ -77,18 +77,19 @@ public class FlouriteXMLParser extends FileParser {
 									
 									processCase = projects.get(projectName).get(caseId);
 									cases = projects.get(projectName);
-									long idleTime = edu.cwi.espionage.util.DateManipulator
-											.diff(processCase.getLastEventTime(), currDate);
-									long incrIdleTime = edu.cwi.espionage.util.DateManipulator
-											.add(processCase.getIdleTime(), idleTime);
+									long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
+									long idleTime = DateManipulator.diff(nDate, currDate);
+									long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(currDate)), "dd/MM/yyyy"),idleTime);
 									processCase.setIdleTime(incrIdleTime);
 								} else {
-									long idleTime = edu.cwi.espionage.util.DateManipulator.diff(initDate, currDate);
+									long idleTime = DateManipulator.diff(initDate, currDate);
 									processCase = new ProcessCase(caseId);
 									processCase.setStartTime(initDate);
 									processCase.setIdleTime(idleTime);
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(initDate)), "dd/MM/yyyy"), new Long("0"));
 								}
-								processCase.setLastEventTime(currDate);
+//								processCase.setLastEventTime(currDate);
 								System.out.println(caseId);
 							}
 						}
@@ -106,6 +107,7 @@ public class FlouriteXMLParser extends FileParser {
 						Date processTimestamp = Date.from(Instant.ofEpochSecond(epochSecond));
 						Event event = new Event(processTimestamp, Long.parseLong(timestamp), activity);
 						processCase.addEvents(event);
+						processCase.setLastEvent(event);
 						cases.put(processCase.getCaseId(), processCase);
 						projects.put(projectName, cases);
 
@@ -148,5 +150,6 @@ public class FlouriteXMLParser extends FileParser {
 		}
 		return "";
 	}
+	
 
 }
