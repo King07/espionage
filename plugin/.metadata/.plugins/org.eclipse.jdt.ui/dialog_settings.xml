@@ -36,7 +36,7 @@
 	</section>
 	<section name="ExtractMethodWizard">
 		<item value="false" key="GenerateJavadoc"/>
-		<item value="1" key="AccessModifier"/>
+		<item value="2" key="AccessModifier"/>
 		<item value="false" key="ThrowRuntimeExceptions"/>
 	</section>
 	<section name="NewClassWizardPage">

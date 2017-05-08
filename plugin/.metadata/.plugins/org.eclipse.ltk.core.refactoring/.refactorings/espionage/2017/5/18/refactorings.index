@@ -15,3 +15,10 @@
 1493856646668	Rename method 'getTotalTime'
 1493932967002	Extract local variable 'ans'
 1494033130914	Extract local variable 'cases'
+1494083369603	Rename type 'SampleView'
+1494084158577	Rename type 'EspionageView'
+1494084242212	Rename type 'SampleView'
+1494085163944	Delete elements
+1494085821096	Delete elements
+1494088355428	Delete elements
+1494088411681	Delete element

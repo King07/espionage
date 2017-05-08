@@ -5,15 +5,15 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Sample Category"
+            name="Espionage"
             id="edu.cwi.espionage">
       </category>
       <view
-            name="Sample View"
-            icon="icons/sample.gif"
+            name="Espionage"
+            icon="icons/logo.gif"
             category="edu.cwi.espionage"
-            class="edu.cwi.espionage.views.SampleView"
-            id="edu.cwi.espionage.views.SampleView">
+            class="edu.cwi.espionage.views.EspionageView"
+            id="edu.cwi.espionage.views.EspionageView">
       </view>
    </extension>
    <extension
@@ -24,7 +24,7 @@
                ratio="0.5"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="right"
-               id="edu.cwi.espionage.views.SampleView">
+               id="edu.cwi.espionage.views.EspionageView">
          </view>
       </perspectiveExtension>
    </extension>

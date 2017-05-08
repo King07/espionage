@@ -86,14 +86,13 @@ public class TreeDisplay extends JPanel
         infoPane.setVisible(false);
         JScrollPane infoView = new JScrollPane(infoPane);
         //Add the scroll panes to a split pane.
-        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setTopComponent(treeView);
         splitPane.setBottomComponent(infoView);
-
         Dimension minimumSize = new Dimension(100, 50);
         infoPane.setMinimumSize(minimumSize);
         treeView.setMinimumSize(minimumSize);
-        splitPane.setDividerLocation(100); 
+        splitPane.setDividerLocation(200); 
         splitPane.setPreferredSize(new Dimension(500, 300));
 
         //Add the split pane to this panel.

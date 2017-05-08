@@ -41,11 +41,7 @@ public class MimecCSVParser extends FileParser {
 					String projectName = getProjectName(line.get(3));
 					ProcessCase processCase = null;
 					if (!caseId.isEmpty() && !projectName.isEmpty()) {
-						if (projects.containsKey(projectName)) {
-							cases = projects.get(projectName);
-						} else {
-							cases = new HashMap<String, ProcessCase>();
-						}
+						cases = getProjectCase(projects, projectName);
 
 						long fDate = (DateManipulator.getDateFromString(date, "EEE MMM dd HH:mm:ss Z yyyy").getTime() / 1000);
 						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
@@ -88,6 +84,17 @@ public class MimecCSVParser extends FileParser {
 		}
 
 		return projects;
+	}
+
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
 	}
 
 	public String getProjectName(String line) {

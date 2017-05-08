@@ -28,6 +28,26 @@ public class DateManipulator {
 		return format;
 	}
 	
+	public static Long getLongFromMinutes(int minutes){
+		int longFromMins = minutes * 60 * 1000;
+		return new Long(longFromMins);
+	}
+	
+	public static Long getLongFromSeconds(int seconds){
+		int longFromSeconds = seconds * 1000;
+		return new Long(longFromSeconds);
+	}
+	
+	public static Long getLongFromHours(int hours){
+		int longFromHours = hours * 60 * 60 * 1000;
+		return new Long(longFromHours);
+	}
+	
+	public static Long getLongFromDays(int days){
+		int longFromDays = days * 24 * 60 * 60 * 1000;
+		return new Long(longFromDays);
+	}
+	
 	public static Integer getSecondsFromDiff(long diff){
 		int diffMins = (int) (diff / 1000);
 		Integer format = new Integer(diffMins);

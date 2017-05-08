@@ -1,0 +1,11 @@
+1494229036474	Delete element
+1494233686359	Copy compilation unit
+1494234608282	Rename type 'ModelTest'
+1494236700717	Rename local variable 'minutes'
+1494236724818	Rename local variable 'longFromMins'
+1494236750951	Rename local variable 'seconds'
+1494236775699	Rename local variable 'longFromSeconds'
+1494236799890	Rename local variable 'hours'
+1494236810457	Rename local variable 'longFromHours'
+1494240375332	Extract method 'getDefaultData'
+1494243753917	Extract method 'getProjectCase'
