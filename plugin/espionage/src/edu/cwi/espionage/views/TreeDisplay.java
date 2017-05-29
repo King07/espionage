@@ -30,6 +30,7 @@
  */ 
 package edu.cwi.espionage.views;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -39,8 +40,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.jfree.chart.ChartPanel;
+
+import edu.cwi.espionage.interfaces.SelectedYValueListener;
 import edu.cwi.espionage.model.ProcessCase;
 import edu.cwi.espionage.util.LineChart;
+import edu.cwi.espionage.util.Utils;
+
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.util.HashMap;
@@ -52,14 +57,16 @@ import java.awt.GridLayout;
 import java.util.Map.Entry;
 
 public class TreeDisplay extends JPanel
-                      implements TreeSelectionListener {
-    /**
+                      implements TreeSelectionListener, SelectedYValueListener {
+ 
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private ChartPanel infoPane;
     private LineChart lineChart;
     private JTree tree;
+    private String yValue;
     
     //Optionally set the look and feel.
     private static boolean useSystemLookAndFeel = false;
@@ -81,13 +88,18 @@ public class TreeDisplay extends JPanel
         tree.addTreeSelectionListener(this);
         //Create the scroll pane and add the tree to it. 
         JScrollPane treeView = new JScrollPane(tree);
+        
+        JSplitPane splitPaneFirst = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        splitPaneFirst.setTopComponent(getSelectionGroup());
+        splitPaneFirst.setBottomComponent(treeView);
+        
         lineChart = new LineChart();
         infoPane = lineChart.getLineChartPanel("", new ProcessCase(""));
         infoPane.setVisible(false);
         JScrollPane infoView = new JScrollPane(infoPane);
         //Add the scroll panes to a split pane.
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        splitPane.setTopComponent(treeView);
+        splitPane.setTopComponent(splitPaneFirst);
         splitPane.setBottomComponent(infoView);
         Dimension minimumSize = new Dimension(100, 50);
         infoPane.setMinimumSize(minimumSize);
@@ -109,11 +121,9 @@ public class TreeDisplay extends JPanel
         Object nodeInfo = node.getUserObject();
         if (node.isLeaf()) {
             ProcessCase processCase = (ProcessCase)nodeInfo;
-            System.out.println("TreeSelectionListener#valueChanged");
-            System.out.println(processCase.getCaseId()+" => "+processCase.getDateTotalTime());
-            System.out.println(processCase.getIdleTimeTable().toString());
             String title = "Time spent on "+processCase.getCaseId();
-            infoPane.setChart(lineChart.createChart(title, processCase));
+            title += ". Overall Time is ("+Utils.getYValue(processCase.getTotalTime(), yValue)+" "+yValue+")";
+            infoPane.setChart(lineChart.createChart(title, processCase, yValue));
             infoPane.setVisible(true);
         }
     }
@@ -157,11 +167,45 @@ public class TreeDisplay extends JPanel
         }
 
         //Add content to the window.
-        frame.add(new TreeDisplay(project));
+        TreeDisplay display = new TreeDisplay(project);
+        
+        
+		frame.add(display);
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
+
+
+	@Override
+	public void yValueSelected(ButtonSelection btn) {
+		this.yValue = btn.getBtn().getText();
+		infoPane.setVisible(false);
+		
+		
+		
+	}
+	
+	public JScrollPane getSelectionGroup(){
+		JPanel controlPanel = new JPanel();
+	    controlPanel.setLayout(new GridLayout(1,2));
+	    ButtonSelection btnMins = new ButtonSelection(Utils.Y_MINUTES, true);
+	    ButtonSelection btnHrs = new ButtonSelection(Utils.Y_HOURS, false);
+	    btnMins.addSelectedYValueListener(this);
+	    btnHrs.addSelectedYValueListener(this);
+	    this.yValue = Utils.Y_MINUTES;
+		//Group the radio buttons.
+	    ButtonGroup group = new ButtonGroup();
+	    group.add(btnMins.getBtn());
+	    group.add(btnHrs.getBtn());
+	    controlPanel.add(btnMins.getBtn());
+	    controlPanel.add(btnHrs.getBtn());
+	    JScrollPane slt = new JScrollPane(controlPanel);
+	    slt.setMinimumSize(new Dimension(100, 50));
+	    return slt;
+		
+	}
+
 
 }

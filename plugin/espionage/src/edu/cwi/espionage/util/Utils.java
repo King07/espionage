@@ -2,6 +2,7 @@ package edu.cwi.espionage.util;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +13,20 @@ import java.util.regex.Pattern;
 import org.eclipse.core.runtime.Platform;
 
 public class Utils {
+	
+	public static final String Y_HOURS = "Hours";
+	public static final String Y_MINUTES = "Minutes";
 
 	public static String getClassName(String pathName, String regex) {
 		String[] pathSplit = pathName.split(regex);
 		return pathSplit[pathSplit.length - 1];
+	}
+	
+	public static Integer getYValue(Long time, String yValue) {
+		Map<String, Integer> values = new HashMap<String, Integer>();
+		values.put(Y_HOURS, DateManipulator.getHoursFromDiff(time));
+		values.put(Y_MINUTES, DateManipulator.getMinutesFromDiff(time));
+		return values.get(yValue);
 	}
 
 	public static String getFullPath(String file) {

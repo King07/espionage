@@ -1,0 +1,216 @@
+<Events startTimestamp="1495972724738" logVersion="0.11.0.201504031625" osName="Mac OS X" osVersion="10.11.6" lineSeparator="\n" numMonitors="1" monitorBounds="[0, 0, 1280, 800]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[0, 23, 1280, 724]" timestamp="65" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="1113" docActiveCodeLength="6469" docExpressionCount="770" docLength="6595" projectName="espionage" timestamp="370">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MylynXMLParser extends FileParser {
+
+	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/Logs/";
+
+	public MylynXMLParser() {
+		super(MYLYN_LOGS_PATH);
+
+	}
+
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if (this.files == null) {
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
+			System.out.println(aLogFile);
+			try {
+
+				Document document = this.getDocument(aLogFile);
+
+				NodeList cmds = document.getElementsByTagName("InteractionEvent");
+				List<Node> commands = sortNodeList(cmds);
+				System.out.println(commands);
+				ProcessCase processCase = null;
+				for (int i = 0; i < commands.size(); i++) {
+					Element theNode = (Element) commands.get(i);
+
+					String startDate = ((Element) commands.get(0)).getAttribute("StartDate");
+					long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime()
+							/ 1000);
+					String sCurrDate = theNode.getAttribute("StartDate");
+					long currDate = (DateManipulator.getDateFromString(sCurrDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime()
+							/ 1000);
+					String typeKind = theNode.getAttribute("Kind");
+					String caseId = Utils.regexChecker("\\{\\w+\\.java", theNode.getAttribute("StructureHandle"))
+							.replace("{", "");
+					if (caseId.isEmpty()) {
+						caseId = Utils.regexChecker("\\/\\w+\\.java", theNode.getAttribute("StructureHandle"))
+								.replace("/", "");
+					}
+					String projectName = this.files[n].split("\\_")[0];
+//					ProcessCase processCase = null;
+
+					if (!caseId.isEmpty() && !projectName.isEmpty()) {
+						cases = getProjectCase(projects, projectName);
+
+						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+							processCase = projects.get(projectName).get(caseId);
+							cases = projects.get(projectName);
+
+							long nDate = processCase.getLastEvent().getTimestamp().getTime() / 1000;
+							long idleTime = DateManipulator.diff(nDate, currDate);
+							long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(
+									Date.from(Instant.ofEpochSecond(currDate)), "dd/MM/yyyy"), idleTime);
+							processCase.setIdleTime(incrIdleTime);
+						} else {
+							long idleTime = DateManipulator.diff(fDate, currDate);
+							processCase = new ProcessCase(caseId);
+							processCase.setStartTime(fDate);
+							processCase.setIdleTime(idleTime);
+							processCase.getIdleTimeTable().add(DateManipulator
+									.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), idleTime);
+						}
+					}
+
+						if (processCase != null) {
+
+							long elapseTime = DateManipulator.diff(fDate, currDate);
+							Date processTimestamp = Date.from(Instant.ofEpochSecond(currDate));
+
+							Event event = new Event(processTimestamp, elapseTime, typeKind);
+							if (!processCase.getEvents().isEmpty()) {
+								long cElapseTime = DateManipulator.diff(
+										processCase.getLastEvent().getTimestamp().getTime(),
+										Date.from(Instant.ofEpochSecond(currDate)).getTime()) / 1000;
+								event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
+							}
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+
+						}
+
+					}
+
+				
+			} catch (ParserConfigurationException e1) {
+				e1.printStackTrace();
+			} catch (SAXException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		return projects;
+	}
+
+	private Document getDocument(String file) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		// Load the input XML document, parse it and return an instance of the
+		// Document class.
+		Document document = builder.parse(new File(file));
+		return document;
+	}
+
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("org(.*?)\\.java", line).replace("/", ".");
+		return pNameRaw != "" ? pNameRaw.split("\\.")[2] : pNameRaw;
+	}
+
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+
+
+	private List<Node> sortNodeList(NodeList commands) {
+		Map<Date, List<Node>> tempNodeList = new HashMap<Date, List<Node>>();
+		for (int i = 0; i < commands.getLength(); i++) {
+			Node aNode = commands.item(i);
+
+			if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element theNode = (Element) aNode;
+
+				String startDate = theNode.getAttribute("StartDate");
+				long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+				Date fStartDate = Date.from(Instant.ofEpochSecond(fDate));
+
+				if (tempNodeList.containsKey(fStartDate)) {
+					List<Node> tempNodes = tempNodeList.get(fStartDate);
+					tempNodes.add(theNode);
+					tempNodeList.put(fStartDate, tempNodes);
+				} else {
+					List<Node> tempNodes = new ArrayList<Node>();
+					tempNodes.add(theNode);
+					tempNodeList.put(fStartDate, tempNodes);
+				}
+			}
+		}
+
+		SortedSet<Date> keys = new TreeSet<Date>(tempNodeList.keySet());
+
+		List<Node> newCommands = new ArrayList<>();
+		for (Date key : keys) {
+			List<Node> tenpCommands = tempNodeList.get(key);
+			newCommands.addAll(tenpCommands);
+		}
+		return newCommands;
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="MoveCaretCommand" caretOffset="1028" docOffset="1631" timestamp="595" />
+  <Command __id="3" _type="MoveCaretCommand" caretOffset="1948" docOffset="2551" timestamp="242000" />
+  <Command __id="4" _type="ShellBoundsCommand" bounds="[0, 23, 1280, 714]" repeat="2" timestamp="244974" timestamp2="244975" />
+  <Command __id="6" _type="EclipseCommand" commandID="org.eclipse.pde.ui.runtimeWorkbenchShortcut.debug" timestamp="253359" />
+  <Command __id="7" _type="RunCommand" kind="Create" projectName="null" timestamp="253865" type="Run" />
+  <Command __id="8" _type="RunCommand" kind="Create" projectName="null" timestamp="254341" type="Debug" />
+  <Command __id="9" _type="MoveCaretCommand" caretOffset="1737" docOffset="2340" timestamp="317620" />
+  <Command __id="10" _type="MoveCaretCommand" caretOffset="283" docOffset="886" timestamp="323393" />
+  <Command __id="11" _type="RunCommand" exitValue="0" kind="Terminate" projectName="null" timestamp="334156" type="Debug" />
+  <Command __id="12" _type="RunCommand" exitValue="1" kind="Terminate" projectName="null" timestamp="334186" type="Run" />
+  <Command __id="13" _type="RunCommand" kind="Create" projectName="null" timestamp="374893" type="Run" />
+  <Command __id="14" _type="RunCommand" kind="Create" projectName="null" timestamp="375133" type="Debug" />
+  <Command __id="15" _type="EclipseCommand" commandID="org.eclipse.debug.ui.commands.StepOver" timestamp="392320" />
+  <Command __id="16" _type="EclipseCommand" commandID="org.eclipse.debug.ui.commands.StepOver" repeat="3" timestamp="397694" timestamp2="400823" />
+  <Command __id="19" _type="EclipseCommand" commandID="org.eclipse.debug.ui.commands.StepOver" repeat="6" timestamp="408887" timestamp2="412462" />
+  <Command __id="25" _type="EclipseCommand" commandID="org.eclipse.debug.ui.commands.StepOver" repeat="2" timestamp="426999" timestamp2="428603" />
+  <Command __id="27" _type="RunCommand" exitValue="0" kind="Terminate" projectName="null" timestamp="432273" type="Debug" />
+  <Command __id="28" _type="RunCommand" exitValue="1" kind="Terminate" projectName="null" timestamp="432304" type="Run" />
+</Events>

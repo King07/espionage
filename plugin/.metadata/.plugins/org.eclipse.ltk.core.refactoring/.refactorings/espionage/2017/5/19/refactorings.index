@@ -9,3 +9,13 @@
 1494236810457	Rename local variable 'longFromHours'
 1494240375332	Extract method 'getDefaultData'
 1494243753917	Extract method 'getProjectCase'
+1494257898200	Extract local variable 'display'
+1494261628716	Encapsulate field 'isSelected'
+1494265637536	Rename compilation unit 'XXXXX.java'
+1494270792278	Encapsulate field 'btn'
+1494330049740	Delete element
+1494330130055	Rename type 'Observer'
+1494341521683	Extract constant 'Y_MINUTES'
+1494341534876	Extract constant 'Y_HOURS'
+1494347459914	Rename field 'PROJECT'
+1494349615428	Rename local variable 'LINE_Y_VALUES'

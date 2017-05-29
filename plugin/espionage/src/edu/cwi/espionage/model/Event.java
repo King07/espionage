@@ -4,24 +4,17 @@ import java.util.Date;
 
 public class Event implements Comparable<Event>{
 	
-	//private String caseId;
 	private Date timestamp;
 	private String activity;
 	private long elapstime;
+	private String caseId;
 	
 	public Event(Date timestamp, long elapstime, String activity) {
-		//this.caseId = caseId;
 		this.timestamp = timestamp;
 		this.activity = activity;
 		this.elapstime = elapstime;
 	}
 	
-//	public String getCaseId() {
-//		return caseId;
-//	}
-//	public void setCaseId(String caseId) {
-//		this.caseId = caseId;
-//	}
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -37,7 +30,7 @@ public class Event implements Comparable<Event>{
 	
 	@Override
 	public String toString() {
-		return "EVENTS:: ["+getActivity()+" || "+getTimestamp().toString()+"]";
+		return "EVENTS:: ["+getActivity()+" || "+getTimestamp().toString()+" ELAPSE = "+getElapstime()+"]";
 	}
 
 	public long getElapstime() {
@@ -57,6 +50,14 @@ public class Event implements Comparable<Event>{
 	    if (this.getTimestamp().getMonth() != e.getTimestamp().getMonth()) 
 	        return this.getTimestamp().getMonth() - e.getTimestamp().getMonth();
 	    return this.getTimestamp().getDate() - e.getTimestamp().getDate();
+	}
+
+	public String getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
 	}
 
 	

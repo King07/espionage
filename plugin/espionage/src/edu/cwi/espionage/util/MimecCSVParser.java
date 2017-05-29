@@ -15,12 +15,9 @@ import edu.cwi.espionage.model.ProcessCase;
 public class MimecCSVParser extends FileParser {
 	
 	private static final String MIMEC_LOGS_PATH = "/.metadata/.plugins/mimec/";
-	private String[] files;
 
 	public MimecCSVParser() {
-		// create a file that is really a directory
-		File aDirectory = new File(Utils.getFullPath(MIMEC_LOGS_PATH));
-		this.files = aDirectory.list();
+		super(MIMEC_LOGS_PATH);
 	}
 
 	@Override

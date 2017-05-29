@@ -14,6 +14,8 @@ public class FileLogManager {
 	static {
 		PROJECT.put(FileType.FLOURITE_XML, new FlouriteXMLParser());
 		PROJECT.put(FileType.MIMEC_CSV, new MimecCSVParser());
+		PROJECT.put(FileType.MYLYN_XML,new MylynXMLParser());
+		PROJECT.put(FileType.MYLYN_CSV, new MylynCSVParser());
 	}
 	
 	public Map<String, HashMap<String, ProcessCase>> getProject(FileType logs) {

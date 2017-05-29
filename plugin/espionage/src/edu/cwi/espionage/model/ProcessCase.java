@@ -7,7 +7,7 @@ import edu.cwi.espionage.util.DateManipulator;
 import edu.cwi.espionage.util.IdleTimeTable;
 import edu.cwi.espionage.util.Utils;
 
-public class ProcessCase implements Comparable<ProcessCase> {
+public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 	private static final long MINIMUM_IDLE_TIME = 600000; //10 minutes as default.
 	private String caseId;
 	private List<Event> events;
@@ -51,15 +51,11 @@ public class ProcessCase implements Comparable<ProcessCase> {
 	}
 
 	public long getDateTotalTime() {
-//		Event event = events.get(events.size() - 1);
-//		return event.getElapstime();
-		long globalTime = DateManipulator.diff(getStartTime(), (getLastEvent().getTimestamp().getTime()/1000))*1000;
-		long processTime = DateManipulator.diff(globalTime, getIdleTime());
-		System.out.println("ProcessCase#getTotalTime");
-		System.out.println("GLOBAL :"+DateManipulator.getMinutesFromDiff(globalTime));
-		System.out.println("IDLE :"+DateManipulator.getMinutesFromDiff(getIdleTime()));
-		System.out.println("GOOD :"+DateManipulator.getMinutesFromDiff(processTime));
-		return processTime;
+		Long processTime = new Long(0);
+		for (Event event : events) {
+			processTime += event.getElapstime();
+		}
+		return DateManipulator.diff(processTime,getIdleTime()) * 1000;
 	}
 	
 	public long getTotalIdleTime() {
@@ -70,6 +66,7 @@ public class ProcessCase implements Comparable<ProcessCase> {
 		long total = new Long(0);
 		for (ProcessCase p : getByDate()) {
 			total +=p.getDateTotalTime();
+			
 		}
 		return total;
 	}
@@ -94,7 +91,9 @@ public class ProcessCase implements Comparable<ProcessCase> {
 					eventsTemp.remove(e);
 				}
 			}
-			pcTemp.setIdleTime(this.getIdleTimeTable().lookupIdleTime(DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy")));
+			String formatedDate = DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy");
+			Long lookupIdleTime = this.getIdleTimeTable().lookupIdleTime(formatedDate);
+			pcTemp.setIdleTime(lookupIdleTime);
 			pc.add(pcTemp);
 		}
 		return pc;
@@ -134,14 +133,7 @@ public class ProcessCase implements Comparable<ProcessCase> {
 	
 	@Override
 	public String toString() {
-//		StringBuilder str = new StringBuilder("["+getCaseId()+" || ");
-//		for (Event event : events) {
-//			str.append(event.toString());
-//		}
-//		return str.toString();
-		String className = Utils.getClassName(getCaseId(), "/");
-		String cNameEffort = className+" ("+DateManipulator.getMinutesFromDiff(getTotalTime())+")";
-		return cNameEffort;
+		return Utils.getClassName(getCaseId(), "/");
 	}
 
 	public Event getLastEvent() {
@@ -172,6 +164,10 @@ public class ProcessCase implements Comparable<ProcessCase> {
 	public int compareTo(ProcessCase p) {
 		long ans = p.getTotalTime() - this.getTotalTime() ;
 		return new Long(ans).intValue();
+	}
+	
+	public Object clone()throws CloneNotSupportedException{  
+		return super.clone();  
 	}
 	
 	

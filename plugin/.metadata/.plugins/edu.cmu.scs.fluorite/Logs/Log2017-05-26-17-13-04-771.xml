@@ -1,0 +1,3042 @@
+<Events startTimestamp="1495811584771" logVersion="0.11.0.201504031625" osName="Mac OS X" osVersion="10.11.6" lineSeparator="\n" numMonitors="1" monitorBounds="[0, 0, 1280, 800]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[0, 23, 1280, 729]" timestamp="131" />
+  <Command __id="1" _type="RunCommand" kind="Create" projectName="null" timestamp="14843" type="Run" />
+  <Command __id="2" _type="RunCommand" exitValue="143" kind="Terminate" projectName="null" timestamp="9147515" type="Run" />
+  <Command __id="3" _type="FileOpenCommand" docASTNodeCount="863" docActiveCodeLength="5523" docExpressionCount="582" docLength="7672" projectName="espionage" timestamp="9293052">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/views/TreeDisplay.java]]></filePath>
+    <snapshot><![CDATA[/*
+ * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   - Neither the name of Oracle or the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */ 
+package edu.cwi.espionage.views;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.UIManager;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
+
+import org.jfree.chart.ChartPanel;
+
+import edu.cwi.espionage.interfaces.SelectedYValueListener;
+import edu.cwi.espionage.model.ProcessCase;
+import edu.cwi.espionage.util.LineChart;
+import edu.cwi.espionage.util.Utils;
+
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.util.Map.Entry;
+
+public class TreeDisplay extends JPanel
+                      implements TreeSelectionListener, SelectedYValueListener {
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ChartPanel infoPane;
+    private LineChart lineChart;
+    private JTree tree;
+    private String yValue;
+    
+    //Optionally set the look and feel.
+    private static boolean useSystemLookAndFeel = false;
+
+    public TreeDisplay(Map<String, HashMap<String, ProcessCase>> project) {
+        super(new GridLayout(1,0));
+
+        //Create the nodes.
+        DefaultMutableTreeNode top =
+            new DefaultMutableTreeNode("Espionage");
+        createNodes(top,project);
+
+        //Create a tree that allows one selection at a time.
+        tree = new JTree(top);
+        tree.getSelectionModel().setSelectionMode
+                (TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+        //Listen for when the selection changes.
+        tree.addTreeSelectionListener(this);
+        //Create the scroll pane and add the tree to it. 
+        JScrollPane treeView = new JScrollPane(tree);
+        
+        JSplitPane splitPaneFirst = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        splitPaneFirst.setTopComponent(getSelectionGroup());
+        splitPaneFirst.setBottomComponent(treeView);
+        
+        lineChart = new LineChart();
+        infoPane = lineChart.getLineChartPanel("", new ProcessCase(""));
+        infoPane.setVisible(false);
+        JScrollPane infoView = new JScrollPane(infoPane);
+        //Add the scroll panes to a split pane.
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setTopComponent(splitPaneFirst);
+        splitPane.setBottomComponent(infoView);
+        Dimension minimumSize = new Dimension(100, 50);
+        infoPane.setMinimumSize(minimumSize);
+        treeView.setMinimumSize(minimumSize);
+        splitPane.setDividerLocation(200); 
+        splitPane.setPreferredSize(new Dimension(500, 300));
+
+        //Add the split pane to this panel.
+        add(splitPane);
+    }
+
+    /** Required by TreeSelectionListener interface. */
+    public void valueChanged(TreeSelectionEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+                           tree.getLastSelectedPathComponent();
+
+        if (node == null) return;
+
+        Object nodeInfo = node.getUserObject();
+        if (node.isLeaf()) {
+            ProcessCase processCase = (ProcessCase)nodeInfo;
+            String title = "Time spent on "+processCase.getCaseId();
+            title += ". Overall Time is ("+Utils.getYValue(processCase.getTotalTime(), yValue)+" "+yValue+")";
+            infoPane.setChart(lineChart.createChart(title, processCase, yValue));
+            infoPane.setVisible(true);
+        }
+    }
+
+
+    private void createNodes(DefaultMutableTreeNode top, Map<String, HashMap<String, ProcessCase>> project) {
+        DefaultMutableTreeNode pName = null;
+        DefaultMutableTreeNode cName = null;
+
+		
+		Iterator<Entry<String, HashMap<String, ProcessCase>>> pit = project.entrySet().iterator();
+	    while (pit.hasNext()) {
+	        Map.Entry<String, HashMap<String, ProcessCase>> ppair = pit.next();
+	        System.out.println(ppair.getKey());
+	        pName = new DefaultMutableTreeNode(ppair.getKey());
+			top.add(pName);
+			
+			Iterator<Entry<String, ProcessCase>> cit = ppair.getValue().entrySet().iterator();
+		    while (cit.hasNext()) {
+		        Map.Entry<String, ProcessCase> cpair = cit.next();
+		        cName = new DefaultMutableTreeNode(cpair.getValue());
+				pName.add(cName);
+		    }
+		}
+		
+    }
+    
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event dispatch thread.
+     */
+    public static void createAndShowGUI(Frame frame, Map<String, HashMap<String, ProcessCase>> project) {
+        if (useSystemLookAndFeel) {
+            try {
+                UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                System.err.println("Couldn't use system look and feel.");
+            }
+        }
+
+        //Add content to the window.
+        TreeDisplay display = new TreeDisplay(project);
+        
+        
+		frame.add(display);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+
+	@Override
+	public void yValueSelected(ButtonSelection btn) {
+		this.yValue = btn.getBtn().getText();
+		infoPane.setVisible(false);
+		
+		
+		
+	}
+	
+	public JScrollPane getSelectionGroup(){
+		JPanel controlPanel = new JPanel();
+	    controlPanel.setLayout(new GridLayout(1,2));
+	    ButtonSelection btnMins = new ButtonSelection(Utils.Y_MINUTES, true);
+	    ButtonSelection btnHrs = new ButtonSelection(Utils.Y_HOURS, false);
+	    btnMins.addSelectedYValueListener(this);
+	    btnHrs.addSelectedYValueListener(this);
+	    this.yValue = Utils.Y_MINUTES;
+		//Group the radio buttons.
+	    ButtonGroup group = new ButtonGroup();
+	    group.add(btnMins.getBtn());
+	    group.add(btnHrs.getBtn());
+	    controlPanel.add(btnMins.getBtn());
+	    controlPanel.add(btnHrs.getBtn());
+	    JScrollPane slt = new JScrollPane(controlPanel);
+	    slt.setMinimumSize(new Dimension(100, 50));
+	    return slt;
+		
+	}
+
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="4" _type="MoveCaretCommand" caretOffset="0" docOffset="3" timestamp="9293433" />
+  <Command __id="5" _type="MoveCaretCommand" caretOffset="165" docOffset="2418" timestamp="9294724" />
+  <Command __id="6" _type="SelectTextCommand" caretOffset="171" docEnd="2424" docOffset="2424" docStart="2413" end="171" start="160" timestamp="9294864" />
+  <Command __id="7" _type="CopyCommand" timestamp="9295461" />
+  <Command __id="8" _type="FileOpenCommand" docASTNodeCount="309" docActiveCodeLength="1935" docExpressionCount="177" docLength="2165" projectName="espionage" timestamp="9393537">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/CSVUtils.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CSVUtils{
+
+	private static final char DEFAULT_SEPARATOR = ',';
+	private static final char DEFAULT_QUOTE = '"';
+
+	public static List<String> parseLine(String cvsLine) {
+		return parseLine(cvsLine, DEFAULT_SEPARATOR, DEFAULT_QUOTE);
+	}
+
+	public static List<String> parseLine(String cvsLine, char separators) {
+		return parseLine(cvsLine, separators, DEFAULT_QUOTE);
+	}
+
+	public static List<String> parseLine(String cvsLine, char separators, char customQuote) {
+
+		List<String> result = new ArrayList<>();
+
+		// if empty, return!
+		if (cvsLine == null || cvsLine.isEmpty()) {
+			return result;
+		}
+
+		if (customQuote == ' ') {
+			customQuote = DEFAULT_QUOTE;
+		}
+
+		if (separators == ' ') {
+			separators = DEFAULT_SEPARATOR;
+		}
+
+		StringBuffer curVal = new StringBuffer();
+		boolean inQuotes = false;
+		boolean startCollectChar = false;
+		boolean doubleQuotesInColumn = false;
+
+		char[] chars = cvsLine.toCharArray();
+
+		for (char ch : chars) {
+
+			if (inQuotes) {
+				startCollectChar = true;
+				if (ch == customQuote) {
+					inQuotes = false;
+					doubleQuotesInColumn = false;
+				} else {
+
+					// Fixed : allow "" in custom quote enclosed
+					if (ch == '\"') {
+						if (!doubleQuotesInColumn) {
+							curVal.append(ch);
+							doubleQuotesInColumn = true;
+						}
+					} else {
+						curVal.append(ch);
+					}
+
+				}
+			} else {
+				if (ch == customQuote) {
+
+					inQuotes = true;
+
+					// Fixed : allow "" in empty quote enclosed
+					if (chars[0] != '"' && customQuote == '\"') {
+						curVal.append('"');
+					}
+
+					// double quotes in column will hit this!
+					if (startCollectChar) {
+						curVal.append('"');
+					}
+
+				} else if (ch == separators) {
+
+					result.add(curVal.toString());
+
+					curVal = new StringBuffer();
+					startCollectChar = false;
+
+				} else if (ch == '\r') {
+					// ignore LF characters
+					continue;
+				} else if (ch == '\n') {
+					// the end, break!
+					break;
+				} else {
+					curVal.append(ch);
+				}
+			}
+
+		}
+
+		result.add(curVal.toString());
+
+		return result;
+	}
+	// TODO Need to add tests same as vogella
+
+
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="9" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="9393841" />
+  <Command __id="10" _type="MoveCaretCommand" caretOffset="79" docOffset="102" timestamp="9394524" />
+  <Command __id="11" _type="SelectTextCommand" caretOffset="83" docEnd="106" docOffset="106" docStart="98" end="83" start="75" timestamp="9394675" />
+  <Command __id="12" _type="CopyCommand" timestamp="9395130" />
+  <Command __id="13" _type="FileOpenCommand" docASTNodeCount="236" docActiveCodeLength="1338" docExpressionCount="152" docLength="1338" projectName="espionage" timestamp="9510514">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/model/Event.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.model;
+
+import java.util.Date;
+
+public class Event implements Comparable<Event>{
+	
+	private Date timestamp;
+	private String activity;
+	private long elapstime;
+	
+	public Event(Date timestamp, long elapstime, String activity) {
+		this.timestamp = timestamp;
+		this.activity = activity;
+		this.elapstime = elapstime;
+	}
+	
+	public Date getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+	
+	@Override
+	public String toString() {
+		return "EVENTS:: ["+getActivity()+" || "+getTimestamp().toString()+" ELAPSE = "+getElapstime()+"]";
+	}
+
+	public long getElapstime() {
+		return elapstime;
+	}
+
+	public void setElapstime(long elapstime) {
+		this.elapstime = elapstime;
+	}
+
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public int compareTo(Event e) {
+		if (this.getTimestamp().getYear() != e.getTimestamp().getYear()) 
+	        return this.getTimestamp().getYear() - e.getTimestamp().getYear();
+	    if (this.getTimestamp().getMonth() != e.getTimestamp().getMonth()) 
+	        return this.getTimestamp().getMonth() - e.getTimestamp().getMonth();
+	    return this.getTimestamp().getDate() - e.getTimestamp().getDate();
+	}
+
+	
+	
+}
+]]></snapshot>
+  </Command>
+  <Command __id="14" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="9510795" />
+  <Command __id="15" _type="MoveCaretCommand" caretOffset="72" docOffset="72" timestamp="9511654" />
+  <Command __id="16" _type="SelectTextCommand" caretOffset="76" docEnd="76" docOffset="76" docStart="71" end="76" start="71" timestamp="9511789" />
+  <Command __id="17" _type="CopyCommand" timestamp="9513268" />
+  <Command __id="18" _type="FileOpenCommand" docASTNodeCount="690" docActiveCodeLength="3805" docExpressionCount="403" docLength="4327" projectName="espionage" timestamp="9652071">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/model/ProcessCase.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.cwi.espionage.util.DateManipulator;
+import edu.cwi.espionage.util.IdleTimeTable;
+import edu.cwi.espionage.util.Utils;
+
+public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
+	private static final long MINIMUM_IDLE_TIME = 600000; //10 minutes as default.
+	private String caseId;
+	private List<Event> events;
+	private long startTime;
+	private long idleTime;
+	private Event lastEvent;
+	private IdleTimeTable idleTimeTable;
+	
+	public ProcessCase(String caseId) {
+		this.events = new ArrayList<Event>();
+		this.setCaseId(caseId);
+		this.setIdleTimeTable(new IdleTimeTable());
+	}
+
+	public String getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	public void addEvents(Event event) {
+		this.events.add(event);
+	}
+
+	public long getIdleTime() {
+		return idleTime;
+	}
+
+	public void setIdleTime(long idleTime) {
+		this.idleTime = idleTime;
+	}
+
+	public long getDateTotalTime() {
+		Long processTime = new Long(0);
+		for (Event event : events) {
+			processTime += event.getElapstime();
+		}
+		return DateManipulator.diff(processTime,getIdleTime()) * 1000;
+	}
+	
+	public long getTotalIdleTime() {
+		return getIdleTimeTable().total();
+	}
+	
+	public long getTotalTime() {
+		long total = new Long(0);
+		for (ProcessCase p : getByDate()) {
+			total +=p.getDateTotalTime();
+			
+		}
+		return total;
+	}
+	
+	public List<ProcessCase> getByDate() {
+		List<ProcessCase> pc = new ArrayList<>();
+		List<Event> eventsTemp = new ArrayList<>(events);
+		while (!eventsTemp.isEmpty()) {
+			Event topEvent = eventsTemp.get(0);
+			ProcessCase pcTemp = new ProcessCase(getCaseId());
+			for (Event e : events) {
+				if(topEvent.compareTo(e) == 0){
+					if(pcTemp.getEvents().isEmpty()){
+						pcTemp.setStartTime(e.getTimestamp().getTime()/1000);
+					}
+					else{
+						calculateIdleTime(pcTemp, e);
+						
+					}
+					pcTemp.addEvents(e);
+					pcTemp.setLastEvent(e);
+					eventsTemp.remove(e);
+				}
+			}
+			String formatedDate = DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy");
+			Long lookupIdleTime = this.getIdleTimeTable().lookupIdleTime(formatedDate);
+			pcTemp.setIdleTime(lookupIdleTime);
+			pc.add(pcTemp);
+		}
+		return pc;
+	}
+
+	private void calculateIdleTime(ProcessCase pcTemp, Event e) {
+		Event event2 = pcTemp.getEvents().get(pcTemp.getEvents().size()-1);
+		if (IsInactive(event2, e)) {
+			long idleTime = getInactiveTime(e, event2);
+			pcTemp.getIdleTimeTable().add(DateManipulator.getFormatedDate(e.getTimestamp(), "dd/MM/yyyy"),idleTime);
+		}
+	}
+	
+	/**
+	 * To calculate inactive time:
+	 * CONTEXT: The fluorite log all developers events. 
+	 * METHOD : Visualizing Developer Interactions by  Roberto Minelli, Andrea Mocci, Michele Lanza and Lorenzo Baracchi
+	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
+	 * 			that the user is inactive.
+	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
+	 * @param Event e1
+	 * @param Event e2
+	 * 
+	 * @return
+	 */
+	private long getInactiveTime(Event e1, Event e2){
+		return Math.abs(e2.getTimestamp().getTime() - e1.getTimestamp().getTime());
+	}
+	
+	private boolean IsInactive(Event e1, Event e2){
+		boolean isInactive = false;
+		if(getInactiveTime(e1,e2) > MINIMUM_IDLE_TIME){
+			isInactive = true;
+		}
+		return isInactive;
+	}
+	
+	@Override
+	public String toString() {
+		return Utils.getClassName(getCaseId(), "/");
+	}
+
+	public Event getLastEvent() {
+		return lastEvent;
+	}
+
+	public void setLastEvent(Event e) {
+		this.lastEvent = e;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public IdleTimeTable getIdleTimeTable() {
+		return idleTimeTable;
+	}
+
+	public void setIdleTimeTable(IdleTimeTable idleTimeTable) {
+		this.idleTimeTable = idleTimeTable;
+	}
+
+	@Override
+	public int compareTo(ProcessCase p) {
+		long ans = p.getTotalTime() - this.getTotalTime() ;
+		return new Long(ans).intValue();
+	}
+	
+	public Object clone()throws CloneNotSupportedException{  
+		return super.clone();  
+	}
+	
+	
+}
+]]></snapshot>
+  </Command>
+  <Command __id="19" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="9652345" />
+  <Command __id="20" _type="MoveCaretCommand" caretOffset="82" docOffset="235" timestamp="9653024" />
+  <Command __id="21" _type="SelectTextCommand" caretOffset="87" docEnd="240" docOffset="240" docStart="229" end="87" start="76" timestamp="9653176" />
+  <Command __id="22" _type="CopyCommand" timestamp="9653690" />
+  <Command __id="23" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="9684995">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class FlouriteXMLParser extends FileParser {
+
+	private static final String FLUORITE_LOGS_PATH = "/.metadata/.plugins/edu.cmu.scs.fluorite/Logs/";
+
+	public FlouriteXMLParser() {
+		super(FLUORITE_LOGS_PATH);
+
+	}
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if(this.files == null){
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], FLUORITE_LOGS_PATH);
+			System.out.println(aLogFile);
+			try {
+				
+				Document document = this.getDocument(aLogFile);
+				Element eventsElem = document.getDocumentElement();
+				if (!eventsElem.hasAttribute("startTimestamp")) {
+					continue;
+				}
+				String startTime = eventsElem.getAttribute("startTimestamp").substring(0, 10);
+
+				NodeList commands = document.getElementsByTagName("Command");
+				ProcessCase processCase = null;
+				String projectName = "";
+				for (int i = 0; i < commands.getLength(); i++) {
+					Node aNode = commands.item(i);
+					String caseId = "";
+					if (aNode.hasChildNodes()) {
+						NodeList comCh = aNode.getChildNodes();
+						Node cNode = comCh.item(1);
+						if (cNode.getNodeType() == Node.ELEMENT_NODE) {
+							Element ceNode = (Element) cNode;
+							Element comChElem = (Element) comCh;
+							caseId = Utils.getClassName(getCharacterDataFromElement(ceNode), "/");
+							if (caseId.compareTo("") != 0) {
+								String tString = comChElem.getAttribute("timestamp");
+								long ts = Long.parseLong(tString.substring(0, tString.length() - 3));
+								long initDate = Long.parseLong(startTime);
+								long currDate = DateManipulator.add(initDate, ts);
+								projectName = comChElem.getAttribute("projectName");
+								if (projects.containsKey(projectName)) {
+									cases = projects.get(projectName);
+								} else {
+									cases = new HashMap<String, ProcessCase>();
+								}
+								
+								if (projects.containsKey(projectName)
+										&& projects.get(projectName).containsKey(caseId)) {
+									
+									processCase = projects.get(projectName).get(caseId);
+									cases = projects.get(projectName);
+									long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
+									long idleTime = DateManipulator.diff(nDate, currDate);
+									long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(currDate)), "dd/MM/yyyy"),idleTime);
+									processCase.setIdleTime(incrIdleTime);
+								} else {
+									long idleTime = DateManipulator.diff(initDate, currDate);
+									processCase = new ProcessCase(caseId);
+									processCase.setStartTime(initDate);
+									processCase.setIdleTime(idleTime);
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(initDate)), "dd/MM/yyyy"), ts);
+								}
+//								processCase.setLastEventTime(currDate);
+								System.out.println(caseId);
+							}
+						}
+					}
+
+					if (aNode.getNodeType() == Node.ELEMENT_NODE && processCase != null) {
+						Element theNode = (Element) aNode;
+						String activity = theNode.getAttribute("_type");
+
+						if (activity.contains("ShellBoundsCommand")) {
+							continue;
+						}
+						String timestamp = theNode.getAttribute("timestamp");
+						long elapseTime = Long.parseLong(timestamp.substring(0, timestamp.length() - 3));
+						long epochSecond = (elapseTime + Long.parseLong(startTime));
+						Date processTimestamp = Date.from(Instant.ofEpochSecond(epochSecond));
+					
+						Event event = new Event(processTimestamp, elapseTime, activity);
+						if(!processCase.getEvents().isEmpty()){
+							long cElapseTime = DateManipulator.diff(processCase.getLastEvent().getTimestamp().getTime(), Date.from(Instant.ofEpochSecond(Long.parseLong(startTime))).getTime())/1000;
+							event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
+						}
+						processCase.addEvents(event);
+						processCase.setLastEvent(event);
+						cases.put(processCase.getCaseId(), processCase);
+						projects.put(projectName, cases);
+
+					}
+
+				}
+			} catch (ParserConfigurationException e1) {
+				e1.printStackTrace();
+			} catch (SAXException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		return projects;
+	}
+
+	private Document getDocument(String file) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		// Load the input XML document, parse it and return an instance of the
+		// Document class.
+		Document document = builder.parse(new File(file));
+		return document;
+	}
+
+	private String getCharacterDataFromElement(Element e) {
+		// TODO Remove pathname and make it more generic
+		String filePath = e.getNodeName();
+		if (filePath.compareTo("filePath") != 0) {
+			return "";
+		}
+		Node child = e.getFirstChild();
+		if (child instanceof CharacterData) {
+			CharacterData cd = (CharacterData) child;
+			return cd.getData();
+		}
+		return "";
+	}
+	
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="24" _type="MoveCaretCommand" caretOffset="1266" docOffset="1797" timestamp="9685129" />
+  <Command __id="25" _type="MoveCaretCommand" caretOffset="80" docOffset="611" timestamp="9687165" />
+  <Command __id="26" _type="SelectTextCommand" caretOffset="85" docEnd="616" docOffset="616" docStart="599" end="85" start="68" timestamp="9687300" />
+  <Command __id="27" _type="CopyCommand" timestamp="9687881" />
+  <Command __id="28" _type="MoveCaretCommand" caretOffset="54" docOffset="585" timestamp="9763052" />
+  <Command __id="29" _type="MoveCaretCommand" caretOffset="98" docOffset="629" timestamp="9763873" />
+  <Command __id="30" _type="SelectTextCommand" caretOffset="104" docEnd="635" docOffset="635" docStart="625" end="104" start="94" timestamp="9764002" />
+  <Command __id="31" _type="CopyCommand" timestamp="9764641" />
+  <Command __id="32" _type="FileOpenCommand" docASTNodeCount="617" docActiveCodeLength="3522" docExpressionCount="431" docLength="3527" projectName="espionage" timestamp="9797099">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MimecCSVParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MimecCSVParser extends FileParser {
+	
+	private static final String MIMEC_LOGS_PATH = "/.metadata/.plugins/mimec/";
+
+	public MimecCSVParser() {
+		super(MIMEC_LOGS_PATH);
+	}
+
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MIMEC_LOGS_PATH);
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(new File(aLogFile));
+				while (scanner.hasNext()) {
+					List<String> line = CSVUtils.parseLine(scanner.nextLine());
+					String date = line.get(1).substring(7);
+					String typeKind = line.get(2).substring(6).trim();
+					String caseId = Utils.regexChecker("\\{\\w+\\.java", line.get(3)).replace("{", "");
+					String projectName = getProjectName(line.get(3));
+					ProcessCase processCase = null;
+					if (!caseId.isEmpty() && !projectName.isEmpty()) {
+						cases = getProjectCase(projects, projectName);
+
+						long fDate = (DateManipulator.getDateFromString(date, "EEE MMM dd HH:mm:ss Z yyyy").getTime() / 1000);
+						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+							processCase = projects.get(projectName).get(caseId);
+							cases = projects.get(projectName);
+							long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
+							long idleTime = DateManipulator.diff(nDate, fDate);
+							long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+							processCase.setIdleTime(incrIdleTime);
+							///
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),idleTime);
+							
+						} else {
+							processCase = new ProcessCase(caseId);
+							processCase.setStartTime(fDate);
+							processCase.setIdleTime(0);
+							//
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+						}
+						
+
+						long elapstime = DateManipulator.diff(processCase.getStartTime(), fDate) * 1000;
+						Event event = new Event(Date.from(Instant.ofEpochSecond(fDate)), elapstime, typeKind);
+						processCase.addEvents(event);
+						processCase.setLastEvent(event);
+						cases.put(processCase.getCaseId(), processCase);
+						projects.put(projectName, cases);
+					}
+
+				}
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				if (scanner != null) {
+					scanner.close();
+				}
+			}
+		}
+
+		return projects;
+	}
+
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("no(.*?)\\{", line).replace("{", "");
+		return pNameRaw != "" ? pNameRaw.split("\\.")[1] : pNameRaw;
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="33" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="9797363" />
+  <Command __id="34" _type="MoveCaretCommand" caretOffset="74" docOffset="341" timestamp="9798236" />
+  <Command __id="35" _type="SelectTextCommand" caretOffset="82" docEnd="349" docOffset="349" docStart="335" end="82" start="68" timestamp="9798384" />
+  <Command __id="36" _type="CopyCommand" timestamp="9798951" />
+  <Command __id="37" _type="FileOpenCommand" docASTNodeCount="685" docActiveCodeLength="3851" docExpressionCount="478" docLength="3923" projectName="espionage" timestamp="10460034">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynCSVParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MylynCSVParser extends FileParser {
+	
+	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/VIT/";
+	private String[] files;
+
+	public MylynCSVParser() {
+		super(MYLYN_LOGS_PATH);
+	}
+
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if(files == null){
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(new File(aLogFile));
+				while (scanner.hasNext()) {
+					List<String> line = CSVUtils.parseLine(scanner.nextLine(),';');
+					if(line.size() < 3){
+						continue;
+					}
+					if(line.get(4).contains("explorer")){
+						continue;
+					}
+//					if(line.get(4).contains("editor")){
+//						continue;
+//					}
+					String startDate = "2013-12-13 "+line.get(0);
+					String endDate = "2013-12-13 "+line.get(1);
+					
+					long fDate = new Long(0);
+					long fEndDate = new Long(0);
+					
+					String typeKind = line.get(6).trim();
+					String caseId = Utils.regexChecker("\\{\\w+\\.java", line.get(2)).replace("{", "");
+					String projectName = this.files[n].split("\\_")[0];
+					if(caseId.isEmpty()){
+						caseId = Utils.regexChecker("\\/\\w+\\.java", line.get(2)).replace("/", "");
+					}
+					ProcessCase processCase = null;
+					if (!caseId.isEmpty() && !projectName.isEmpty()) {
+						cases = getProjectCase(projects, projectName);
+
+					    fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
+					    fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
+						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+							processCase = projects.get(projectName).get(caseId);
+							cases = projects.get(projectName);
+							processCase.setIdleTime(new Long(0));
+							///
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),new Long(0));
+							
+						} else {
+							processCase = new ProcessCase(caseId);
+							processCase.setStartTime(fDate);
+							processCase.setIdleTime(0);
+							//
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+						}
+						
+
+						long elapstime = DateManipulator.diff(fEndDate, fDate) ;
+						Event event = new Event(Date.from(Instant.ofEpochSecond(fDate)), elapstime, typeKind);
+						processCase.addEvents(event);
+						processCase.setLastEvent(event);
+						cases.put(processCase.getCaseId(), processCase);
+						projects.put(projectName, cases);
+					}
+
+				}
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				if (scanner != null) {
+					scanner.close();
+				}
+			}
+		}
+
+		return projects;
+	}
+
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("org(.*?)\\.java", line).replace("/", ".");
+		System.out.println(pNameRaw);
+		return pNameRaw != "" ? pNameRaw.split("\\.")[1] : pNameRaw;
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="38" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="10460342" />
+  <Command __id="39" _type="MoveCaretCommand" caretOffset="75" docOffset="342" timestamp="10461188" />
+  <Command __id="40" _type="SelectTextCommand" caretOffset="82" docEnd="349" docOffset="349" docStart="335" end="82" start="68" timestamp="10461659" />
+  <Command __id="41" _type="CopyCommand" timestamp="10462304" />
+  <Command __id="42" _type="FileOpenCommand" docASTNodeCount="1131" docActiveCodeLength="6679" docExpressionCount="810" docLength="6996" projectName="espionage" timestamp="10504013">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MylynXMLParser extends FileParser {
+
+	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/Logs/";
+	private String[] files;
+
+	public MylynXMLParser() {
+		super(MYLYN_LOGS_PATH);
+		
+	}
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if(this.files == null){
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
+			System.out.println(aLogFile);
+			try {
+				
+				Document document = this.getDocument(aLogFile);
+
+				NodeList commands = document.getElementsByTagName("InteractionEvent");
+				
+				for (int i = 0; i < commands.getLength(); i++) {
+					Node aNode = commands.item(i);
+
+					if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element theNode = (Element) aNode;
+//						if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//							continue;
+//						}
+						if(theNode.getAttribute("OriginId").contains("propagation")){
+							continue;
+						}
+//						if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//							continue;
+//						}
+						
+						String startDate = theNode.getAttribute("StartDate");
+						long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String endDate = theNode.getAttribute("EndDate");
+						long fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String typeKind = theNode.getAttribute("Kind");
+						String caseId = Utils.regexChecker("\\{\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("{", "");
+						if(caseId.isEmpty()){
+							caseId = Utils.regexChecker("\\/\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("/", "");
+						}
+						String projectName = this.files[n].split("\\_")[0];
+						ProcessCase processCase = null;
+						
+						if (!caseId.isEmpty() && !projectName.isEmpty()) {
+							cases = getProjectCase(projects, projectName);
+							
+							if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+								processCase = projects.get(projectName).get(caseId);
+								cases = projects.get(projectName);
+								long idleTime = getOverlap(processCase, Date.from(Instant.ofEpochSecond(fDate)),Date.from(Instant.ofEpochSecond(fEndDate)));
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),idleTime);
+								
+							} else {
+								processCase = new ProcessCase(caseId);
+								processCase.setStartTime(fDate);
+								processCase.setIdleTime(0);
+								//
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+							}
+							
+							
+							long elapstime = DateManipulator.diff(fEndDate, fDate);
+							Event event = new Event(Date.from(Instant.ofEpochSecond(fEndDate)), elapstime, typeKind);
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+							
+						}
+
+					}
+
+				}
+			} catch (ParserConfigurationException e1) {
+				e1.printStackTrace();
+			} catch (SAXException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		return projects;
+	}
+
+	private Document getDocument(String file) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		// Load the input XML document, parse it and return an instance of the
+		// Document class.
+		Document document = builder.parse(new File(file));
+		return document;
+	}
+	
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("org(.*?)\\.java", line).replace("/", ".");
+		return pNameRaw != "" ? pNameRaw.split("\\.")[2] : pNameRaw;
+	}
+	
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+	
+	private Long getOverlap(ProcessCase processCase, Date aStartDate, Date aEndDate){
+		Long res = new Long(0);
+		for (Event e : processCase.getEvents()) {
+			Date eEndDate = e.getTimestamp();
+			Long elapse = e.getElapstime();
+			Date eStartDate = Date.from(Instant.ofEpochSecond((eEndDate.getTime()/1000) - elapse));
+			if(elapse.equals(new Long(0))){
+				continue;
+			}
+			//1
+			if(aStartDate.equals(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(), aStartDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			//2
+			if(aStartDate.equals(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			//3
+			if(aStartDate.after(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(),aStartDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//4
+			if(aStartDate.before(eStartDate) && aEndDate.before(eEndDate) && aEndDate.after(eStartDate)){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),aEndDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//5
+			if(aStartDate.before(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			
+			//6
+			if(aStartDate.before(eStartDate) && aEndDate.after(eEndDate) ){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),eEndDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			
+			//7
+			if(aStartDate.after(eStartDate) && aEndDate.after(eEndDate) && aStartDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(eEndDate.getTime(),aStartDate.getTime())/1000;
+			    res = updateTime(res, currentRes);
+			}
+			
+			
+			
+		}
+		return res;
+	}
+	private Long updateTime(Long res, Long currentRes) {
+		if(currentRes > res){
+			res = currentRes;
+		}
+		return res;
+	}
+	
+
+	
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="43" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="10504285" />
+  <Command __id="44" _type="MoveCaretCommand" caretOffset="71" docOffset="568" timestamp="10504959" />
+  <Command __id="45" _type="SelectTextCommand" caretOffset="82" docEnd="579" docOffset="579" docStart="565" end="82" start="68" timestamp="10505110" />
+  <Command __id="46" _type="CopyCommand" timestamp="10505689" />
+  <Command __id="47" _type="FileOpenCommand" docASTNodeCount="315" docActiveCodeLength="1685" docExpressionCount="225" docLength="1933" projectName="espionage" timestamp="16619379">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/views/EspionageView.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.views;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.part.*;
+
+import edu.cwi.espionage.model.ProcessCase;
+import edu.cwi.espionage.util.DateManipulator;
+import edu.cwi.espionage.util.FileLogManager;
+import edu.cwi.espionage.util.FileType;
+import edu.cwi.espionage.util.FileUtils;
+import edu.cwi.espionage.util.Utils;
+
+import java.awt.Frame;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
+
+public class EspionageView extends ViewPart {
+
+	/**
+	 * The ID of the view as specified by the extension.
+	 */
+	public static final String ID = "edu.cwi.espionage.views.SampleView";
+
+	/**
+	 * The constructor.
+	 */
+	public EspionageView() {
+	}
+
+	/**
+	 * This is a callback that will allow us to create the viewer and initialize
+	 * it.
+	 */
+	public void createPartControl(Composite parent) {
+		FileLogManager logManager = new FileLogManager();
+		Map<String, HashMap<String, ProcessCase>> project = logManager.getProject(FileType.FLOURITE_XML);
+		writeProjectToFile(project,FileType.FLOURITE_XML);
+		Composite composite = new Composite(parent, SWT.EMBEDDED | SWT.NO_BACKGROUND);
+		Frame frame = SWT_AWT.new_Frame(composite);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				TreeDisplay.createAndShowGUI(frame, project);
+			}
+		});
+	}
+
+	private void writeProjectToFile(Map<String, HashMap<String, ProcessCase>> project, FileType fileType) {
+		String currentDate = DateManipulator.getFormatedDate(Calendar.getInstance().getTime(), "yyyy-MM-dd_HH-mm-ss");
+		PrintWriter projectOutput = FileUtils.createFile(Utils.getFullPath("/dataset/"+fileType+"_"+currentDate+".csv"));
+		FileUtils.createProject(project, projectOutput);
+		projectOutput.close();
+	}
+
+	/**
+	 * Passing the focus request to the viewer's control.
+	 */
+	public void setFocus() {
+	}
+}
+]]></snapshot>
+  </Command>
+  <Command __id="48" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="16619623" />
+  <Command __id="49" _type="MoveCaretCommand" caretOffset="467" docOffset="944" timestamp="16684641" />
+  <Command __id="50" _type="RunCommand" kind="Create" projectName="null" timestamp="16689981" type="Run" />
+  <Command __id="51" _type="RunCommand" exitValue="143" kind="Terminate" projectName="null" timestamp="24708282" type="Run" />
+  <Command __id="52" _type="FileOpenCommand" docASTNodeCount="278" docActiveCodeLength="1875" docExpressionCount="191" docLength="2169" projectName="espionage" timestamp="24724640">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/PieChart.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.awt.Frame;
+
+import javax.swing.JFrame;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
+
+public class PieChart extends JFrame {
+
+        private static final long serialVersionUID = 1L;
+
+        public PieChart(String applicationTitle, String chartTitle, Frame frame) {
+        super(applicationTitle);
+        // This will create the dataset
+        PieDataset dataset = createDataset();
+        // based on the dataset we create the chart
+        JFreeChart chart = createChart(dataset, chartTitle);
+        // we put the chart into a panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+       
+        // default size
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        frame.add(chartPanel);
+        // add it to our application
+       // setContentPane(chartPanel);
+
+    }
+
+    /**
+     * Creates a sample dataset
+     */
+    private  PieDataset createDataset() {
+        DefaultPieDataset result = new DefaultPieDataset();
+        result.setValue("Linux", 29);
+        result.setValue("Mac", 20);
+        result.setValue("Windows", 51);
+        return result;
+
+    }
+
+    /**
+     * Creates a chart
+     */
+    private JFreeChart createChart(PieDataset dataset, String title) {
+
+        JFreeChart chart = ChartFactory.createPieChart3D(
+            title,                                  // chart title
+            dataset,                // data
+            true,                   // include legend
+            true,
+            false
+        );
+
+        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        plot.setStartAngle(290);
+        plot.setDirection(Rotation.CLOCKWISE);
+        plot.setForegroundAlpha(0.5f);
+        return chart;
+
+    }
+    
+    public static void create(Frame frame) {
+        PieChart demo = new PieChart("Comparison", "Which operating system are you using?",frame);
+        demo.pack();
+        demo.setVisible(true);
+    }
+}
+]]></snapshot>
+  </Command>
+  <Command __id="53" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="24724899" />
+  <Command __id="54" _type="FileOpenCommand" docASTNodeCount="315" docActiveCodeLength="1685" docExpressionCount="225" docLength="1933" projectName="espionage" timestamp="24726766">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/views/EspionageView.java]]></filePath>
+  </Command>
+  <Command __id="55" _type="MoveCaretCommand" caretOffset="467" docOffset="944" timestamp="24726922" />
+  <Command __id="56" _type="FileOpenCommand" docASTNodeCount="1131" docActiveCodeLength="6679" docExpressionCount="810" docLength="6996" projectName="espionage" timestamp="24728411">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="57" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="24728666" />
+  <Command __id="58" _type="MoveCaretCommand" caretOffset="3400" docOffset="3897" timestamp="24777531" />
+  <Command __id="59" _type="MoveCaretCommand" caretOffset="993" docOffset="1490" timestamp="24787932" />
+  <Command __id="60" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="24801501">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="61" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="24801764" />
+  <Command __id="62" _type="FileOpenCommand" docASTNodeCount="1131" docActiveCodeLength="6679" docExpressionCount="810" docLength="6996" projectName="espionage" timestamp="24807977">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="63" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="24808207">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="64" _type="MoveCaretCommand" caretOffset="993" docOffset="1490" timestamp="24808486" />
+  <Command __id="65" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="24808487" />
+  <Command __id="66" _type="MoveCaretCommand" caretOffset="1266" docOffset="1797" timestamp="24820254" />
+  <Command __id="67" _type="FileOpenCommand" docASTNodeCount="1131" docActiveCodeLength="6679" docExpressionCount="810" docLength="6996" projectName="espionage" timestamp="60496818">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="68" _type="MoveCaretCommand" caretOffset="2165" docOffset="2662" timestamp="60497152" />
+  <Command __id="69" _type="MoveCaretCommand" caretOffset="2165" docOffset="2662" timestamp="60497180" />
+  <Command __id="70" _type="CopyCommand" timestamp="61467302" />
+  <Command __id="71" _type="CopyCommand" timestamp="61471003" />
+  <Command __id="72" _type="PasteCommand" timestamp="61486392" />
+  <Command __id="73" _type="MoveCaretCommand" caretOffset="1230" docOffset="1727" timestamp="79199543" />
+  <Command __id="74" _type="SelectTextCommand" caretOffset="1144" docEnd="1727" docOffset="1641" docStart="1641" end="1230" start="1144" timestamp="79201181" />
+  <DocumentChange __id="75" _type="Insert" docASTNodeCount="1123" docActiveCodeLength="6612" docExpressionCount="802" docLength="6998" length="2" offset="1635" timestamp="79202755">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="76" _type="Insert" docASTNodeCount="1122" docActiveCodeLength="6596" docExpressionCount="802" docLength="7000" length="2" offset="1705" timestamp="79202796">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <DocumentChange __id="77" _type="Insert" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" length="2" offset="1724" timestamp="79202803">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="78" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.toggle.comment" timestamp="79202889" />
+  <Command __id="79" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="80037918">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="80" _type="MoveCaretCommand" caretOffset="2729" docOffset="3260" timestamp="80038262" />
+  <Command __id="81" _type="MoveCaretCommand" caretOffset="1603" docOffset="2134" timestamp="80045507" />
+  <Command __id="82" _type="MoveCaretCommand" caretOffset="3225" docOffset="3756" timestamp="80049849" />
+  <Command __id="83" _type="MoveCaretCommand" caretOffset="3721" docOffset="4252" timestamp="80125684" />
+  <Command __id="84" _type="MoveCaretCommand" caretOffset="3775" docOffset="4306" timestamp="80130257" />
+  <Command __id="85" _type="FileOpenCommand" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" projectName="espionage" timestamp="82119822">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="86" _type="FileOpenCommand" projectName="null" timestamp="82120385">
+    <filePath><![CDATA[null]]></filePath>
+  </Command>
+  <Command __id="87" _type="MoveCaretCommand" caretOffset="779" docOffset="1276" timestamp="82120532" />
+  <Command __id="88" _type="SelectTextCommand" caretOffset="598" docEnd="1189" docOffset="1189" docStart="1181" end="598" start="590" timestamp="82120676" />
+  <Command __id="89" _type="FileOpenCommand" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" projectName="espionage" timestamp="82164812">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="90" _type="MoveCaretCommand" caretOffset="779" docOffset="1276" timestamp="82165063" />
+  <Command __id="91" _type="MoveCaretCommand" caretOffset="844" docOffset="1341" timestamp="82313288" />
+  <DocumentChange __id="92" _type="Insert" docASTNodeCount="1123" docActiveCodeLength="6590" docExpressionCount="805" docLength="7003" length="1" offset="1341" timestamp="82314138">
+    <text><![CDATA[.]]></text>
+  </DocumentChange>
+  <Command __id="93" _type="InsertStringCommand" repeat="2" timestamp="82314180" timestamp2="82314180">
+    <data><![CDATA[..]]></data>
+  </Command>
+  <Command __id="95" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="82315767" />
+  <DocumentChange __id="96" _type="Delete" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" endLine="42" length="1" offset="1341" startLine="42" timestamp="82333592">
+    <text><![CDATA[.]]></text>
+  </DocumentChange>
+  <Command __id="97" _type="UndoCommand" timestamp="82333647" />
+  <Command __id="98" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="82335587" />
+  <Command __id="99" _type="MoveCaretCommand" caretOffset="850" docOffset="1347" timestamp="82337044" />
+  <DocumentChange __id="100" _type="Insert" docASTNodeCount="1123" docActiveCodeLength="6593" docExpressionCount="804" docLength="7006" length="4" offset="1347" repeat="4" timestamp="82337952" timestamp2="82338792">
+    <text><![CDATA[comm]]></text>
+  </DocumentChange>
+  <Command __id="101" _type="InsertStringCommand" repeat="8" timestamp="82337968" timestamp2="82338804">
+    <data><![CDATA[ccoommmm]]></data>
+  </Command>
+  <Command __id="112" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="82339538" />
+  <Command __id="113" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="82340533" />
+  <Command __id="114" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="82342007" />
+  <DocumentChange __id="115" _type="Insert" docASTNodeCount="1123" docActiveCodeLength="6598" docExpressionCount="804" docLength="7011" length="5" offset="1351" repeat="2" timestamp="82342018" timestamp2="82342923">
+    <text><![CDATA[ands.]]></text>
+  </DocumentChange>
+  <Command __id="116" _type="InsertStringCommand" timestamp="82342033">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="117" _type="InsertStringCommand" timestamp="82342034">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="119" _type="InsertStringCommand" repeat="2" timestamp="82342938" timestamp2="82342938">
+    <data><![CDATA[..]]></data>
+  </Command>
+  <Command __id="121" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="82343044" />
+  <DocumentChange __id="122" _type="Delete" docASTNodeCount="1123" docActiveCodeLength="6597" docExpressionCount="804" docLength="7010" endLine="43" length="1" offset="1355" startLine="43" timestamp="82370181">
+    <text><![CDATA[.]]></text>
+  </DocumentChange>
+  <Command __id="123" _type="UndoCommand" repeat="3" timestamp="82370186" timestamp2="82371336" />
+  <DocumentChange __id="124" _type="Replace" docASTNodeCount="1123" docActiveCodeLength="6593" docExpressionCount="804" docLength="7006" endLine="43" insertionLength="0" int_docASTNodeCount="1123" int_docActiveCodeLength="6593" int_docExpressionCount="804" int_docLength="7006" length="4" offset="1351" startLine="43" timestamp="82370917">
+    <deletedText><![CDATA[ands]]></deletedText>
+    <insertedText><![CDATA[]]></insertedText>
+  </DocumentChange>
+  <DocumentChange __id="126" _type="Delete" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" endLine="43" length="4" offset="1347" startLine="43" timestamp="82371328">
+    <text><![CDATA[comm]]></text>
+  </DocumentChange>
+  <Command __id="128" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="82378531" />
+  <Command __id="129" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="86890450">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="130" _type="MoveCaretCommand" caretOffset="3555" docOffset="4086" timestamp="86890783" />
+  <Command __id="131" _type="ShellBoundsCommand" bounds="[0, 0, 1280, 800]" repeat="3" timestamp="86893279" timestamp2="86893359" />
+  <Command __id="134" _type="FileOpenCommand" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" projectName="espionage" timestamp="86925352">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="135" _type="MoveCaretCommand" caretOffset="850" docOffset="1347" timestamp="86925653" />
+  <Command __id="136" _type="MoveCaretCommand" caretOffset="6482" docOffset="6979" timestamp="86973464" />
+  <Command __id="137" _type="MoveCaretCommand" caretOffset="6496" docOffset="6993" timestamp="86975209" />
+  <Command __id="138" _type="FileOpenCommand" docASTNodeCount="928" docActiveCodeLength="5689" docExpressionCount="657" docLength="5874" projectName="espionage" timestamp="86977537">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/FlouriteXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="139" _type="FileOpenCommand" docASTNodeCount="1121" docActiveCodeLength="6589" docExpressionCount="803" docLength="7002" projectName="espionage" timestamp="86977847">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="140" _type="MoveCaretCommand" caretOffset="6496" docOffset="6993" timestamp="86978015" />
+  <Command __id="141" _type="InsertStringCommand" timestamp="86987064">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="142" _type="InsertStringCommand" timestamp="86987231">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="143" _type="InsertStringCommand" repeat="3" timestamp="86988781" timestamp2="86989669">
+    <data><![CDATA[pri]]></data>
+  </Command>
+  <Command __id="146" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="86992245" />
+  <Command __id="147" _type="InsertStringCommand" timestamp="86992610">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="148" _type="MoveCaretCommand" caretOffset="6510" docOffset="7007" timestamp="86994976" />
+  <Command __id="149" _type="SelectTextCommand" caretOffset="6519" docEnd="7016" docOffset="7016" docStart="7005" end="6519" start="6508" timestamp="86995114" />
+  <Command __id="150" _type="InsertStringCommand" timestamp="87001221">
+    <data><![CDATA[H]]></data>
+  </Command>
+  <Command __id="151" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="87002563" />
+  <Command __id="152" _type="InsertStringCommand" repeat="3" timestamp="87003234" timestamp2="87004939">
+    <data><![CDATA[Map]]></data>
+  </Command>
+  <Command __id="155" _type="InsertStringCommand" timestamp="87006983">
+    <data><![CDATA[<]]></data>
+  </Command>
+  <Command __id="156" _type="SelectTextCommand" caretOffset="291" docEnd="829" docOffset="788" docStart="788" end="332" start="291" timestamp="87017562" />
+  <Command __id="157" _type="SelectTextCommand" caretOffset="6508" docEnd="7010" docOffset="7005" docStart="7005" end="6513" start="6508" timestamp="87023032" />
+  <Command __id="158" _type="MoveCaretCommand" caretOffset="6551" docOffset="7048" timestamp="87025517" />
+  <Command __id="159" _type="SelectTextCommand" caretOffset="6554" docEnd="7051" docOffset="7051" docStart="7047" end="6554" start="6550" timestamp="87025672" />
+  <Command __id="160" _type="InsertStringCommand" repeat="4" timestamp="87027644" timestamp2="87028210">
+    <data><![CDATA[sort]]></data>
+  </Command>
+  <Command __id="164" _type="InsertStringCommand" timestamp="87034463">
+    <data><![CDATA[X]]></data>
+  </Command>
+  <Command __id="165" _type="InsertStringCommand" repeat="2" timestamp="87036637" timestamp2="87036758">
+    <data><![CDATA[ML]]></data>
+  </Command>
+  <Command __id="167" _type="SelectTextCommand" caretOffset="6508" docEnd="7046" docOffset="7005" docStart="7005" end="6549" start="6508" timestamp="87098124" />
+  <Command __id="168" _type="InsertStringCommand" repeat="4" timestamp="87099270" timestamp2="87099941">
+    <data><![CDATA[Node]]></data>
+  </Command>
+  <Command __id="172" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="87102744" timestamp2="87102932" />
+  <Command __id="174" _type="InsertStringCommand" timestamp="87103472">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="175" _type="MoveCaretCommand" caretOffset="6531" docOffset="7028" timestamp="87106315" />
+  <Command __id="176" _type="MoveCaretCommand" caretOffset="6525" docOffset="7022" timestamp="87113110" />
+  <Command __id="177" _type="MoveCaretCommand" caretOffset="6524" docOffset="7021" timestamp="87116487" />
+  <Command __id="178" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="3" timestamp="87117158" timestamp2="87117465" />
+  <Command __id="181" _type="InsertStringCommand" repeat="7" timestamp="87118528" timestamp2="87120325">
+    <data><![CDATA[NodeLsi]]></data>
+  </Command>
+  <Command __id="188" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87121446" timestamp2="87121621" />
+  <Command __id="190" _type="InsertStringCommand" repeat="3" timestamp="87122086" timestamp2="87122389">
+    <data><![CDATA[ist]]></data>
+  </Command>
+  <Command __id="193" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="87123337" />
+  <Command __id="194" _type="InsertStringCommand" repeat="4" timestamp="87126174" timestamp2="87126726">
+    <data><![CDATA[Node]]></data>
+  </Command>
+  <Command __id="198" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="87128569" timestamp2="87128733" />
+  <Command __id="200" _type="InsertStringCommand" timestamp="87129166">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="201" _type="InsertStringCommand" timestamp="87129581">
+    <data><![CDATA[ ]]></data>
+  </Command>
+  <Command __id="202" _type="InsertStringCommand" repeat="8" timestamp="87136319" timestamp2="87138240">
+    <data><![CDATA[commands]]></data>
+  </Command>
+  <Command __id="210" _type="MoveCaretCommand" caretOffset="6553" docOffset="7050" timestamp="87140238" />
+  <Command __id="211" _type="InsertStringCommand" repeat="3" timestamp="87142279" timestamp2="87142623">
+    <data><![CDATA[reu]]></data>
+  </Command>
+  <Command __id="214" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="87143753" />
+  <Command __id="215" _type="InsertStringCommand" repeat="10" timestamp="87144239" timestamp2="87146568">
+    <data><![CDATA[turn null;]]></data>
+  </Command>
+  <Command __id="225" _type="MoveCaretCommand" caretOffset="6550" docOffset="7047" timestamp="87223558" />
+  <Command __id="226" _type="InsertStringCommand" timestamp="87225524">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="227" _type="InsertStringCommand" timestamp="87225996">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="228" _type="FileOpenCommand" projectName="null" timestamp="87240655">
+    <filePath><![CDATA[null]]></filePath>
+  </Command>
+  <Command __id="229" _type="SelectTextCommand" caretOffset="598" docEnd="1189" docOffset="1189" docStart="1181" end="598" start="590" timestamp="87240712" />
+  <Command __id="230" _type="SelectTextCommand" caretOffset="598" docEnd="1189" docOffset="1189" docStart="1181" end="598" start="590" timestamp="87240984" />
+  <Command __id="231" _type="FileOpenCommand" docASTNodeCount="1133" docActiveCodeLength="6667" docExpressionCount="808" docLength="7080" projectName="espionage" timestamp="87274285">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MylynXMLParser extends FileParser {
+
+	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/Logs/";
+	private String[] files;
+
+	public MylynXMLParser() {
+		super(MYLYN_LOGS_PATH);
+		
+	}
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if(this.files == null){
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
+			System.out.println(aLogFile);
+			try {
+				
+				Document document = this.getDocument(aLogFile);
+
+				NodeList commands = document.getElementsByTagName("InteractionEvent");
+				
+				for (int i = 0; i < commands.getLength(); i++) {
+					Node aNode = commands.item(i);
+
+					if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element theNode = (Element) aNode;
+//						if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//							continue;
+//						}
+//						if(theNode.getAttribute("OriginId").contains("propagation")){
+//							continue;
+//						}
+//						if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//							continue;
+//						}
+						
+						String startDate = theNode.getAttribute("StartDate");
+						long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String endDate = theNode.getAttribute("EndDate");
+						long fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String typeKind = theNode.getAttribute("Kind");
+						String caseId = Utils.regexChecker("\\{\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("{", "");
+						if(caseId.isEmpty()){
+							caseId = Utils.regexChecker("\\/\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("/", "");
+						}
+						String projectName = this.files[n].split("\\_")[0];
+						ProcessCase processCase = null;
+						
+						if (!caseId.isEmpty() && !projectName.isEmpty()) {
+							cases = getProjectCase(projects, projectName);
+							
+							if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+								processCase = projects.get(projectName).get(caseId);
+								cases = projects.get(projectName);
+								long idleTime = getOverlap(processCase, Date.from(Instant.ofEpochSecond(fDate)),Date.from(Instant.ofEpochSecond(fEndDate)));
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),idleTime);
+								
+							} else {
+								processCase = new ProcessCase(caseId);
+								processCase.setStartTime(fDate);
+								processCase.setIdleTime(0);
+								//
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+							}
+							
+							
+							long elapstime = DateManipulator.diff(fEndDate, fDate);
+							Event event = new Event(Date.from(Instant.ofEpochSecond(fEndDate)), elapstime, typeKind);
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+							
+						}
+
+					}
+
+				}
+			} catch (ParserConfigurationException e1) {
+				e1.printStackTrace();
+			} catch (SAXException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		return projects;
+	}
+
+	private Document getDocument(String file) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		// Load the input XML document, parse it and return an instance of the
+		// Document class.
+		Document document = builder.parse(new File(file));
+		return document;
+	}
+	
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("org(.*?)\\.java", line).replace("/", ".");
+		return pNameRaw != "" ? pNameRaw.split("\\.")[2] : pNameRaw;
+	}
+	
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+	
+	private Long getOverlap(ProcessCase processCase, Date aStartDate, Date aEndDate){
+		Long res = new Long(0);
+		for (Event e : processCase.getEvents()) {
+			Date eEndDate = e.getTimestamp();
+			Long elapse = e.getElapstime();
+			Date eStartDate = Date.from(Instant.ofEpochSecond((eEndDate.getTime()/1000) - elapse));
+			if(elapse.equals(new Long(0))){
+				continue;
+			}
+			//1
+			if(aStartDate.equals(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(), aStartDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			//2
+			if(aStartDate.equals(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			//3
+			if(aStartDate.after(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(),aStartDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//4
+			if(aStartDate.before(eStartDate) && aEndDate.before(eEndDate) && aEndDate.after(eStartDate)){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),aEndDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//5
+			if(aStartDate.before(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			
+			//6
+			if(aStartDate.before(eStartDate) && aEndDate.after(eEndDate) ){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),eEndDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			
+			//7
+			if(aStartDate.after(eStartDate) && aEndDate.after(eEndDate) && aStartDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(eEndDate.getTime(),aStartDate.getTime())/1000;
+			    res = updateTime(res, currentRes);
+			}
+			
+			
+			
+		}
+		return res;
+	}
+	private Long updateTime(Long res, Long currentRes) {
+		if(currentRes > res){
+			res = currentRes;
+		}
+		return res;
+	}
+	
+	private NodeList sortNodeList(NodeList commands) {
+		
+		
+		return null;
+	}
+	
+
+	
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="232" _type="MoveCaretCommand" caretOffset="6512" docOffset="7009" timestamp="87274581" />
+  <Command __id="233" _type="SelectTextCommand" caretOffset="920" docEnd="1417" docOffset="1417" docStart="1400" end="920" start="903" timestamp="87282766" />
+  <Command __id="234" _type="SelectTextCommand" caretOffset="855" docEnd="1531" docOffset="1352" docStart="1352" end="1034" start="855" timestamp="87301549" />
+  <Command __id="235" _type="CopyCommand" timestamp="87301940" />
+  <Command __id="236" _type="SelectTextCommand" caretOffset="946" docEnd="1909" docOffset="1443" docStart="1443" end="1412" start="946" timestamp="87313025" />
+  <Command __id="237" _type="CopyCommand" timestamp="87313242" />
+  <Command __id="238" _type="MoveCaretCommand" caretOffset="6556" docOffset="7053" timestamp="87317098" />
+  <DocumentChange __id="239" _type="Insert" docASTNodeCount="1133" docActiveCodeLength="6667" docExpressionCount="808" docLength="7080" length="430" offset="7053" timestamp="87318327">
+    <text><![CDATA[if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element theNode = (Element) aNode;
+//			if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//				continue;
+//			}
+//			if(theNode.getAttribute("OriginId").contains("propagation")){
+//				continue;
+//			}
+//			if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//				continue;
+//			}
+			
+			String startDate = theNode.getAttribute("StartDate");]]></text>
+  </DocumentChange>
+  <Command __id="240" _type="PasteCommand" timestamp="87318359" />
+  <DocumentChange __id="241" _type="Replace" docASTNodeCount="1133" docActiveCodeLength="6667" docExpressionCount="808" docLength="7080" endLine="214" insertionLength="0" int_docASTNodeCount="1133" int_docActiveCodeLength="6667" int_docExpressionCount="808" int_docLength="7080" length="430" offset="7053" startLine="202" timestamp="87325189">
+    <deletedText><![CDATA[if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element theNode = (Element) aNode;
+//			if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//				continue;
+//			}
+//			if(theNode.getAttribute("OriginId").contains("propagation")){
+//				continue;
+//			}
+//			if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//				continue;
+//			}
+			
+			String startDate = theNode.getAttribute("StartDate");]]></deletedText>
+    <insertedText><![CDATA[]]></insertedText>
+  </DocumentChange>
+  <Command __id="242" _type="UndoCommand" timestamp="87325230" />
+  <Command __id="243" _type="SelectTextCommand" caretOffset="855" docEnd="2020" docOffset="1352" docStart="1352" end="1523" start="855" timestamp="87342726" />
+  <Command __id="244" _type="CopyCommand" timestamp="87342907" />
+  <Command __id="245" _type="MoveCaretCommand" caretOffset="6556" docOffset="7053" timestamp="87345784" />
+  <DocumentChange __id="246" _type="Insert" docASTNodeCount="1133" docActiveCodeLength="6667" docExpressionCount="808" docLength="7080" length="638" offset="7053" timestamp="87346593">
+    <text><![CDATA[for (int i = 0; i < commands.getLength(); i++) {
+			Node aNode = commands.item(i);
+
+			if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element theNode = (Element) aNode;
+//				if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//					continue;
+//				}
+//				if(theNode.getAttribute("OriginId").contains("propagation")){
+//					continue;
+//				}
+//				if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//					continue;
+//				}
+				
+				String startDate = theNode.getAttribute("StartDate");
+				long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);]]></text>
+  </DocumentChange>
+  <Command __id="247" _type="PasteCommand" timestamp="87346689" />
+  <DocumentChange __id="248" _type="Insert" docASTNodeCount="1131" docActiveCodeLength="7026" docExpressionCount="807" docLength="7723" length="5" offset="7691" timestamp="87348993">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="249" _type="InsertStringCommand" timestamp="87349015">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="250" _type="InsertStringCommand" timestamp="87349016">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="251" _type="Insert" docASTNodeCount="1131" docActiveCodeLength="7031" docExpressionCount="807" docLength="7728" length="5" offset="7696" timestamp="87349149">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="252" _type="InsertStringCommand" timestamp="87349163">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="253" _type="InsertStringCommand" timestamp="87349163">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="254" _type="Replace" docASTNodeCount="1197" docActiveCodeLength="7031" docExpressionCount="853" docLength="7728" endLine="220" insertionLength="1" int_docASTNodeCount="1131" int_docActiveCodeLength="7030" int_docExpressionCount="807" int_docLength="7727" length="1" offset="7700" startLine="220" timestamp="87349479">
+    <deletedText><![CDATA[	]]></deletedText>
+    <insertedText><![CDATA[}]]></insertedText>
+  </DocumentChange>
+  <Command __id="255" _type="InsertStringCommand" repeat="2" timestamp="87349490" timestamp2="87349490">
+    <data><![CDATA[}}]]></data>
+  </Command>
+  <Command __id="257" _type="MoveCaretCommand" caretOffset="7194" docOffset="7691" timestamp="87353318" />
+  <DocumentChange __id="258" _type="Insert" docASTNodeCount="1197" docActiveCodeLength="7036" docExpressionCount="853" docLength="7733" length="5" offset="7691" timestamp="87354737">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="259" _type="InsertStringCommand" timestamp="87354754">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="260" _type="InsertStringCommand" timestamp="87354754">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="261" _type="SelectTextCommand" caretOffset="6729" docEnd="7519" docOffset="7226" docStart="7226" end="7022" start="6729" timestamp="87360128" />
+  <DocumentChange __id="262" _type="Delete" docASTNodeCount="1197" docActiveCodeLength="7027" docExpressionCount="853" docLength="7440" endLine="215" length="293" offset="7226" startLine="206" timestamp="87360850">
+    <text><![CDATA[
+//				if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//					continue;
+//				}
+//				if(theNode.getAttribute("OriginId").contains("propagation")){
+//					continue;
+//				}
+//				if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//					continue;
+//				}]]></text>
+  </DocumentChange>
+  <Command __id="263" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87360883" timestamp2="87360883" />
+  <Command __id="265" _type="MoveCaretCommand" caretOffset="6901" docOffset="7398" timestamp="87362299" />
+  <DocumentChange __id="266" _type="Insert" docASTNodeCount="1197" docActiveCodeLength="7032" docExpressionCount="853" docLength="7445" length="5" offset="7398" timestamp="87362826">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="267" _type="InsertStringCommand" timestamp="87362847">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="268" _type="InsertStringCommand" timestamp="87362847">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="269" _type="Replace" docASTNodeCount="1197" docActiveCodeLength="7032" docExpressionCount="853" docLength="7445" endLine="210" insertionLength="1" int_docASTNodeCount="1197" int_docActiveCodeLength="7031" int_docExpressionCount="853" int_docLength="7444" length="1" offset="7402" startLine="210" timestamp="87363141">
+    <deletedText><![CDATA[	]]></deletedText>
+    <insertedText><![CDATA[}]]></insertedText>
+  </DocumentChange>
+  <Command __id="270" _type="InsertStringCommand" repeat="2" timestamp="87363167" timestamp2="87363167">
+    <data><![CDATA[}}]]></data>
+  </Command>
+  <Command __id="272" _type="MoveCaretCommand" caretOffset="6901" docOffset="7398" timestamp="87367672" />
+  <DocumentChange __id="273" _type="Insert" docASTNodeCount="1197" docActiveCodeLength="7037" docExpressionCount="853" docLength="7450" length="5" offset="7398" timestamp="87369927">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="274" _type="InsertStringCommand" timestamp="87369948">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="275" _type="InsertStringCommand" timestamp="87369948">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="276" _type="Insert" docASTNodeCount="1199" docActiveCodeLength="7042" docExpressionCount="854" docLength="7455" length="5" offset="7403" repeat="5" timestamp="87371224" timestamp2="87372473">
+    <text><![CDATA[Date ]]></text>
+  </DocumentChange>
+  <Command __id="277" _type="InsertStringCommand" repeat="10" timestamp="87371249" timestamp2="87372493">
+    <data><![CDATA[DDaattee  ]]></data>
+  </Command>
+  <DocumentChange __id="291" _type="Insert" docASTNodeCount="1202" docActiveCodeLength="7051" docExpressionCount="855" docLength="7464" length="9" offset="7408" repeat="9" timestamp="87375545" timestamp2="87378504">
+    <text><![CDATA[startDate]]></text>
+  </DocumentChange>
+  <Command __id="292" _type="InsertStringCommand" repeat="18" timestamp="87375555" timestamp2="87378514">
+    <data><![CDATA[ssttaarrttDDaattee]]></data>
+  </Command>
+  <DocumentChange __id="318" _type="Insert" docASTNodeCount="1202" docActiveCodeLength="7054" docExpressionCount="855" docLength="7467" length="3" offset="7417" repeat="3" timestamp="87380977" timestamp2="87381185">
+    <text><![CDATA[ = ]]></text>
+  </DocumentChange>
+  <Command __id="319" _type="InsertStringCommand" repeat="6" timestamp="87380986" timestamp2="87381194">
+    <data><![CDATA[  ==  ]]></data>
+  </Command>
+  <DocumentChange __id="327" _type="Insert" docASTNodeCount="1205" docActiveCodeLength="7061" docExpressionCount="858" docLength="7474" length="7" offset="7420" repeat="7" timestamp="87384657" timestamp2="87387377">
+    <text><![CDATA[Date.fr]]></text>
+  </DocumentChange>
+  <Command __id="328" _type="InsertStringCommand" repeat="10" timestamp="87384667" timestamp2="87386810">
+    <data><![CDATA[DDaattee..]]></data>
+  </Command>
+  <Command __id="342" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="true" start_end="START" timestamp="87386824" />
+  <Command __id="345" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="87389481" />
+  <DocumentChange __id="346" _type="Insert" docASTNodeCount="1205" docActiveCodeLength="7061" docExpressionCount="858" docLength="7474" length="11" offset="7427" timestamp="87389489">
+    <text><![CDATA[om(instant)]]></text>
+  </DocumentChange>
+  <Command __id="347" _type="InsertStringCommand" timestamp="87389535">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="348" _type="InsertStringCommand" timestamp="87389536">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="349" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="87390779" />
+  <Command __id="350" _type="SelectTextCommand" caretOffset="2983" docEnd="3480" docOffset="3480" docStart="3453" end="2983" start="2956" timestamp="87401437" />
+  <Command __id="351" _type="CopyCommand" timestamp="87401633" />
+  <Command __id="352" _type="MoveCaretCommand" caretOffset="6935" docOffset="7432" timestamp="87404716" />
+  <Command __id="353" _type="SelectTextCommand" caretOffset="6940" docEnd="7437" docOffset="7437" docStart="7430" end="6940" start="6933" timestamp="87404856" />
+  <DocumentChange __id="354" _type="Replace" docASTNodeCount="1209" docActiveCodeLength="7092" docExpressionCount="862" docLength="7505" endLine="210" insertionLength="27" int_docASTNodeCount="1205" int_docActiveCodeLength="7065" int_docExpressionCount="858" int_docLength="7478" length="7" offset="7430" startLine="210" timestamp="87405044">
+    <deletedText><![CDATA[instant]]></deletedText>
+    <insertedText><![CDATA[nstant.ofEpochSecond(fDate)]]></insertedText>
+  </DocumentChange>
+  <Command __id="355" _type="PasteCommand" timestamp="87405051" />
+  <Command __id="356" _type="MoveCaretCommand" caretOffset="6961" docOffset="7458" timestamp="87408154" />
+  <DocumentChange __id="357" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7093" docExpressionCount="862" docLength="7506" length="1" offset="7458" timestamp="87408960">
+    <text><![CDATA[;]]></text>
+  </DocumentChange>
+  <Command __id="358" _type="InsertStringCommand" repeat="2" timestamp="87408972" timestamp2="87408972">
+    <data><![CDATA[;;]]></data>
+  </Command>
+  <Command __id="360" _type="MoveCaretCommand" caretOffset="6933" docOffset="7430" timestamp="87416427" />
+  <DocumentChange __id="361" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7094" docExpressionCount="862" docLength="7507" length="1" offset="7430" timestamp="87417962">
+    <text><![CDATA[I]]></text>
+  </DocumentChange>
+  <Command __id="362" _type="InsertStringCommand" repeat="2" timestamp="87417973" timestamp2="87417973">
+    <data><![CDATA[II]]></data>
+  </Command>
+  <Command __id="364" _type="MoveCaretCommand" caretOffset="6916" docOffset="7413" timestamp="87427022" />
+  <DocumentChange __id="365" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7090" docExpressionCount="862" docLength="7503" endLine="210" length="4" offset="7409" repeat="4" startLine="210" timestamp="87427582" timestamp2="87428330">
+    <text><![CDATA[tart]]></text>
+  </DocumentChange>
+  <Command __id="366" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="8" timestamp="87427588" timestamp2="87428335" />
+  <Command __id="377" _type="MoveCaretCommand" caretOffset="6668" docOffset="7165" timestamp="87433290" />
+  <Command __id="378" _type="MoveCaretCommand" caretOffset="6912" docOffset="7409" timestamp="87436406" />
+  <DocumentChange __id="379" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7094" docExpressionCount="862" docLength="7507" length="4" offset="7409" timestamp="87437324">
+    <text><![CDATA[tart]]></text>
+  </DocumentChange>
+  <Command __id="380" _type="UndoCommand" timestamp="87437328" />
+  <Command __id="381" _type="MoveCaretCommand" caretOffset="6911" docOffset="7408" timestamp="87439014" />
+  <DocumentChange __id="382" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7098" docExpressionCount="862" docLength="7511" length="4" offset="7408" repeat="4" timestamp="87439461" timestamp2="87441113">
+    <text><![CDATA[real]]></text>
+  </DocumentChange>
+  <Command __id="383" _type="InsertStringCommand" repeat="8" timestamp="87439473" timestamp2="87441130">
+    <data><![CDATA[rreeaall]]></data>
+  </Command>
+  <Command __id="394" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" repeat="2" timestamp="87441642" timestamp2="87441642" />
+  <DocumentChange __id="396" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7097" docExpressionCount="862" docLength="7510" endLine="210" length="1" offset="7412" startLine="210" timestamp="87442193">
+    <text><![CDATA[s]]></text>
+  </DocumentChange>
+  <Command __id="397" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87442200" timestamp2="87442200" />
+  <DocumentChange __id="399" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7098" docExpressionCount="862" docLength="7511" length="1" offset="7412" timestamp="87442484">
+    <text><![CDATA[S]]></text>
+  </DocumentChange>
+  <Command __id="400" _type="InsertStringCommand" repeat="2" timestamp="87442496" timestamp2="87442496">
+    <data><![CDATA[SS]]></data>
+  </Command>
+  <Command __id="402" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="2" timestamp="87443874" timestamp2="87443875" />
+  <DocumentChange __id="404" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7094" docExpressionCount="862" docLength="7507" endLine="210" length="4" offset="7408" repeat="4" startLine="210" timestamp="87444629" timestamp2="87445148">
+    <text><![CDATA[real]]></text>
+  </DocumentChange>
+  <Command __id="405" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="8" timestamp="87444635" timestamp2="87445154" />
+  <DocumentChange __id="416" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7095" docExpressionCount="862" docLength="7508" length="1" offset="7408" timestamp="87445676">
+    <text><![CDATA[f]]></text>
+  </DocumentChange>
+  <Command __id="417" _type="InsertStringCommand" repeat="2" timestamp="87445687" timestamp2="87445687">
+    <data><![CDATA[ff]]></data>
+  </Command>
+  <Command __id="419" _type="MoveCaretCommand" caretOffset="6964" docOffset="7461" timestamp="87457343" />
+  <DocumentChange __id="420" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7100" docExpressionCount="862" docLength="7513" length="5" offset="7461" timestamp="87457915">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="421" _type="InsertStringCommand" timestamp="87457934">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="422" _type="InsertStringCommand" timestamp="87457934">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="423" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7105" docExpressionCount="862" docLength="7518" length="5" offset="7466" timestamp="87458258">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="424" _type="InsertStringCommand" timestamp="87458268">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="425" _type="InsertStringCommand" timestamp="87458268">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="426" _type="Insert" docASTNodeCount="1211" docActiveCodeLength="7106" docExpressionCount="863" docLength="7519" length="1" offset="7471" timestamp="87459342">
+    <text><![CDATA[t]]></text>
+  </DocumentChange>
+  <Command __id="427" _type="InsertStringCommand" repeat="2" timestamp="87459351" timestamp2="87459351">
+    <data><![CDATA[tt]]></data>
+  </Command>
+  <DocumentChange __id="429" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7105" docExpressionCount="862" docLength="7518" endLine="212" length="1" offset="7471" startLine="212" timestamp="87459996">
+    <text><![CDATA[t]]></text>
+  </DocumentChange>
+  <Command __id="430" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87459999" timestamp2="87459999" />
+  <DocumentChange __id="432" _type="Insert" docASTNodeCount="1211" docActiveCodeLength="7109" docExpressionCount="863" docLength="7522" length="4" offset="7471" repeat="4" timestamp="87464084" timestamp2="87464842">
+    <text><![CDATA[temp]]></text>
+  </DocumentChange>
+  <Command __id="433" _type="InsertStringCommand" repeat="8" timestamp="87464094" timestamp2="87464856">
+    <data><![CDATA[tteemmpp]]></data>
+  </Command>
+  <DocumentChange __id="444" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7105" docExpressionCount="862" docLength="7518" endLine="212" length="4" offset="7471" repeat="4" startLine="212" timestamp="87465872" timestamp2="87466563">
+    <text><![CDATA[temp]]></text>
+  </DocumentChange>
+  <Command __id="445" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="8" timestamp="87465876" timestamp2="87466567" />
+  <DocumentChange __id="456" _type="Insert" docASTNodeCount="1211" docActiveCodeLength="7110" docExpressionCount="863" docLength="7523" length="5" offset="7471" repeat="4" timestamp="87469756" timestamp2="87471127">
+    <text><![CDATA[Map<>]]></text>
+  </DocumentChange>
+  <Command __id="457" _type="InsertStringCommand" repeat="8" timestamp="87469767" timestamp2="87471134">
+    <data><![CDATA[MMaapp<<]]></data>
+  </Command>
+  <DocumentChange __id="468" _type="Insert" docASTNodeCount="1209" docActiveCodeLength="7115" docExpressionCount="862" docLength="7528" length="5" offset="7475" repeat="5" timestamp="87474638" timestamp2="87476726">
+    <text><![CDATA[Date,]]></text>
+  </DocumentChange>
+  <Command __id="469" _type="InsertStringCommand" repeat="10" timestamp="87474648" timestamp2="87476735">
+    <data><![CDATA[DDaattee,,]]></data>
+  </Command>
+  <DocumentChange __id="483" _type="Insert" docASTNodeCount="1211" docActiveCodeLength="7119" docExpressionCount="863" docLength="7532" length="4" offset="7480" repeat="4" timestamp="87590390" timestamp2="87591135">
+    <text><![CDATA[List]]></text>
+  </DocumentChange>
+  <Command __id="484" _type="InsertStringCommand" repeat="8" timestamp="87590398" timestamp2="87591144">
+    <data><![CDATA[LLiisstt]]></data>
+  </Command>
+  <DocumentChange __id="495" _type="Insert" docASTNodeCount="1211" docActiveCodeLength="7125" docExpressionCount="863" docLength="7538" length="6" offset="7484" repeat="5" timestamp="87599176" timestamp2="87601024">
+    <text><![CDATA[<Node>]]></text>
+  </DocumentChange>
+  <Command __id="496" _type="InsertStringCommand" repeat="10" timestamp="87599182" timestamp2="87601033">
+    <data><![CDATA[<<NNooddee]]></data>
+  </Command>
+  <Command __id="510" _type="MoveCaretCommand" caretOffset="6994" docOffset="7491" timestamp="87603660" />
+  <DocumentChange __id="511" _type="Insert" docASTNodeCount="1222" docActiveCodeLength="7130" docExpressionCount="867" docLength="7543" length="5" offset="7491" repeat="5" timestamp="87608344" timestamp2="87609529">
+    <text><![CDATA[ temp]]></text>
+  </DocumentChange>
+  <Command __id="512" _type="InsertStringCommand" repeat="10" timestamp="87608355" timestamp2="87609538">
+    <data><![CDATA[  tteemmpp]]></data>
+  </Command>
+  <DocumentChange __id="526" _type="Insert" docASTNodeCount="1225" docActiveCodeLength="7148" docExpressionCount="869" docLength="7561" length="18" offset="7496" repeat="18" timestamp="87613303" timestamp2="87619264">
+    <text><![CDATA[Commands = new Arr]]></text>
+  </DocumentChange>
+  <Command __id="527" _type="InsertStringCommand" repeat="36" timestamp="87613313" timestamp2="87619274">
+    <data><![CDATA[CCoommmmaannddss  ==  nneeww  AArrrr]]></data>
+  </Command>
+  <DocumentChange __id="580" _type="Delete" docASTNodeCount="1209" docActiveCodeLength="7145" docExpressionCount="862" docLength="7558" endLine="212" length="3" offset="7511" repeat="3" startLine="212" timestamp="87619839" timestamp2="87621135">
+    <text><![CDATA[Arr]]></text>
+  </DocumentChange>
+  <Command __id="581" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="6" timestamp="87619845" timestamp2="87621139" />
+  <DocumentChange __id="589" _type="Insert" docASTNodeCount="1225" docActiveCodeLength="7148" docExpressionCount="869" docLength="7561" length="3" offset="7511" repeat="3" timestamp="87621688" timestamp2="87622000">
+    <text><![CDATA[Has]]></text>
+  </DocumentChange>
+  <Command __id="590" _type="InsertStringCommand" repeat="6" timestamp="87621699" timestamp2="87622010">
+    <data><![CDATA[HHaass]]></data>
+  </Command>
+  <Command __id="598" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="87622646" />
+  <Command __id="599" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="87623656" />
+  <Command __id="600" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="87625752" />
+  <DocumentChange __id="601" _type="Insert" docASTNodeCount="1226" docActiveCodeLength="7156" docExpressionCount="869" docLength="7569" length="8" offset="7514" repeat="2" timestamp="87625790" timestamp2="87625803">
+    <text><![CDATA[hMap<>()]]></text>
+  </DocumentChange>
+  <Command __id="603" _type="InsertStringCommand" timestamp="87625811">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="604" _type="InsertStringCommand" timestamp="87625811">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="605" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" repeat="6" timestamp="87627917" timestamp2="87628429" />
+  <DocumentChange __id="611" _type="Insert" docASTNodeCount="1232" docActiveCodeLength="7178" docExpressionCount="874" docLength="7591" length="22" offset="156" timestamp="87633847">
+    <text><![CDATA[import java.util.List;]]></text>
+  </DocumentChange>
+  <DocumentChange __id="612" _type="Insert" docASTNodeCount="1232" docActiveCodeLength="7179" docExpressionCount="874" docLength="7592" length="1" offset="156" timestamp="87633853">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <DocumentChange __id="613" _type="Insert" docASTNodeCount="1236" docActiveCodeLength="7192" docExpressionCount="876" docLength="7605" length="13" offset="7542" repeat="13" timestamp="87648690" timestamp2="87653032">
+    <text><![CDATA[Date, new Arr]]></text>
+  </DocumentChange>
+  <Command __id="614" _type="InsertStringCommand" repeat="26" timestamp="87648704" timestamp2="87653046">
+    <data><![CDATA[DDaattee,,  nneeww  AArrrr]]></data>
+  </Command>
+  <Command __id="652" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="87654070" />
+  <Command __id="653" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="87654238" />
+  <DocumentChange __id="654" _type="Insert" docASTNodeCount="1236" docActiveCodeLength="7194" docExpressionCount="876" docLength="7607" length="2" offset="7555" repeat="2" timestamp="87657250" timestamp2="87657426">
+    <text><![CDATA[ay]]></text>
+  </DocumentChange>
+  <DocumentChange __id="656" _type="Insert" docASTNodeCount="1236" docActiveCodeLength="7195" docExpressionCount="876" docLength="7608" length="1" offset="7557" timestamp="87659457">
+    <text><![CDATA[L]]></text>
+  </DocumentChange>
+  <Command __id="657" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="87660832" />
+  <DocumentChange __id="658" _type="Insert" docASTNodeCount="1236" docActiveCodeLength="7195" docExpressionCount="876" docLength="7608" length="8" offset="7555" timestamp="87660838">
+    <text><![CDATA[ayList<>]]></text>
+  </DocumentChange>
+  <DocumentChange __id="659" _type="Insert" docASTNodeCount="1243" docActiveCodeLength="7230" docExpressionCount="881" docLength="7643" length="27" offset="107" timestamp="87660847">
+    <text><![CDATA[import java.util.ArrayList;]]></text>
+  </DocumentChange>
+  <DocumentChange __id="660" _type="Insert" docASTNodeCount="1243" docActiveCodeLength="7231" docExpressionCount="881" docLength="7644" length="1" offset="107" timestamp="87660850">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <DocumentChange __id="661" _type="Replace" docASTNodeCount="1221" docActiveCodeLength="7230" docExpressionCount="872" docLength="7643" endLine="214" insertionLength="2" int_docASTNodeCount="1244" int_docActiveCodeLength="7228" int_docExpressionCount="881" int_docLength="7641" length="3" offset="7591" startLine="214" timestamp="87660856">
+    <deletedText><![CDATA[ayL]]></deletedText>
+    <insertedText><![CDATA[()]]></insertedText>
+  </DocumentChange>
+  <Command __id="662" _type="InsertStringCommand" timestamp="87660868">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="663" _type="InsertStringCommand" timestamp="87660868">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="664" _type="MoveCaretCommand" caretOffset="7048" docOffset="7596" timestamp="87680051" />
+  <DocumentChange __id="665" _type="Insert" docASTNodeCount="1214" docActiveCodeLength="7231" docExpressionCount="861" docLength="7644" length="1" offset="7596" timestamp="87680897">
+    <text><![CDATA[;]]></text>
+  </DocumentChange>
+  <Command __id="666" _type="InsertStringCommand" repeat="2" timestamp="87680963" timestamp2="87680964">
+    <data><![CDATA[;;]]></data>
+  </Command>
+  <Command __id="668" _type="MoveCaretCommand" caretOffset="7046" docOffset="7594" timestamp="87688148" />
+  <Command __id="669" _type="MoveCaretCommand" caretOffset="7042" docOffset="7590" timestamp="87693608" />
+  <DocumentChange __id="670" _type="Insert" docASTNodeCount="1214" docActiveCodeLength="7235" docExpressionCount="861" docLength="7648" length="4" offset="7590" repeat="4" timestamp="87695736" timestamp2="87696336">
+    <text><![CDATA[Node]]></text>
+  </DocumentChange>
+  <Command __id="671" _type="InsertStringCommand" repeat="8" timestamp="87695751" timestamp2="87696347">
+    <data><![CDATA[NNooddee]]></data>
+  </Command>
+  <Command __id="682" _type="SelectTextCommand" caretOffset="7028" docEnd="7597" docOffset="7576" docStart="7576" end="7049" start="7028" timestamp="87703388" />
+  <Command __id="683" _type="CopyCommand" timestamp="87703624" />
+  <Command __id="684" _type="MoveCaretCommand" caretOffset="6969" docOffset="7517" timestamp="87705521" />
+  <DocumentChange __id="685" _type="Insert" docASTNodeCount="1216" docActiveCodeLength="7240" docExpressionCount="862" docLength="7653" length="5" offset="7517" repeat="5" timestamp="87710509" timestamp2="87711038">
+    <text><![CDATA[nodes]]></text>
+  </DocumentChange>
+  <Command __id="686" _type="InsertStringCommand" repeat="10" timestamp="87710518" timestamp2="87711047">
+    <data><![CDATA[nnooddeess]]></data>
+  </Command>
+  <DocumentChange __id="700" _type="Delete" docASTNodeCount="1216" docActiveCodeLength="7239" docExpressionCount="862" docLength="7652" endLine="213" length="1" offset="7521" startLine="213" timestamp="87715205">
+    <text><![CDATA[s]]></text>
+  </DocumentChange>
+  <Command __id="701" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87715209" timestamp2="87715209" />
+  <DocumentChange __id="703" _type="Insert" docASTNodeCount="1223" docActiveCodeLength="7272" docExpressionCount="866" docLength="7685" length="33" offset="7521" repeat="13" timestamp="87715421" timestamp2="87720147">
+    <text><![CDATA[Commands = new ArrayList<Node>();]]></text>
+  </DocumentChange>
+  <Command __id="704" _type="InsertStringCommand" repeat="22" timestamp="87715430" timestamp2="87718648">
+    <data><![CDATA[CCoommmmaannddss  ==  ]]></data>
+  </Command>
+  <Command __id="737" _type="PasteCommand" timestamp="87718797" />
+  <Command __id="739" _type="InsertStringCommand" repeat="2" timestamp="87720166" timestamp2="87720166">
+    <data><![CDATA[;;]]></data>
+  </Command>
+  <Command __id="741" _type="EclipseCommand" commandID="AUTOGEN:::org.eclipse.jdt.internal.ui.CompilationUnitEditor.ruler.actions/org.eclipse.jdt.internal.ui.javaeditor.JavaSelectRulerAction" timestamp="87722885" />
+  <Command __id="742" _type="AssistCommand" assist_type="QUICK_ASSIST" auto_activated="false" start_end="START" timestamp="87725487" />
+  <Command __id="743" _type="EclipseCommand" commandID="AUTOGEN:::org.eclipse.jdt.internal.ui.CompilationUnitEditor.ruler.actions/org.eclipse.jdt.internal.ui.javaeditor.JavaSelectRulerAction" repeat="2" timestamp="87726190" timestamp2="87726756" />
+  <Command __id="745" _type="AssistCommand" assist_type="QUICK_ASSIST" auto_activated="false" start_end="END" timestamp="87727669" />
+  <DocumentChange __id="746" _type="Delete" docASTNodeCount="1215" docActiveCodeLength="7236" docExpressionCount="861" docLength="7649" endLine="213" length="36" offset="7517" startLine="213" timestamp="87727675">
+    <text><![CDATA[nodeCommands = new ArrayList<Node>()]]></text>
+  </DocumentChange>
+  <DocumentChange __id="747" _type="Insert" docASTNodeCount="1228" docActiveCodeLength="7288" docExpressionCount="867" docLength="7701" length="52" offset="7517" repeat="5" timestamp="87727679" timestamp2="87727692">
+    <text><![CDATA[ArrayList<Node> nodeCommands = new ArrayList<Node>()]]></text>
+  </DocumentChange>
+  <Command __id="752" _type="AssistCommand" assist_type="QUICK_ASSIST" auto_activated="false" start_end="END" timestamp="87727801" />
+  <Command __id="753" _type="MoveCaretCommand" caretOffset="6734" docOffset="7282" timestamp="87729340" />
+  <Command __id="754" _type="MoveCaretCommand" caretOffset="6993" docOffset="7541" timestamp="87733527" />
+  <Command __id="755" _type="SelectTextCommand" caretOffset="6997" docEnd="7545" docOffset="7545" docStart="7533" end="6997" start="6985" timestamp="87733707" />
+  <Command __id="756" _type="CopyCommand" timestamp="87734302" />
+  <Command __id="757" _type="SelectTextCommand" caretOffset="7081" docEnd="7650" docOffset="7629" docStart="7629" end="7102" start="7081" timestamp="87739073" />
+  <DocumentChange __id="758" _type="Replace" docASTNodeCount="1256" docActiveCodeLength="7279" docExpressionCount="887" docLength="7692" endLine="214" insertionLength="11" int_docASTNodeCount="1256" int_docActiveCodeLength="7268" int_docExpressionCount="887" int_docLength="7681" length="20" offset="7630" startLine="214" timestamp="87739768">
+    <deletedText><![CDATA[ew ArrayList<Node>()]]></deletedText>
+    <insertedText><![CDATA[odeCommands]]></insertedText>
+  </DocumentChange>
+  <Command __id="759" _type="PasteCommand" timestamp="87739777" />
+  <Command __id="760" _type="SelectTextCommand" caretOffset="7072" docEnd="7645" docOffset="7620" docStart="7620" end="7097" start="7072" timestamp="87757599" />
+  <DocumentChange __id="761" _type="Delete" docASTNodeCount="1251" docActiveCodeLength="7254" docExpressionCount="885" docLength="7667" endLine="214" length="25" offset="7620" startLine="214" timestamp="87758283">
+    <text><![CDATA[ap<Date, nodeCommands>();]]></text>
+  </DocumentChange>
+  <Command __id="762" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="2" timestamp="87758290" timestamp2="87758290" />
+  <Command __id="764" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="87759010" />
+  <Command __id="765" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="87759678" />
+  <Command __id="766" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="87761451" />
+  <DocumentChange __id="767" _type="Insert" docASTNodeCount="1252" docActiveCodeLength="7260" docExpressionCount="885" docLength="7673" length="6" offset="7620" repeat="2" timestamp="87761456" timestamp2="87761470">
+    <text><![CDATA[ap<>()]]></text>
+  </DocumentChange>
+  <Command __id="769" _type="InsertStringCommand" timestamp="87761477">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="770" _type="InsertStringCommand" timestamp="87761477">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="771" _type="Insert" docASTNodeCount="1252" docActiveCodeLength="7261" docExpressionCount="885" docLength="7674" length="1" offset="7626" timestamp="87763556">
+    <text><![CDATA[;]]></text>
+  </DocumentChange>
+  <Command __id="772" _type="InsertStringCommand" repeat="2" timestamp="87763569" timestamp2="87763569">
+    <data><![CDATA[;;]]></data>
+  </Command>
+  <Command __id="774" _type="MoveCaretCommand" caretOffset="7035" docOffset="7583" timestamp="87775561" />
+  <Command __id="775" _type="MoveCaretCommand" caretOffset="7033" docOffset="7581" timestamp="87777553" />
+  <Command __id="776" _type="SelectTextCommand" caretOffset="7035" docEnd="7583" docOffset="7583" docStart="7579" end="7035" start="7031" timestamp="87777723" />
+  <Command __id="777" _type="CopyCommand" timestamp="87778474" />
+  <Command __id="778" _type="MoveCaretCommand" caretOffset="7075" docOffset="7623" timestamp="87780327" />
+  <DocumentChange __id="779" _type="Insert" docASTNodeCount="1255" docActiveCodeLength="7266" docExpressionCount="886" docLength="7679" length="5" offset="7623" repeat="2" timestamp="87781501" timestamp2="87781796">
+    <text><![CDATA[Date,]]></text>
+  </DocumentChange>
+  <Command __id="780" _type="PasteCommand" timestamp="87781510" />
+  <Command __id="782" _type="InsertStringCommand" repeat="2" timestamp="87781808" timestamp2="87781808">
+    <data><![CDATA[,,]]></data>
+  </Command>
+  <Command __id="784" _type="MoveCaretCommand" caretOffset="6992" docOffset="7540" timestamp="87783698" />
+  <Command __id="785" _type="SelectTextCommand" caretOffset="6997" docEnd="7545" docOffset="7545" docStart="7533" end="6997" start="6985" timestamp="87783821" />
+  <Command __id="786" _type="CopyCommand" timestamp="87784349" />
+  <Command __id="787" _type="MoveCaretCommand" caretOffset="7080" docOffset="7628" timestamp="87786375" />
+  <DocumentChange __id="788" _type="Insert" docASTNodeCount="1256" docActiveCodeLength="7278" docExpressionCount="887" docLength="7691" length="12" offset="7628" timestamp="87786941">
+    <text><![CDATA[nodeCommands]]></text>
+  </DocumentChange>
+  <Command __id="789" _type="PasteCommand" timestamp="87786947" />
+  <Command __id="790" _type="FileOpenCommand" docASTNodeCount="690" docActiveCodeLength="3805" docExpressionCount="403" docLength="4327" projectName="espionage" timestamp="87910399">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/model/ProcessCase.java]]></filePath>
+  </Command>
+  <Command __id="791" _type="SelectTextCommand" caretOffset="87" docEnd="240" docOffset="240" docStart="229" end="87" start="76" timestamp="87910462" />
+  <Command __id="792" _type="SelectTextCommand" caretOffset="87" docEnd="240" docOffset="240" docStart="229" end="87" start="76" timestamp="87910664" />
+  <Command __id="793" _type="FileOpenCommand" docASTNodeCount="1256" docActiveCodeLength="7278" docExpressionCount="887" docLength="7691" projectName="espionage" timestamp="87919293">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+  </Command>
+  <Command __id="794" _type="MoveCaretCommand" caretOffset="382" docOffset="930" timestamp="87919641" />
+  <Command __id="795" _type="SelectTextCommand" caretOffset="7046" docEnd="7594" docOffset="7594" docStart="7584" end="7046" start="7036" timestamp="87946156" />
+  <Command __id="796" _type="MoveCaretCommand" caretOffset="7085" docOffset="7633" timestamp="87948178" />
+  <Command __id="797" _type="SelectTextCommand" caretOffset="7092" docEnd="7640" docOffset="7640" docStart="7628" end="7092" start="7080" timestamp="87948298" />
+  <Command __id="798" _type="SelectTextCommand" caretOffset="6964" docEnd="7570" docOffset="7512" docStart="7512" end="7022" start="6964" timestamp="87954665" />
+  <Command __id="799" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="87955281" />
+  <Command __id="800" _type="InsertStringCommand" timestamp="87955627">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="801" _type="MoveCaretCommand" caretOffset="7041" docOffset="7589" timestamp="87965032" />
+  <Command __id="802" _type="SelectTextCommand" caretOffset="6974" docEnd="7589" docOffset="7522" docStart="7522" end="7041" start="6974" timestamp="87970723" />
+  <Command __id="803" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="87971314" />
+  <Command __id="804" _type="MoveCaretCommand" caretOffset="6576" docOffset="7124" timestamp="87974282" />
+  <Command __id="805" _type="MoveCaretCommand" caretOffset="6502" docOffset="7050" timestamp="87975792" />
+  <Command __id="806" _type="MoveCaretCommand" caretOffset="6553" docOffset="7101" timestamp="87976784" />
+  <Command __id="807" _type="MoveCaretCommand" caretOffset="7041" docOffset="7589" timestamp="87979957" />
+  <Command __id="808" _type="MoveCaretCommand" caretOffset="7046" docOffset="7594" timestamp="87981118" />
+  <Command __id="809" _type="MoveCaretCommand" caretOffset="7041" docOffset="7589" timestamp="87982438" />
+  <Command __id="810" _type="ShellBoundsCommand" bounds="[0, 23, 1280, 729]" repeat="5" timestamp="88009150" timestamp2="88009201" />
+  <Command __id="815" _type="MoveCaretCommand" caretOffset="6796" docOffset="7344" timestamp="89075828" />
+  <Command __id="816" _type="MoveCaretCommand" caretOffset="7031" docOffset="7579" timestamp="89077896" />
+  <Command __id="817" _type="InsertStringCommand" timestamp="89079093">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="818" _type="InsertStringCommand" timestamp="89079211">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="819" _type="InsertStringCommand" repeat="6" timestamp="89084151" timestamp2="89088025">
+    <data><![CDATA[if(tem]]></data>
+  </Command>
+  <Command __id="825" _type="InsertStringCommand" timestamp="89089162">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="826" _type="InsertStringCommand" timestamp="89090001">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="827" _type="InsertStringCommand" timestamp="89093875">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="828" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89097150" />
+  <Command __id="829" _type="InsertStringCommand" timestamp="89098716">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="830" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="89099469" />
+  <Command __id="831" _type="InsertStringCommand" timestamp="89100641">
+    <data><![CDATA[{]]></data>
+  </Command>
+  <Command __id="832" _type="InsertStringCommand" timestamp="89100886">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="833" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89102095" />
+  <Command __id="834" _type="InsertStringCommand" repeat="4" timestamp="89103132" timestamp2="89103694">
+    <data><![CDATA[else]]></data>
+  </Command>
+  <Command __id="838" _type="InsertStringCommand" timestamp="89115109">
+    <data><![CDATA[{]]></data>
+  </Command>
+  <Command __id="839" _type="InsertStringCommand" timestamp="89115674">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="840" _type="MoveCaretCommand" caretOffset="7088" docOffset="7636" timestamp="89126124" />
+  <Command __id="841" _type="InsertStringCommand" repeat="3" timestamp="89150105" timestamp2="89150897">
+    <data><![CDATA[tem]]></data>
+  </Command>
+  <Command __id="844" _type="InsertStringCommand" timestamp="89152133">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="845" _type="InsertStringCommand" timestamp="89152861">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="846" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89155791" />
+  <Command __id="847" _type="InsertStringCommand" timestamp="89161853">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="848" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89163964" />
+  <Command __id="849" _type="InsertStringCommand" timestamp="89164364">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="850" _type="InsertStringCommand" repeat="3" timestamp="89167762" timestamp2="89168095">
+    <data><![CDATA[tem]]></data>
+  </Command>
+  <Command __id="853" _type="InsertStringCommand" timestamp="89169584">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="854" _type="InsertStringCommand" repeat="4" timestamp="89170110" timestamp2="89170672">
+    <data><![CDATA[.get]]></data>
+  </Command>
+  <Command __id="858" _type="InsertStringCommand" timestamp="89172902">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="859" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89174428" />
+  <Command __id="860" _type="InsertStringCommand" timestamp="89174939">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="861" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="89176118" />
+  <Command __id="862" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_PREVIOUS" timestamp="89176845" />
+  <Command __id="863" _type="InsertStringCommand" timestamp="89177222">
+    <data><![CDATA[.]]></data>
+  </Command>
+  <Command __id="864" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="5" timestamp="89180828" timestamp2="89182348" />
+  <Command __id="869" _type="InsertStringCommand" timestamp="89183386">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="870" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="89187060" timestamp2="89187220" />
+  <Command __id="872" _type="InsertStringCommand" timestamp="89187733">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="873" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="89188940" />
+  <Command __id="874" _type="InsertStringCommand" timestamp="89189704">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="875" _type="SelectTextCommand" caretOffset="7145" docEnd="7693" docOffset="7693" docStart="7665" end="7145" start="7117" timestamp="89231126" />
+  <Command __id="876" _type="MoveCaretCommand" caretOffset="7082" docOffset="7630" timestamp="89232679" />
+  <Command __id="877" _type="InsertStringCommand" timestamp="89233206">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="878" _type="InsertStringCommand" timestamp="89235434">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="879" _type="MoveCaretCommand" caretOffset="7088" docOffset="7636" timestamp="89240421" />
+  <Command __id="880" _type="InsertStringCommand" repeat="11" timestamp="89242698" timestamp2="89246337">
+    <data><![CDATA[templist = ]]></data>
+  </Command>
+  <Command __id="891" _type="MoveCaretCommand" caretOffset="7091" docOffset="7639" timestamp="89249395" />
+  <Command __id="892" _type="InsertStringCommand" repeat="4" timestamp="89250650" timestamp2="89251050">
+    <data><![CDATA[Node]]></data>
+  </Command>
+  <Command __id="896" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="4" timestamp="89253804" timestamp2="89254340" />
+  <Command __id="900" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.COLUMN_NEXT" timestamp="89255304" />
+  <Command __id="901" _type="InsertStringCommand" repeat="4" timestamp="89255849" timestamp2="89256289">
+    <data><![CDATA[Node]]></data>
+  </Command>
+  <Command __id="905" _type="MoveCaretCommand" caretOffset="7143" docOffset="7691" timestamp="89267868" />
+  <Command __id="906" _type="InsertStringCommand" timestamp="89269415">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="907" _type="InsertStringCommand" repeat="4" timestamp="89270593" timestamp2="89271520">
+    <data><![CDATA[tem ]]></data>
+  </Command>
+  <Command __id="911" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" timestamp="89272026" />
+  <Command __id="912" _type="InsertStringCommand" timestamp="89272960">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="913" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="8" timestamp="89274075" timestamp2="89275283" />
+  <Command __id="921" _type="InsertStringCommand" timestamp="89275793">
+    <data><![CDATA[N]]></data>
+  </Command>
+  <Command __id="922" _type="InsertStringCommand" repeat="2" timestamp="89278533" timestamp2="89279807">
+    <data><![CDATA[.a]]></data>
+  </Command>
+  <Command __id="924" _type="InsertStringCommand" timestamp="89283104">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="925" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" repeat="2" timestamp="89284166" timestamp2="89284343" />
+  <Command __id="927" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_UP" timestamp="89289818" />
+  <Command __id="928" _type="InsertStringCommand" timestamp="89290389">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="929" _type="InsertStringCommand" timestamp="89291493">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="930" _type="MoveCaretCommand" caretOffset="7156" docOffset="7704" timestamp="89292935" />
+  <Command __id="931" _type="SelectTextCommand" caretOffset="7161" docEnd="7709" docOffset="7709" docStart="7697" end="7161" start="7149" timestamp="89293056" />
+  <Command __id="932" _type="SelectTextCommand" caretOffset="7249" docEnd="7797" docOffset="7797" docStart="7758" end="7249" start="7210" timestamp="89296266" />
+  <Command __id="933" _type="MoveCaretCommand" caretOffset="7235" docOffset="7783" timestamp="89301373" />
+  <Command __id="934" _type="InsertStringCommand" timestamp="89302693">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="935" _type="SelectTextCommand" caretOffset="7088" docEnd="7691" docOffset="7636" docStart="7636" end="7143" start="7088" timestamp="89311028" />
+  <Command __id="936" _type="MoveCaretCommand" caretOffset="7247" docOffset="7795" timestamp="89312389" />
+  <Command __id="937" _type="SelectTextCommand" caretOffset="7273" docEnd="7850" docOffset="7821" docStart="7821" end="7302" start="7273" timestamp="89320258" />
+  <Command __id="938" _type="InsertStringCommand" repeat="7" timestamp="89321126" timestamp2="89323747">
+    <data><![CDATA[new Arr]]></data>
+  </Command>
+  <Command __id="945" _type="InsertStringCommand" timestamp="89325980">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="946" _type="InsertStringCommand" timestamp="89327470">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="947" _type="InsertStringCommand" timestamp="89329462">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="948" _type="InsertStringCommand" repeat="3" timestamp="89329666" timestamp2="89330147">
+    <data><![CDATA[tem]]></data>
+  </Command>
+  <Command __id="951" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89332009" />
+  <Command __id="952" _type="InsertStringCommand" timestamp="89332227">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="953" _type="InsertStringCommand" repeat="4" timestamp="89332498" timestamp2="89332999">
+    <data><![CDATA[.add]]></data>
+  </Command>
+  <Command __id="957" _type="InsertStringCommand" timestamp="89333653">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="958" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.LINE_DOWN" timestamp="89334673" />
+  <Command __id="959" _type="InsertStringCommand" timestamp="89335213">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="960" _type="InsertStringCommand" timestamp="89336110">
+    <data><![CDATA[;]]></data>
+  </Command>
+  <Command __id="961" _type="SelectTextCommand" caretOffset="7181" docEnd="7772" docOffset="7729" docStart="7729" end="7224" start="7181" timestamp="89341537" />
+  <Command __id="962" _type="MoveCaretCommand" caretOffset="7323" docOffset="7871" timestamp="89343260" />
+  <Command __id="963" _type="InsertStringCommand" timestamp="89344273">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="964" _type="MoveCaretCommand" caretOffset="7241" docOffset="7789" timestamp="89347910" />
+  <Command __id="965" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="6" timestamp="89348523" timestamp2="89350320" />
+  <Command __id="971" _type="MoveCaretCommand" caretOffset="7382" docOffset="7930" timestamp="89376003" />
+  <Command __id="972" _type="MoveCaretCommand" caretOffset="7387" docOffset="7935" timestamp="89379429" />
+  <Command __id="973" _type="MoveCaretCommand" caretOffset="7372" docOffset="7920" timestamp="89381035" />
+  <Command __id="974" _type="InsertStringCommand" timestamp="89381541">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="975" _type="InsertStringCommand" timestamp="89382038">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="976" _type="MoveCaretCommand" caretOffset="6859" docOffset="7407" timestamp="89954285" />
+  <Command __id="977" _type="MoveCaretCommand" caretOffset="7285" docOffset="7833" timestamp="90714201" />
+  <Command __id="978" _type="MoveCaretCommand" caretOffset="7372" docOffset="7920" timestamp="90715837" />
+  <Command __id="979" _type="FileOpenCommand" docASTNodeCount="463" docActiveCodeLength="2161" docExpressionCount="281" docLength="2161" projectName="espionage" timestamp="90722285">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/Utils.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.eclipse.core.runtime.Platform;
+
+public class Utils {
+	
+	public static final String Y_HOURS = "Hours";
+	public static final String Y_MINUTES = "Minutes";
+
+	public static String getClassName(String pathName, String regex) {
+		String[] pathSplit = pathName.split(regex);
+		return pathSplit[pathSplit.length - 1];
+	}
+	
+	public static Integer getYValue(Long time, String yValue) {
+		Map<String, Integer> values = new HashMap<String, Integer>();
+		values.put(Y_HOURS, DateManipulator.getHoursFromDiff(time));
+		values.put(Y_MINUTES, DateManipulator.getMinutesFromDiff(time));
+		return values.get(yValue);
+	}
+
+	public static String getFullPath(String file) {
+		String workspace = Platform.getLocation().toFile().getAbsolutePath();
+		return workspace + file;
+
+	}
+
+	public static String getFullPath(String file, String logPath) {
+		String workspace = Platform.getLocation().toFile().getAbsolutePath();
+		return workspace + logPath + file;
+
+	}
+
+	public static String regexChecker(String theRegex, String str2Check) {
+		Pattern checkRegex = Pattern.compile(theRegex);
+		Matcher regexMatcher = checkRegex.matcher(str2Check);
+		while (regexMatcher.find()) {
+
+			if (regexMatcher.group().length() != 0) {
+				return regexMatcher.group().trim();
+
+			}
+
+		}
+		return "";
+	}
+	
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> unsortMap) {
+
+	    List<Map.Entry<K, V>> list =
+	            new LinkedList<Map.Entry<K, V>>(unsortMap.entrySet());
+
+	    Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+	        public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+	            return (o1.getValue()).compareTo(o2.getValue());
+	        }
+	    });
+
+	    Map<K, V> result = new LinkedHashMap<K, V>();
+	    for (Map.Entry<K, V> entry : list) {
+	        result.put(entry.getKey(), entry.getValue());
+	    }
+
+	    return result;
+
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="980" _type="MoveCaretCommand" caretOffset="0" docOffset="0" timestamp="90723446" />
+  <Command __id="981" _type="FileOpenCommand" docASTNodeCount="1298" docActiveCodeLength="7574" docExpressionCount="916" docLength="7987" projectName="espionage" timestamp="90741119">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/util/MylynXMLParser.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public class MylynXMLParser extends FileParser {
+
+	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/Logs/";
+	private String[] files;
+
+	public MylynXMLParser() {
+		super(MYLYN_LOGS_PATH);
+		
+	}
+	@Override
+	public Map<String, HashMap<String, ProcessCase>> getProject() {
+		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
+		if(this.files == null){
+			return projects;
+		}
+		HashMap<String, ProcessCase> cases = null;
+		for (int n = 0; n < this.files.length; n++) {
+			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
+			System.out.println(aLogFile);
+			try {
+				
+				Document document = this.getDocument(aLogFile);
+
+				NodeList commands = document.getElementsByTagName("InteractionEvent");
+				
+				for (int i = 0; i < commands.getLength(); i++) {
+					Node aNode = commands.item(i);
+
+					if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element theNode = (Element) aNode;
+//						if(theNode.getAttribute("OriginId").contains("PackageExplorer")){
+//							continue;
+//						}
+//						if(theNode.getAttribute("OriginId").contains("propagation")){
+//							continue;
+//						}
+//						if(theNode.getAttribute("OriginId").contains("CompilationUnitEditor")){
+//							continue;
+//						}
+						
+						String startDate = theNode.getAttribute("StartDate");
+						long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String endDate = theNode.getAttribute("EndDate");
+						long fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+						String typeKind = theNode.getAttribute("Kind");
+						String caseId = Utils.regexChecker("\\{\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("{", "");
+						if(caseId.isEmpty()){
+							caseId = Utils.regexChecker("\\/\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("/", "");
+						}
+						String projectName = this.files[n].split("\\_")[0];
+						ProcessCase processCase = null;
+						
+						if (!caseId.isEmpty() && !projectName.isEmpty()) {
+							cases = getProjectCase(projects, projectName);
+							
+							if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
+
+								processCase = projects.get(projectName).get(caseId);
+								cases = projects.get(projectName);
+								long idleTime = getOverlap(processCase, Date.from(Instant.ofEpochSecond(fDate)),Date.from(Instant.ofEpochSecond(fEndDate)));
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),idleTime);
+								
+							} else {
+								processCase = new ProcessCase(caseId);
+								processCase.setStartTime(fDate);
+								processCase.setIdleTime(0);
+								//
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+							}
+							
+							
+							long elapstime = DateManipulator.diff(fEndDate, fDate);
+							Event event = new Event(Date.from(Instant.ofEpochSecond(fEndDate)), elapstime, typeKind);
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+							
+						}
+
+					}
+
+				}
+			} catch (ParserConfigurationException e1) {
+				e1.printStackTrace();
+			} catch (SAXException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+		return projects;
+	}
+
+	private Document getDocument(String file) throws ParserConfigurationException, SAXException, IOException {
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		// Load the input XML document, parse it and return an instance of the
+		// Document class.
+		Document document = builder.parse(new File(file));
+		return document;
+	}
+	
+	public String getProjectName(String line) {
+		String pNameRaw = Utils.regexChecker("org(.*?)\\.java", line).replace("/", ".");
+		return pNameRaw != "" ? pNameRaw.split("\\.")[2] : pNameRaw;
+	}
+	
+	private HashMap<String, ProcessCase> getProjectCase(Map<String, HashMap<String, ProcessCase>> projects,
+			String projectName) {
+		HashMap<String, ProcessCase> cases;
+		if (projects.containsKey(projectName)) {
+			cases = projects.get(projectName);
+		} else {
+			cases = new HashMap<String, ProcessCase>();
+		}
+		return cases;
+	}
+	
+	private Long getOverlap(ProcessCase processCase, Date aStartDate, Date aEndDate){
+		Long res = new Long(0);
+		for (Event e : processCase.getEvents()) {
+			Date eEndDate = e.getTimestamp();
+			Long elapse = e.getElapstime();
+			Date eStartDate = Date.from(Instant.ofEpochSecond((eEndDate.getTime()/1000) - elapse));
+			if(elapse.equals(new Long(0))){
+				continue;
+			}
+			//1
+			if(aStartDate.equals(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(), aStartDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			//2
+			if(aStartDate.equals(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			//3
+			if(aStartDate.after(eStartDate) && aEndDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(aEndDate.getTime(),aStartDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//4
+			if(aStartDate.before(eStartDate) && aEndDate.before(eEndDate) && aEndDate.after(eStartDate)){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),aEndDate.getTime())/1000;
+				 res = updateTime(res, currentRes);
+			}
+			//5
+			if(aStartDate.before(eStartDate) && aEndDate.equals(eEndDate)){
+				Long currentRes = elapse;
+				res = updateTime(res, currentRes);
+			}
+			
+			//6
+			if(aStartDate.before(eStartDate) && aEndDate.after(eEndDate) ){
+				Long currentRes = DateManipulator.diff(eStartDate.getTime(),eEndDate.getTime())/1000;
+				res = updateTime(res, currentRes);
+			}
+			
+			//7
+			if(aStartDate.after(eStartDate) && aEndDate.after(eEndDate) && aStartDate.before(eEndDate)){
+				Long currentRes = DateManipulator.diff(eEndDate.getTime(),aStartDate.getTime())/1000;
+			    res = updateTime(res, currentRes);
+			}
+			
+			
+			
+		}
+		return res;
+	}
+	private Long updateTime(Long res, Long currentRes) {
+		if(currentRes > res){
+			res = currentRes;
+		}
+		return res;
+	}
+	
+	private NodeList sortNodeList(NodeList commands) {
+		Map<Date,List<Node>> tempCommands = new HashMap<Date,List<Node>>();
+		for (int i = 0; i < commands.getLength(); i++) {
+			Node aNode = commands.item(i);
+
+			if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element theNode = (Element) aNode;
+				
+				String startDate = theNode.getAttribute("StartDate");
+				long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime() / 1000);
+				Date fStartDate = Date.from(Instant.ofEpochSecond(fDate));
+				
+				if(tempCommands.containsKey(fStartDate)){
+					List<Node> tempNodelist = tempCommands.get(fStartDate);
+					tempNodelist.add(theNode);
+					tempCommands.put(fStartDate, tempNodelist);
+				}else{
+					List<Node> tempNodelist = new ArrayList<>();
+					tempNodelist.add(theNode);
+					tempCommands.put(fStartDate, tempNodelist);
+				}
+				
+				
+				
+				
+			}
+				
+				
+			}
+		return null;
+	}
+	
+
+	
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="982" _type="MoveCaretCommand" caretOffset="7372" docOffset="7920" timestamp="90741278" />
+  <DocumentChange __id="983" _type="Insert" docASTNodeCount="1298" docActiveCodeLength="7579" docExpressionCount="916" docLength="7992" length="5" offset="7920" timestamp="90746351">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="984" _type="InsertStringCommand" timestamp="90746370">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="985" _type="InsertStringCommand" timestamp="90746371">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="986" _type="Insert" docASTNodeCount="1298" docActiveCodeLength="7584" docExpressionCount="916" docLength="7997" length="5" offset="7925" timestamp="90746683">
+    <text><![CDATA[
+				]]></text>
+  </DocumentChange>
+  <Command __id="987" _type="InsertStringCommand" timestamp="90746692">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="988" _type="InsertStringCommand" timestamp="90746692">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="989" _type="Insert" docASTNodeCount="1300" docActiveCodeLength="7589" docExpressionCount="917" docLength="8002" length="13" offset="7930" repeat="6" timestamp="90751090" timestamp2="90755065">
+    <text><![CDATA[TreeMap<K, V>]]></text>
+  </DocumentChange>
+  <Command __id="990" _type="InsertStringCommand" repeat="10" timestamp="90751098" timestamp2="90753259">
+    <data><![CDATA[TTrreeeeMM]]></data>
+  </Command>
+  <Command __id="1004" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="90753663" />
+  <Command __id="1005" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="90753743" />
+  <Command __id="1006" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="90755059" />
+  <DocumentChange __id="1008" _type="Delete" docASTNodeCount="1300" docActiveCodeLength="7596" docExpressionCount="917" docLength="8009" endLine="10" length="1" offset="229" startLine="9" timestamp="90755072">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1009" _type="Insert" docASTNodeCount="1300" docActiveCodeLength="7598" docExpressionCount="917" docLength="8011" length="2" offset="229" timestamp="90755076">
+    <text><![CDATA[
+
+]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1010" _type="Insert" docASTNodeCount="1306" docActiveCodeLength="7623" docExpressionCount="922" docLength="8036" length="25" offset="229" timestamp="90755079">
+    <text><![CDATA[import java.util.TreeMap;]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1011" _type="Insert" docASTNodeCount="1306" docActiveCodeLength="7624" docExpressionCount="922" docLength="8037" length="1" offset="229" timestamp="90755082">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <Command __id="1012" _type="InsertStringCommand" timestamp="90755102">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="1013" _type="InsertStringCommand" timestamp="90755103">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="1014" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="90759002" />
+  <Command __id="1015" _type="MoveCaretCommand" caretOffset="7366" docOffset="7941" timestamp="90788990" />
+  <Command __id="1016" _type="SelectTextCommand" caretOffset="7382" docEnd="7970" docOffset="7957" docStart="7957" end="7395" start="7382" timestamp="90792845" />
+  <DocumentChange __id="1017" _type="Replace" docASTNodeCount="1321" docActiveCodeLength="7670" docExpressionCount="930" docLength="8083" endLine="226" insertionLength="59" int_docASTNodeCount="1304" int_docActiveCodeLength="7611" int_docExpressionCount="921" int_docLength="8024" length="13" offset="7957" startLine="226" timestamp="90793172">
+    <deletedText><![CDATA[TreeMap<K, V>]]></deletedText>
+    <insertedText><![CDATA[SortedSet<String> keys = new TreeSet<String>(map.keySet());]]></insertedText>
+  </DocumentChange>
+  <Command __id="1018" _type="PasteCommand" timestamp="90793194" />
+  <Command __id="1019" _type="MoveCaretCommand" caretOffset="7396" docOffset="7971" timestamp="90794783" />
+  <Command __id="1020" _type="SelectTextCommand" caretOffset="7398" docEnd="7973" docOffset="7973" docStart="7967" end="7398" start="7392" timestamp="90794922" />
+  <DocumentChange __id="1021" _type="Replace" docASTNodeCount="1321" docActiveCodeLength="7668" docExpressionCount="930" docLength="8081" endLine="226" insertionLength="4" int_docASTNodeCount="1319" int_docActiveCodeLength="7664" int_docExpressionCount="929" int_docLength="8077" length="6" offset="7967" repeat="4" startLine="226" timestamp="90799802" timestamp2="90800942">
+    <deletedText><![CDATA[String]]></deletedText>
+    <insertedText><![CDATA[Date]]></insertedText>
+  </DocumentChange>
+  <Command __id="1022" _type="InsertStringCommand" repeat="8" timestamp="90799817" timestamp2="90800962">
+    <data><![CDATA[DDaattee]]></data>
+  </Command>
+  <DocumentChange __id="1033" _type="Insert" docASTNodeCount="1327" docActiveCodeLength="7695" docExpressionCount="935" docLength="8108" length="27" offset="229" timestamp="90809841">
+    <text><![CDATA[import java.util.SortedSet;]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1034" _type="Insert" docASTNodeCount="1327" docActiveCodeLength="7696" docExpressionCount="935" docLength="8109" length="1" offset="229" timestamp="90809843">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <Command __id="1035" _type="MoveCaretCommand" caretOffset="7419" docOffset="8022" timestamp="90813732" />
+  <Command __id="1036" _type="SelectTextCommand" caretOffset="7423" docEnd="8026" docOffset="8026" docStart="8020" end="7423" start="7417" timestamp="90813875" />
+  <DocumentChange __id="1037" _type="Replace" docASTNodeCount="1327" docActiveCodeLength="7694" docExpressionCount="935" docLength="8107" endLine="227" insertionLength="4" int_docASTNodeCount="1325" int_docActiveCodeLength="7690" int_docExpressionCount="934" int_docLength="8103" length="6" offset="8020" repeat="4" startLine="227" timestamp="90814825" timestamp2="90815582">
+    <deletedText><![CDATA[String]]></deletedText>
+    <insertedText><![CDATA[Date]]></insertedText>
+  </DocumentChange>
+  <Command __id="1038" _type="InsertStringCommand" repeat="8" timestamp="90814837" timestamp2="90815592">
+    <data><![CDATA[DDaattee]]></data>
+  </Command>
+  <DocumentChange __id="1049" _type="Insert" docASTNodeCount="1333" docActiveCodeLength="7719" docExpressionCount="940" docLength="8132" length="25" offset="283" timestamp="90821746">
+    <text><![CDATA[import java.util.TreeSet;]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1050" _type="Insert" docASTNodeCount="1333" docActiveCodeLength="7720" docExpressionCount="940" docLength="8133" length="1" offset="283" timestamp="90821771">
+    <text><![CDATA[
+]]></text>
+  </DocumentChange>
+  <Command __id="1051" _type="MoveCaretCommand" caretOffset="6579" docOffset="7208" timestamp="90824711" />
+  <Command __id="1052" _type="SelectTextCommand" caretOffset="6586" docEnd="7215" docOffset="7215" docStart="7203" end="6586" start="6574" timestamp="90824851" />
+  <Command __id="1053" _type="CopyCommand" timestamp="90826262" />
+  <Command __id="1054" _type="MoveCaretCommand" caretOffset="7424" docOffset="8053" timestamp="90829078" />
+  <Command __id="1055" _type="SelectTextCommand" caretOffset="7426" docEnd="8055" docOffset="8055" docStart="8052" end="7426" start="7423" timestamp="90829097" />
+  <DocumentChange __id="1056" _type="Replace" docASTNodeCount="1333" docActiveCodeLength="7729" docExpressionCount="940" docLength="8142" endLine="228" insertionLength="12" int_docASTNodeCount="1332" int_docActiveCodeLength="7717" int_docExpressionCount="939" int_docLength="8130" length="3" offset="8052" startLine="228" timestamp="90831897">
+    <deletedText><![CDATA[map]]></deletedText>
+    <insertedText><![CDATA[tempCommands]]></insertedText>
+  </DocumentChange>
+  <Command __id="1057" _type="PasteCommand" timestamp="90831904" />
+  <Command __id="1058" _type="SelectTextCommand" caretOffset="7383" docEnd="8075" docOffset="8012" docStart="8012" end="7446" start="7383" timestamp="90840341" />
+  <Command __id="1059" _type="CopyCommand" timestamp="90840710" />
+  <DocumentChange __id="1060" _type="Delete" docASTNodeCount="1316" docActiveCodeLength="7664" docExpressionCount="931" docLength="8077" endLine="228" length="65" offset="8010" repeat="3" startLine="228" timestamp="90842422" timestamp2="90843045">
+    <text><![CDATA[	SortedSet<Date> keys = new TreeSet<Date>(tempCommands.keySet());]]></text>
+  </DocumentChange>
+  <Command __id="1061" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="6" timestamp="90842427" timestamp2="90843047" />
+  <DocumentChange __id="1069" _type="Insert" docASTNodeCount="1333" docActiveCodeLength="7729" docExpressionCount="940" docLength="8142" length="65" offset="8010" repeat="2" timestamp="90844138" timestamp2="90844730">
+    <text><![CDATA[	SortedSet<Date> keys = new TreeSet<Date>(tempCommands.keySet());]]></text>
+  </DocumentChange>
+  <Command __id="1070" _type="UndoCommand" repeat="2" timestamp="90844142" timestamp2="90844733" />
+  <Command __id="1073" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.SELECT_COLUMN_PREVIOUS" repeat="8" timestamp="90846149" timestamp2="90848901" />
+  <Command __id="1081" _type="MoveCaretCommand" caretOffset="7382" docOffset="8011" timestamp="90850755" />
+  <Command __id="1082" _type="SelectTextCommand" caretOffset="7446" docEnd="8075" docOffset="8075" docStart="8011" end="7446" start="7382" timestamp="90852797" />
+  <Command __id="1083" _type="CopyCommand" timestamp="90853062" />
+  <DocumentChange __id="1084" _type="Delete" docASTNodeCount="1316" docActiveCodeLength="7660" docExpressionCount="931" docLength="8073" endLine="228" length="69" offset="8006" repeat="6" startLine="227" timestamp="90853620" timestamp2="90855157">
+    <text><![CDATA[
+				SortedSet<Date> keys = new TreeSet<Date>(tempCommands.keySet());]]></text>
+  </DocumentChange>
+  <Command __id="1085" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="12" timestamp="90853625" timestamp2="90855161" />
+  <Command __id="1102" _type="MoveCaretCommand" caretOffset="7392" docOffset="8021" timestamp="90870832" />
+  <DocumentChange __id="1103" _type="Delete" docASTNodeCount="1316" docActiveCodeLength="7640" docExpressionCount="931" docLength="8053" endLine="230" length="20" offset="8001" repeat="20" startLine="226" timestamp="90871474" timestamp2="90875968">
+    <text><![CDATA[
+				
+				
+				
+				]]></text>
+  </DocumentChange>
+  <Command __id="1104" _type="EclipseCommand" commandID="eventLogger.styledTextCommand.DELETE_PREVIOUS" repeat="40" timestamp="90871477" timestamp2="90875992" />
+  <Command __id="1163" _type="MoveCaretCommand" caretOffset="7382" docOffset="8011" timestamp="90878424" />
+  <Command __id="1164" _type="SelectTextCommand" caretOffset="6710" docEnd="8011" docOffset="7339" docStart="7339" end="7382" start="6710" timestamp="90885207" />
+  <DocumentChange __id="1165" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7641" docExpressionCount="931" docLength="8054" length="1" offset="7336" timestamp="90885405">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1166" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7642" docExpressionCount="931" docLength="8055" length="1" offset="7388" timestamp="90885407">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1167" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7643" docExpressionCount="931" docLength="8056" length="1" offset="7428" timestamp="90885409">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1168" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7644" docExpressionCount="931" docLength="8057" length="1" offset="7434" timestamp="90885410">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1169" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7645" docExpressionCount="931" docLength="8058" length="1" offset="7493" timestamp="90885412">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1170" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7646" docExpressionCount="931" docLength="8059" length="1" offset="7603" timestamp="90885414">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1171" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7647" docExpressionCount="931" docLength="8060" length="1" offset="7667" timestamp="90885415">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1172" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7648" docExpressionCount="931" docLength="8061" length="1" offset="7673" timestamp="90885417">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1173" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7649" docExpressionCount="931" docLength="8062" length="1" offset="7720" timestamp="90885418">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1174" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7650" docExpressionCount="931" docLength="8063" length="1" offset="7782" timestamp="90885420">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1175" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7651" docExpressionCount="931" docLength="8064" length="1" offset="7815" timestamp="90885422">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1176" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7652" docExpressionCount="931" docLength="8065" length="1" offset="7865" timestamp="90885424">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1177" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7653" docExpressionCount="931" docLength="8066" length="1" offset="7877" timestamp="90885426">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1178" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7654" docExpressionCount="931" docLength="8067" length="1" offset="7928" timestamp="90885428">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1179" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7655" docExpressionCount="931" docLength="8068" length="1" offset="7961" timestamp="90885430">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1180" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7656" docExpressionCount="931" docLength="8069" length="1" offset="8011" timestamp="90885432">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1181" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7657" docExpressionCount="931" docLength="8070" length="1" offset="8018" timestamp="90885433">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <DocumentChange __id="1182" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7658" docExpressionCount="931" docLength="8071" length="1" offset="8024" timestamp="90885435">
+    <text><![CDATA[	]]></text>
+  </DocumentChange>
+  <Command __id="1183" _type="InsertStringCommand" repeat="2" timestamp="90885531" timestamp2="90885532">
+    <data><![CDATA[		]]></data>
+  </Command>
+  <Command __id="1185" _type="MoveCaretCommand" caretOffset="7415" docOffset="8044" timestamp="90888258" />
+  <DocumentChange __id="1186" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7661" docExpressionCount="931" docLength="8074" length="3" offset="8044" timestamp="90891585">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="1187" _type="InsertStringCommand" timestamp="90891600">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="1188" _type="InsertStringCommand" timestamp="90891600">
+    <data><![CDATA[]]></data>
+  </Command>
+  <DocumentChange __id="1189" _type="Insert" docASTNodeCount="1316" docActiveCodeLength="7664" docExpressionCount="931" docLength="8077" length="3" offset="8047" timestamp="90891774">
+    <text><![CDATA[
+		]]></text>
+  </DocumentChange>
+  <Command __id="1190" _type="InsertStringCommand" timestamp="90891783">
+    <data><![CDATA[]]></data>
+  </Command>
+  <Command __id="1191" _type="InsertStringCommand" timestamp="90891783">
+    <data><![CDATA[]]></data>
+  </Command>

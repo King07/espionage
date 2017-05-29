@@ -48,7 +48,6 @@
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="edu.cwi.espionage.util.IdleTimeTable"/>
-<fullyQualifiedTypeName name="edu.cwi.espionage.util.DateManipulator"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="edu.cwi.espionage.util.Utils"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="edu.cwi.espionage.util.FileLogManager"/>
+<fullyQualifiedTypeName name="edu.cwi.espionage.util.DateManipulator"/>
 </qualifiedTypeNameHistroy>

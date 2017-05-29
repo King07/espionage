@@ -3,7 +3,6 @@ package edu.cwi.espionage.util;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.JFrame;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -16,10 +15,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 import edu.cwi.espionage.model.ProcessCase;
 
-public class LineChart extends JFrame {
+public class LineChart extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,22 +33,23 @@ public class LineChart extends JFrame {
 	/**
 	 * Creates a sample dataset
 	 */
-	private CategoryDataset createDataset(ProcessCase processCase) {
+	private CategoryDataset createDataset(ProcessCase processCase, String yValue) {
 		DefaultCategoryDataset result = new DefaultCategoryDataset();
 		for (ProcessCase p : processCase.getByDate()) {
-			result.addValue(DateManipulator.getMinutesFromDiff(p.getDateTotalTime()), "Amount of Time", DateManipulator
+			result.addValue(Utils.getYValue(p.getDateTotalTime(), yValue), "Amount of Time", DateManipulator
 					.getFormatedDate(p.getLastEvent().getTimestamp(), "yyyy-MM-dd"));
 		}
 		return result;
 
 	}
+	// TODO create a hash map with <string to totalTime value>
 
 	/**
 	 * Creates a chart
 	 */
-	public JFreeChart createChart(String title, ProcessCase processCase) {
-		CategoryDataset dataset = createDataset(processCase);
-		JFreeChart chart = ChartFactory.createLineChart(title, "DAYS", "EFFORT TIME (mins)", dataset,
+	public JFreeChart createChart(String title, ProcessCase processCase, String yValue) {
+		CategoryDataset dataset = createDataset(processCase,yValue);
+		JFreeChart chart = ChartFactory.createLineChart(title, "DAYS", "EFFORT TIME ("+yValue+")", dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		CategoryAxis axis = chart.getCategoryPlot().getDomainAxis();
 		axis.setCategoryLabelPositions(CategoryLabelPositions.UP_90);
@@ -74,11 +73,11 @@ public class LineChart extends JFrame {
 		final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer(); 
 		renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator()); 
 		renderer.setSeriesStroke(0, new BasicStroke(2.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
-		//renderer.setShapesVisible(true);
 		renderer.setBaseShapesVisible(true);
 	}
 	
 	public ChartPanel getLineChartPanel(String title, ProcessCase processCase) {
-		return new ChartPanel(createChart(title, processCase));
+		return new ChartPanel(createChart(title, processCase,""));
 	}
+	
 }

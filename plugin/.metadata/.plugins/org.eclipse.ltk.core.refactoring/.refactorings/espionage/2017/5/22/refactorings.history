@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;edu.cwi.espionage.model.Event.caseId&apos; in &apos;edu.cwi.espionage.model.Event&apos;&#x0A;- Original project: &apos;espionage&apos;&#x0A;- Original element: &apos;edu.cwi.espionage.model.Event.caseId&apos;&#x0A;- Getter method name: &apos;getCaseId&apos;&#x0A;- Setter method name: &apos;setCaseId&apos;&#x0A;- Field visibility: &apos;public&apos;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;caseId&apos;" flags="589830" getter="getCaseId" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;edu.cwi.espionage.model{Event.java[Event^caseId" insertion="8" setter="setCaseId" stamp="1496008019398" version="1.0" visibility="1"/>
+</session>

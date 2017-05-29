@@ -1,0 +1,10 @@
+1494844028414	Delete element
+1494844196033	Copy compilation unit
+1494844247396	Rename field 'FLUORITE_LOGS_PATH'
+1494884159743	Copy compilation unit
+1494889686988	Rename field 'MIMEC_LOGS_PATH'
+1495025360909	Extract constant 'DEFAULT_SEPARATOR'
+1495025723554	Rename local variable 'custOutput'
+1495026970145	Extract method 'writeProjectToFile'
+1495028467010	Extract local variable 'totalTime'
+1495028504468	Extract local variable 'minutesFromDiff'

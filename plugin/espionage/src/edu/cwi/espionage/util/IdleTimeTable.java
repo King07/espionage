@@ -17,6 +17,7 @@ public class IdleTimeTable {
 	public void add(String date, Long idleTime) {
 		if(contains(date)){
 			idleTimeTable.put(date, DateManipulator.add(lookupIdleTime(date), idleTime));
+//			System.out.println("YAYYYYAAAYY: = "+lookupIdleTime(date));
 		}else{
 			idleTimeTable.put(date, idleTime);
 		}

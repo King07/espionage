@@ -1,5 +1,0 @@
-bin.includes = plugin.xml,\
-               META-INF/,\
-               icons/,\
-               contexts.xml,\
-               build.properties
