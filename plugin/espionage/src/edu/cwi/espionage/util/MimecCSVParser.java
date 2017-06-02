@@ -25,14 +25,25 @@ public class MimecCSVParser extends FileParser {
 		Map<String, HashMap<String, ProcessCase>> projects = new HashMap<String, HashMap<String, ProcessCase>>();
 
 		HashMap<String, ProcessCase> cases = null;
+		String lastCaseId = "";
 		for (int n = 0; n < this.files.length; n++) {
 			String aLogFile = Utils.getFullPath(this.files[n], MIMEC_LOGS_PATH);
+			System.out.println(aLogFile);
 			Scanner scanner = null;
+			String startDate = "";
 			try {
 				scanner = new Scanner(new File(aLogFile));
 				while (scanner.hasNext()) {
 					List<String> line = CSVUtils.parseLine(scanner.nextLine());
-					String date = line.get(1).substring(7);
+					if(line.size() < 3){
+						continue;
+					}
+					String sCurrDate = line.get(1).substring(7);
+					if(startDate.equals("")){
+						startDate = sCurrDate;
+					}
+					long currDate = (DateManipulator.getDateFromString(sCurrDate, "EEE MMM dd HH:mm:ss Z yyyy").getTime() / 1000);
+					long fDate = (DateManipulator.getDateFromString(startDate, "EEE MMM dd HH:mm:ss Z yyyy").getTime()/ 1000);
 					String typeKind = line.get(2).substring(6).trim();
 					String caseId = Utils.regexChecker("\\{\\w+\\.java", line.get(3)).replace("{", "");
 					String projectName = getProjectName(line.get(3));
@@ -40,33 +51,54 @@ public class MimecCSVParser extends FileParser {
 					if (!caseId.isEmpty() && !projectName.isEmpty()) {
 						cases = getProjectCase(projects, projectName);
 
-						long fDate = (DateManipulator.getDateFromString(date, "EEE MMM dd HH:mm:ss Z yyyy").getTime() / 1000);
+						
+						Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
+						Date formatFDate = Date.from(Instant.ofEpochSecond(fDate));
 						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
 
 							processCase = projects.get(projectName).get(caseId);
 							cases = projects.get(projectName);
-							long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
-							long idleTime = DateManipulator.diff(nDate, fDate);
-							long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
-							processCase.setIdleTime(incrIdleTime);
-							///
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),idleTime);
-							
+							//TODO verify that (if statement) working fine 
+							if(!lastCaseId.equals(caseId)){
+								
+								long nDate = processCase.getLastEvent().getTimestamp().getTime() / 1000;
+								long idleTime = DateManipulator.diff(nDate, currDate);
+								
+								long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"),DateManipulator.getHourFromDate(formatCurrDate), idleTime);
+								processCase.setIdleTime(incrIdleTime);
+								
+								
+							}
 						} else {
+							long idleTime = DateManipulator.diff(fDate, currDate);
 							processCase = new ProcessCase(caseId);
 							processCase.setStartTime(fDate);
-							processCase.setIdleTime(0);
-							//
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+							processCase.setIdleTime(new Long(0));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"),DateManipulator.getHourFromDate(formatFDate), idleTime);
+//							
 						}
 						
+						if (processCase != null) {
 
-						long elapstime = DateManipulator.diff(processCase.getStartTime(), fDate) * 1000;
-						Event event = new Event(Date.from(Instant.ofEpochSecond(fDate)), elapstime, typeKind);
-						processCase.addEvents(event);
-						processCase.setLastEvent(event);
-						cases.put(processCase.getCaseId(), processCase);
-						projects.put(projectName, cases);
+							long elapseTime = DateManipulator.diff(fDate, currDate);
+							Date processTimestamp = formatCurrDate;
+
+							Event event = new Event(processTimestamp, elapseTime, typeKind);
+							
+							event.setCaseId(caseId);
+							lastCaseId = caseId;
+							if (!processCase.getEvents().isEmpty()) {
+								long cElapseTime = DateManipulator.diff(processCase.getLastEvent().getTimestamp().getTime(),formatFDate.getTime()) / 1000;
+								event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
+							}
+							
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+
+						}
 					}
 
 				}

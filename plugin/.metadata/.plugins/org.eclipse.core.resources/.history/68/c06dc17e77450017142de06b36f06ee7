@@ -1,0 +1,7 @@
+package edu.cwi.espionage.slider;
+
+import JSlider;
+
+public class RangeSlider extends JSlider {
+
+}

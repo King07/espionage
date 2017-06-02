@@ -1,1 +1,28 @@
 1496008019398	Encapsulate field 'caseId'
+1496068704854	Rename method 'getSelectionGroup'
+1496094701424	Copy compilation unit
+1496132819234	Copy compilation unit
+1496132923295	Rename field 'btn'
+1496132980527	Encapsulate field 'datePicker'
+1496133083063	Rename field 'radioBtnListeners'
+1496134707186	Extract method 'getDatePanel'
+1496135054608	Copy compilation unit
+1496135329378	Copy compilation unit
+1496135400484	Rename field 'btn'
+1496135427196	Rename field 'radioBtnListeners'
+1496165714801	Copy compilation unit
+1496171466285	Rename field 'selectedHour'
+1496171901434	Rename local variable 'lowerDateHour'
+1496171913307	Rename field 'uppererSelectedHour'
+1496177880385	Copy compilation unit
+1496178924053	Delete elements
+1496178929878	Delete element
+1496180417137	Extract method 'isDateRangeNull'
+1496222887072	Rename method 'getSelectedDateUppererBound'
+1496230761273	Extract local variable 'inBetween'
+1496256933324	Extract local variable 'formatCurrDate'
+1496257004097	Extract local variable 'formatInitDate'
+1496257764009	Extract local variable 'formatCurrDate'
+1496257808442	Extract local variable 'formatFDate'
+1496258338909	Delete element
+1496262675163	Extract method 'setDefaultHours'

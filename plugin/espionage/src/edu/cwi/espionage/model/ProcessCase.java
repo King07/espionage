@@ -1,6 +1,7 @@
 package edu.cwi.espionage.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.cwi.espionage.util.DateManipulator;
@@ -62,22 +63,27 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 		return getIdleTimeTable().total();
 	}
 	
-	public long getTotalTime() {
+	public long getTotalTime(Date upper, Date lower) {
 		long total = new Long(0);
-		for (ProcessCase p : getByDate()) {
+		for (ProcessCase p : getByDate(upper,lower)) {
 			total +=p.getDateTotalTime();
 			
 		}
 		return total;
 	}
+	public long getTotalTime() {
+		
+		return getTotalTime(null,null);
+	}
 	
-	public List<ProcessCase> getByDate() {
+	public List<ProcessCase> getByDate(Date upper, Date lower) {
 		List<ProcessCase> pc = new ArrayList<>();
 		List<Event> eventsTemp = new ArrayList<>(events);
 		while (!eventsTemp.isEmpty()) {
 			Event topEvent = eventsTemp.get(0);
 			ProcessCase pcTemp = new ProcessCase(getCaseId());
 			for (Event e : events) {
+			
 				if(topEvent.compareTo(e) == 0){
 					if(pcTemp.getEvents().isEmpty()){
 						pcTemp.setStartTime(e.getTimestamp().getTime()/1000);
@@ -86,24 +92,49 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 						calculateIdleTime(pcTemp, e);
 						
 					}
-					pcTemp.addEvents(e);
-					pcTemp.setLastEvent(e);
+					
+					if(isDateRangeNull(upper, lower) || isDateBetwwenRange(upper, lower, e.getTimestamp())){
+						pcTemp.addEvents(e);
+						pcTemp.setLastEvent(e);
+						
+					}
 					eventsTemp.remove(e);
+					
 				}
 			}
-			String formatedDate = DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy");
-			Long lookupIdleTime = this.getIdleTimeTable().lookupIdleTime(formatedDate);
-			pcTemp.setIdleTime(lookupIdleTime);
-			pc.add(pcTemp);
+			if(pcTemp.getLastEvent() != null){
+				String formatedDate = DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy");
+				Long lookupIdleTime = new Long(0);
+				if(isDateRangeNull(upper, lower)){
+					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, 1, 24);
+				}else{
+					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, DateManipulator.getHourFromDate(lower), DateManipulator.getHourFromDate(upper));
+				}
+				
+				pcTemp.setIdleTime(lookupIdleTime);
+				pc.add(pcTemp);
+			}
 		}
 		return pc;
+	}
+
+	private boolean isDateRangeNull(Date upper, Date lower) {
+		return upper == null || lower == null;
+	}
+	
+	private boolean isDateBetwwenRange(Date upper, Date lower, Date toCheck) {
+		boolean inBetween = toCheck.getTime() >= lower.getTime() && toCheck.getTime() <= upper.getTime();
+		if(inBetween){
+			return true;
+		}
+		return false;
 	}
 
 	private void calculateIdleTime(ProcessCase pcTemp, Event e) {
 		Event event2 = pcTemp.getEvents().get(pcTemp.getEvents().size()-1);
 		if (IsInactive(event2, e)) {
 			long idleTime = getInactiveTime(e, event2);
-			pcTemp.getIdleTimeTable().add(DateManipulator.getFormatedDate(e.getTimestamp(), "dd/MM/yyyy"),idleTime);
+			pcTemp.getIdleTimeTable().add(DateManipulator.getFormatedDate(e.getTimestamp(), "dd/MM/yyyy"),DateManipulator.getHourFromDate(e.getTimestamp()),idleTime);
 		}
 	}
 	

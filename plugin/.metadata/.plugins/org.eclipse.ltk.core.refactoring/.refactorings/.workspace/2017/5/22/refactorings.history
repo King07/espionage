@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;datepicker.libs&apos;" deleteContents="false" description="Delete resource &apos;datepicker.libs&apos;" element1="/datepicker.libs" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1496070430727"/>&#x0A;<refactoring comment="Delete resource &apos;edu.cwi.espionage.jdatepicker.libs&apos;" deleteContents="false" description="Delete resource &apos;edu.cwi.espionage.jdatepicker.libs&apos;" element1="/edu.cwi.espionage.jdatepicker.libs" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1496072328403"/>
+</session>

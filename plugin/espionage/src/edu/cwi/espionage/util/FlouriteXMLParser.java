@@ -49,6 +49,7 @@ public class FlouriteXMLParser extends FileParser {
 				ProcessCase processCase = null;
 				String projectName = "";
 				for (int i = 0; i < commands.getLength(); i++) {
+					System.out.println("Progess: ==> "+i+"/"+commands.getLength());
 					Node aNode = commands.item(i);
 					String caseId = "";
 					if (aNode.hasChildNodes()) {
@@ -78,21 +79,23 @@ public class FlouriteXMLParser extends FileParser {
 									long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
 									long idleTime = DateManipulator.diff(nDate, currDate);
 									long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
-									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(currDate)), "dd/MM/yyyy"),idleTime);
+									Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatCurrDate),idleTime);
 									processCase.setIdleTime(incrIdleTime);
 								} else {
 									long idleTime = DateManipulator.diff(initDate, currDate);
 									processCase = new ProcessCase(caseId);
 									processCase.setStartTime(initDate);
 									processCase.setIdleTime(idleTime);
-									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(initDate)), "dd/MM/yyyy"), ts);
+									Date formatInitDate = Date.from(Instant.ofEpochSecond(initDate));
+									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatInitDate, "dd/MM/yyyy"),DateManipulator.getHourFromDate(formatInitDate), idleTime);
 								}
-//								processCase.setLastEventTime(currDate);
+								
 								System.out.println(caseId);
 							}
 						}
 					}
-
+						
 					if (aNode.getNodeType() == Node.ELEMENT_NODE && processCase != null) {
 						Element theNode = (Element) aNode;
 						String activity = theNode.getAttribute("_type");
@@ -110,6 +113,7 @@ public class FlouriteXMLParser extends FileParser {
 							long cElapseTime = DateManipulator.diff(processCase.getLastEvent().getTimestamp().getTime(), Date.from(Instant.ofEpochSecond(Long.parseLong(startTime))).getTime())/1000;
 							event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
 						}
+						
 						processCase.addEvents(event);
 						processCase.setLastEvent(event);
 						cases.put(processCase.getCaseId(), processCase);

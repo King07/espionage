@@ -1,7 +1,9 @@
 package edu.cwi.espionage.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.text.ParseException;
 
 public class DateManipulator {
@@ -55,6 +57,9 @@ public class DateManipulator {
 	}
 	
 	public static Date getDateFromString(String aDate, String format){
+		if(aDate == null){
+			return null;
+		}
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 
         try {
@@ -63,7 +68,7 @@ public class DateManipulator {
             return date;
 
         } catch (ParseException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 		return null;
 	}
@@ -80,6 +85,28 @@ public class DateManipulator {
 		String fd = simpleDateFormat.format(date);
 		
 		return fd;
+	}
+	
+	private static Calendar getDateCalendar(Date date) {
+		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+		calendar.setTime(date);   // assigns calendar to given date 
+		return calendar;
+	}
+	
+	public static Integer getHourFromDate(Date date) {
+		return getDateCalendar(date).get(Calendar.HOUR_OF_DAY);
+	}
+	
+	public static Integer getDayFromDate(Date date) {
+		return getDateCalendar(date).get(Calendar.DATE);
+	}
+	
+	public static Integer getMonthFromDate(Date date) {
+		return getDateCalendar(date).get(Calendar.MONTH);
+	}
+	
+	public static Integer getYearFromDate(Date date) {
+		return getDateCalendar(date).get(Calendar.YEAR);
 	}
 	
 	

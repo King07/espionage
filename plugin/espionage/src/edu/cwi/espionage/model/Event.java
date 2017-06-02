@@ -33,7 +33,7 @@ public class Event implements Comparable<Event>{
 		return "EVENTS:: ["+getActivity()+" || "+getTimestamp().toString()+" ELAPSE = "+getElapstime()+"]";
 	}
 
-	public long getElapstime() {
+	public Long getElapstime() {
 		return elapstime;
 	}
 

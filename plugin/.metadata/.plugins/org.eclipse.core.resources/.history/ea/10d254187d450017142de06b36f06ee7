@@ -1,0 +1,14 @@
+package edu.cwi.espionage.views;
+
+public class LowerBoundHourSelection extends HourSelection {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public LowerBoundHourSelection() {
+		super();
+	}
+
+}

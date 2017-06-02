@@ -78,7 +78,8 @@ public class MylynXMLParser extends FileParser {
 								long nDate = processCase.getLastEvent().getTimestamp().getTime() / 1000;
 								long idleTime = DateManipulator.diff(nDate, currDate);
 								long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
-								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(currDate)), "dd/MM/yyyy"), idleTime);
+								Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
+								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatCurrDate),  idleTime);
 								processCase.setIdleTime(incrIdleTime);
 							}
 							
@@ -87,7 +88,8 @@ public class MylynXMLParser extends FileParser {
 							processCase = new ProcessCase(caseId);
 							processCase.setStartTime(fDate);
 							processCase.setIdleTime(idleTime);
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), idleTime);
+							Date formatFDate = Date.from(Instant.ofEpochSecond(fDate));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatFDate), idleTime);
 						}
 					}
 

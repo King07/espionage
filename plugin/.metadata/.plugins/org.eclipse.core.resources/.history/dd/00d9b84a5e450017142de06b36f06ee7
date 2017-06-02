@@ -1,0 +1,5 @@
+package edu.cwi.espionage.views;
+
+public class UppperBoundHourSelection extends HourSelection {
+
+}

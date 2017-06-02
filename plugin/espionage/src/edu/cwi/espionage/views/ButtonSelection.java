@@ -29,6 +29,7 @@ public class ButtonSelection extends JComponent implements ItemListener{
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
+		System.out.println("ButtonSelection");
 		JRadioButton button = (JRadioButton) e.getSource();
 		if(button.isSelected()){
 			fireSelectedYValue();

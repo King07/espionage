@@ -61,6 +61,7 @@ public class MylynCSVParser extends FileParser {
 						cases = getProjectCase(projects, projectName);
 
 					    fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
+					    Date formatFDate = Date.from(Instant.ofEpochSecond(fDate));
 					    fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
 						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
 
@@ -68,14 +69,14 @@ public class MylynCSVParser extends FileParser {
 							cases = projects.get(projectName);
 							processCase.setIdleTime(new Long(0));
 							///
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"),new Long(0));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), formatFDate.getHours(), new Long(0));
 							
 						} else {
 							processCase = new ProcessCase(caseId);
 							processCase.setStartTime(fDate);
 							processCase.setIdleTime(0);
 							//
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(Date.from(Instant.ofEpochSecond(fDate)), "dd/MM/yyyy"), new Long("0"));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), formatFDate.getHours(), new Long("0"));
 						}
 						
 

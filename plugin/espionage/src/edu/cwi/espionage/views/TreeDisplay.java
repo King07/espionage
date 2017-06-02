@@ -31,6 +31,7 @@
 package edu.cwi.espionage.views;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -38,16 +39,17 @@ import javax.swing.UIManager;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
-
 import org.jfree.chart.ChartPanel;
-
+import edu.cwi.espionage.interfaces.SelectedDatePickerListener;
+import edu.cwi.espionage.interfaces.SelectedHourListener;
 import edu.cwi.espionage.interfaces.SelectedYValueListener;
 import edu.cwi.espionage.model.ProcessCase;
+import edu.cwi.espionage.util.DateManipulator;
 import edu.cwi.espionage.util.LineChart;
 import edu.cwi.espionage.util.Utils;
-
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -56,8 +58,11 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.util.Map.Entry;
 
+
+
 public class TreeDisplay extends JPanel
-                      implements TreeSelectionListener, SelectedYValueListener {
+                      implements TreeSelectionListener, SelectedYValueListener, 
+                      			 SelectedHourListener, SelectedDatePickerListener {
  
 	/**
 	 * 
@@ -67,6 +72,10 @@ public class TreeDisplay extends JPanel
     private LineChart lineChart;
     private JTree tree;
     private String yValue;
+    private Date selectedDate;
+    private int lowerSelectedHour = 1;
+    private int upperSelectedHour = 1;
+    
     
     //Optionally set the look and feel.
     private static boolean useSystemLookAndFeel = false;
@@ -90,7 +99,7 @@ public class TreeDisplay extends JPanel
         JScrollPane treeView = new JScrollPane(tree);
         
         JSplitPane splitPaneFirst = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        splitPaneFirst.setTopComponent(getSelectionGroup());
+        splitPaneFirst.setTopComponent(getFiltersGroup());
         splitPaneFirst.setBottomComponent(treeView);
         
         lineChart = new LineChart();
@@ -120,10 +129,12 @@ public class TreeDisplay extends JPanel
 
         Object nodeInfo = node.getUserObject();
         if (node.isLeaf()) {
+        	System.out.println("valueChanged#getSelectedDateLowerBound "+getSelectedDateLowerBound());
+        	System.out.println("valueChanged#getSelectedDateUppererBound "+getSelectedDateUpperBound());
             ProcessCase processCase = (ProcessCase)nodeInfo;
-            String title = "Time spent on "+processCase.getCaseId();
-            title += ". Overall Time is ("+Utils.getYValue(processCase.getTotalTime(), yValue)+" "+yValue+")";
-            infoPane.setChart(lineChart.createChart(title, processCase, yValue));
+//            String title = "Time spent on "+processCase.getCaseId();
+//            title += ". Overall Time is ("+Utils.getYValue(processCase.getTotalTime(), yValue)+" "+yValue+")";
+            infoPane.setChart(lineChart.createChart(processCase.getCaseId(), processCase, yValue,getSelectedDateLowerBound(),getSelectedDateUpperBound()));
             infoPane.setVisible(true);
         }
     }
@@ -176,18 +187,8 @@ public class TreeDisplay extends JPanel
         frame.pack();
         frame.setVisible(true);
     }
-
-
-	@Override
-	public void yValueSelected(ButtonSelection btn) {
-		this.yValue = btn.getBtn().getText();
-		infoPane.setVisible(false);
-		
-		
-		
-	}
 	
-	public JScrollPane getSelectionGroup(){
+	public JSplitPane getFiltersGroup(){
 		JPanel controlPanel = new JPanel();
 	    controlPanel.setLayout(new GridLayout(1,2));
 	    ButtonSelection btnMins = new ButtonSelection(Utils.Y_MINUTES, true);
@@ -203,9 +204,79 @@ public class TreeDisplay extends JPanel
 	    controlPanel.add(btnHrs.getBtn());
 	    JScrollPane slt = new JScrollPane(controlPanel);
 	    slt.setMinimumSize(new Dimension(100, 50));
-	    return slt;
+	    JSplitPane splitPaneFirst = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+	    splitPaneFirst.setTopComponent(slt);
+	    
+	    
+	    JPanel dateRangePanel = new JPanel();
+	    dateRangePanel.setLayout(new GridLayout(4,1));
+	    
+	    DateSelection dateSelection = new DateSelection();
+	    HourRangeSelection hourRangeSelection = new HourRangeSelection();
+	    		
+	    dateSelection.addSelectedDatePickerListener(this);
+	    hourRangeSelection.addSelectedHourListener(this);
+	    dateRangePanel.add(new JLabel("Date selection"));
+	    dateRangePanel.add(dateSelection); 
+	    dateRangePanel.add(new JLabel("Hour range selection"));
+	    
+	    dateRangePanel.add(hourRangeSelection); 
+	    
+	    splitPaneFirst.setBottomComponent(dateRangePanel);
+	    
+	    
+	    return splitPaneFirst;
 		
 	}
+	
+	private Date getSelectedDateLowerBound(){
+		if(selectedDate == null){
+			return null;
+		}
+		
+		String fDate = DateManipulator.getFormatedDate(selectedDate, "dd/MM/yyyy");
+		String lowerDateHour = fDate+" "+lowerSelectedHour+":00:00";
+
+		return DateManipulator.getDateFromString(lowerDateHour, "dd/MM/yyyy H:mm:ss");
+		
+	}
+	
+	private Date getSelectedDateUpperBound(){
+		if(selectedDate == null){
+			return null;
+		}
+		
+		String fDate = DateManipulator.getFormatedDate(selectedDate, "dd/MM/yyyy");
+		String upperDateHour = fDate+" "+upperSelectedHour+":00:00";
+
+		return DateManipulator.getDateFromString(upperDateHour, "dd/MM/yyyy H:mm:ss");
+		
+	}
+	
+	@Override
+	public void yValueSelected(ButtonSelection btn) {
+		System.out.println(btn);
+		this.yValue = btn.getBtn().getText();
+		infoPane.setVisible(false);	
+	}
+
+	@Override
+	public void datePickerSelected(Date aDate) {
+		selectedDate = aDate;
+		
+	}
+
+	@Override
+	public void hourSelected(HourRangeSelection hourRange) {
+		
+		lowerSelectedHour = hourRange.getValue();
+		upperSelectedHour =	hourRange.getUpperValue();
+		System.out.println("lowerSelectedHour = "+lowerSelectedHour);
+		System.out.println("upperSelectedHour = "+upperSelectedHour);
+			
+	}
+
+	
 
 
 }

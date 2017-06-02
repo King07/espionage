@@ -18,8 +18,9 @@ public class ProcessCaseTest {
 		ProcessCase p = getDefaultData();
 		
 		assertThat(p.getTotalTime(), IsNull.notNullValue());
+		System.out.println(p.getTotalTime());
 		assertThat(p.getTotalTime(), is(DateManipulator.getLongFromMinutes(10)));
-		assertThat(p.getByDate().size(), is(1));
+		assertThat(p.getByDate(null,null).size(), is(1));
 		
 
 	}
@@ -28,8 +29,8 @@ public class ProcessCaseTest {
 	public void test_idle_time() {
 		ProcessCase p = getDefaultData();
 		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:40:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
-				.getLongFromMinutes(30), "Read"));
-		for (ProcessCase pr : p.getByDate()) {
+				.getLongFromMinutes(20), "Read"));
+		for (ProcessCase pr : p.getByDate(null,null)) {
 			assertThat(pr.getTotalIdleTime(), is(DateManipulator.getLongFromMinutes(20)));
 		}
 		
@@ -41,18 +42,18 @@ public class ProcessCaseTest {
 		Date startTime = DateManipulator.getDateFromString("10/02/2001 12:10:00", "dd/MM/yyyy HH:mm:ss");
 		p.setStartTime(startTime.getTime());
 		p.setIdleTime(0);
-		p.getIdleTimeTable().add(DateManipulator.getFormatedDate(startTime, "dd/MM/yyyy"), new Long("0"));
+		p.getIdleTimeTable().add(DateManipulator.getFormatedDate(startTime, "dd/MM/yyyy"),12, new Long("0"));
 		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:10:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
-				.getLongFromMinutes(2), "Edit"));
+				.getLongFromMinutes(0)/1000, "Edit"));
 		
-		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:15:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
-				.getLongFromMinutes(5), "Modify"));
+		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:10:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
+				.getLongFromMinutes(0)/1000, "Modify"));
 		
 		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:17:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
-				.getLongFromMinutes(7), "Scroll"));
+				.getLongFromMinutes(7)/1000, "Scroll"));
 		
 		p.addEvents(new Event(DateManipulator.getDateFromString("10/02/2001 12:20:00", "dd/MM/yyyy HH:mm:ss"), DateManipulator
-				.getLongFromMinutes(10), "Read"));
+				.getLongFromMinutes(3)/1000, "Read"));
 		return p;
 	}
 }
