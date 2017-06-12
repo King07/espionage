@@ -15,7 +15,6 @@ import edu.cwi.espionage.model.ProcessCase;
 public class MylynCSVParser extends FileParser {
 	
 	private static final String MYLYN_LOGS_PATH = "/.metadata/.plugins/mylyn/VIT/";
-	private String[] files;
 
 	public MylynCSVParser() {
 		super(MYLYN_LOGS_PATH);
@@ -28,27 +27,27 @@ public class MylynCSVParser extends FileParser {
 			return projects;
 		}
 		HashMap<String, ProcessCase> cases = null;
+		ProcessCase processCase = null;
 		for (int n = 0; n < this.files.length; n++) {
 			String aLogFile = Utils.getFullPath(this.files[n], MYLYN_LOGS_PATH);
 			Scanner scanner = null;
+			Boolean firstLine = true;
 			try {
 				scanner = new Scanner(new File(aLogFile));
 				while (scanner.hasNext()) {
 					List<String> line = CSVUtils.parseLine(scanner.nextLine(),';');
-					if(line.size() < 3){
+					
+					if(firstLine || line.size() < 3){
+						firstLine = false;
 						continue;
 					}
-					if(line.get(4).contains("explorer")){
-						continue;
-					}
-//					if(line.get(4).contains("editor")){
-//						continue;
-//					}
 					String startDate = "2013-12-13 "+line.get(0);
 					String endDate = "2013-12-13 "+line.get(1);
-					
-					long fDate = new Long(0);
-					long fEndDate = new Long(0);
+					String entityType = line.get(3);
+					long fDate =  (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
+					Date formatFDate = Date.from(Instant.ofEpochSecond(fDate));
+					long fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
+//					Date formatEDate = Date.from(Instant.ofEpochSecond(fEndDate));
 					
 					String typeKind = line.get(6).trim();
 					String caseId = Utils.regexChecker("\\{\\w+\\.java", line.get(2)).replace("{", "");
@@ -56,39 +55,36 @@ public class MylynCSVParser extends FileParser {
 					if(caseId.isEmpty()){
 						caseId = Utils.regexChecker("\\/\\w+\\.java", line.get(2)).replace("/", "");
 					}
-					ProcessCase processCase = null;
+					
 					if (!caseId.isEmpty() && !projectName.isEmpty()) {
 						cases = getProjectCase(projects, projectName);
-
-					    fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
-					    Date formatFDate = Date.from(Instant.ofEpochSecond(fDate));
-					    fEndDate = (DateManipulator.getDateFromString(endDate, "yyyy-MM-dd HH:mm:ss").getTime() / 1000);
 						if (projects.containsKey(projectName) && projects.get(projectName).containsKey(caseId)) {
 
 							processCase = projects.get(projectName).get(caseId);
 							cases = projects.get(projectName);
 							processCase.setIdleTime(new Long(0));
 							///
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), formatFDate.getHours(), new Long(0));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatFDate), new Long(0));
 							
 						} else {
 							processCase = new ProcessCase(caseId);
 							processCase.setStartTime(fDate);
 							processCase.setIdleTime(0);
 							//
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), formatFDate.getHours(), new Long("0"));
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatFDate), new Long("0"));
 						}
-						
-
-						long elapstime = DateManipulator.diff(fEndDate, fDate) ;
-						Event event = new Event(Date.from(Instant.ofEpochSecond(fDate)), elapstime, typeKind);
-						processCase.addEvents(event);
-						processCase.setLastEvent(event);
-						cases.put(processCase.getCaseId(), processCase);
-						projects.put(projectName, cases);
+					}
+						if(processCase != null && !entityType.equals("package")){
+							long elapstime = DateManipulator.diff(fEndDate, fDate) ;
+							Event event = new Event(Date.from(Instant.ofEpochSecond(fDate)), elapstime, typeKind);
+							processCase.addEvents(event);
+							processCase.setLastEvent(event);
+							cases.put(processCase.getCaseId(), processCase);
+							projects.put(projectName, cases);
+						}
 					}
 
-				}
+				
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();

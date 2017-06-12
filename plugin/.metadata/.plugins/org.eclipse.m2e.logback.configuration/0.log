@@ -7575,3 +7575,752 @@ java.io.FileNotFoundException: /Users/user/Documents/workspace/plugin/.metadata/
 2017-06-02 16:23:09,140 [Worker-1005] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
 2017-06-02 16:23:09,140 [Worker-1005] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-06-02 16:23:09,140 [Worker-1005] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-02 16:30:06,573 [Worker-1006] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-02 16:30:06,573 [Worker-1006] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-02 16:30:06,574 [Worker-1006] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-02 16:30:06,574 [Worker-1006] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-02 16:30:34,303 [Worker-1006] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-02 16:30:34,303 [Worker-1006] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-02 16:30:34,304 [Worker-1006] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-02 16:30:34,304 [Worker-1006] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 17:45:17,253 [Worker-1176] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 17:45:17,277 [Worker-1176] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 17:45:17,279 [Worker-1176] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 17:45:17,279 [Worker-1176] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 18:00:12,942 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:00:12,981 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 18:00:12,982 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:00:13,001 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 18:06:32,210 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:06:32,253 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 18:06:32,254 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:06:32,268 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 18:32:27,858 [Worker-1209] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:32:28,056 [Worker-1209] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 18:32:28,062 [Worker-1209] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:32:28,079 [Worker-1209] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 18:32:32,084 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:32:32,085 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 18:32:32,087 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 18:32:32,095 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 20:59:03,171 [Worker-1231] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:03,188 [Worker-1231] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 20:59:03,189 [Worker-1231] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:03,205 [Worker-1231] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 20:59:11,869 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:11,880 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 20:59:11,881 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:11,881 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 20:59:25,149 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:25,165 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 20:59:25,297 [Worker-1203] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 20:59:25,298 [Worker-1203] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 21:00:20,264 [Worker-1231] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:00:20,293 [Worker-1231] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 21:00:20,294 [Worker-1231] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:00:20,321 [Worker-1231] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 21:07:02,272 [Worker-1235] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:07:02,324 [Worker-1235] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 21:07:02,325 [Worker-1235] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:07:02,339 [Worker-1235] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 21:10:07,685 [Worker-1233] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:10:07,709 [Worker-1233] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 21:10:07,710 [Worker-1233] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:10:07,710 [Worker-1233] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-04 21:20:58,013 [Worker-1236] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:20:58,046 [Worker-1236] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-04 21:20:58,047 [Worker-1236] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-04 21:20:58,048 [Worker-1236] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 20:15:48,603 [Worker-1443] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:15:48,636 [Worker-1443] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 20:15:48,656 [Worker-1443] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:15:48,657 [Worker-1443] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 20:15:56,874 [Worker-1447] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:15:56,875 [Worker-1447] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 20:15:56,876 [Worker-1447] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 20:15:56,876 [Worker-1447] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 21:39:46,056 [Worker-1461] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:39:46,085 [Worker-1461] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 21:39:46,086 [Worker-1461] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:39:46,086 [Worker-1461] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 21:40:26,297 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:40:26,323 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 21:40:26,324 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:40:26,325 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 21:50:23,436 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:50:23,464 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 21:50:23,465 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:50:23,465 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 21:56:26,022 [Worker-1473] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:56:26,022 [Worker-1473] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 21:56:26,023 [Worker-1473] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 21:56:26,023 [Worker-1473] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:08:43,798 [Worker-1474] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:08:43,844 [Worker-1474] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:08:43,845 [Worker-1474] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:08:43,846 [Worker-1474] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:13:34,762 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:13:34,792 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:13:34,793 [Worker-1453] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:13:34,797 [Worker-1453] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:20:39,221 [Worker-1481] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:20:39,248 [Worker-1481] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:20:39,250 [Worker-1481] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:20:39,251 [Worker-1481] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:36:49,237 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:36:49,270 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:36:49,271 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:36:49,272 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:37:38,098 [Worker-1486] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:37:38,136 [Worker-1486] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:37:38,137 [Worker-1486] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:37:38,152 [Worker-1486] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:48:52,622 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:48:52,644 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:48:52,645 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:48:52,645 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 22:59:35,045 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:59:35,066 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 22:59:35,068 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 22:59:35,068 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 23:13:55,080 [Worker-1510] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:13:55,111 [Worker-1510] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 23:13:55,112 [Worker-1510] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:13:55,112 [Worker-1510] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 23:27:02,370 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:27:02,415 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 23:27:02,416 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:27:02,416 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 23:54:19,301 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:54:19,351 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 23:54:19,353 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:54:19,353 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 23:58:27,218 [Worker-1525] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:58:27,270 [Worker-1525] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 23:58:27,272 [Worker-1525] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:58:27,272 [Worker-1525] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-06 23:58:31,990 [Worker-1530] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:58:31,991 [Worker-1530] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-06 23:58:31,992 [Worker-1530] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-06 23:58:31,992 [Worker-1530] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 08:39:26,780 [Worker-1558] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 08:39:26,809 [Worker-1558] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 08:39:26,810 [Worker-1558] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 08:39:26,811 [Worker-1558] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 09:08:10,019 [Worker-1567] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 09:08:10,045 [Worker-1567] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 09:08:10,047 [Worker-1567] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 09:08:10,048 [Worker-1567] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 12:38:22,926 [Worker-1648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 12:38:22,952 [Worker-1648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 12:38:22,954 [Worker-1648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 12:38:22,954 [Worker-1648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 12:53:32,002 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 12:53:32,028 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 12:53:32,030 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 12:53:32,030 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:00:43,130 [Worker-1655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:00:43,141 [Worker-1655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:00:43,142 [Worker-1655] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:00:43,142 [Worker-1655] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:08:52,449 [Worker-1660] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:08:52,466 [Worker-1660] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:08:52,467 [Worker-1660] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:08:52,468 [Worker-1660] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:45:08,465 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:45:08,521 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:45:08,522 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:45:08,522 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:45:38,264 [Worker-1675] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:45:38,289 [Worker-1675] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:45:38,290 [Worker-1675] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:45:38,290 [Worker-1675] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:47:38,179 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:47:38,201 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:47:38,202 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:47:38,202 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:49:42,471 [Worker-1679] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:49:42,497 [Worker-1679] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:49:42,498 [Worker-1679] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:49:42,499 [Worker-1679] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:52:16,414 [Worker-1681] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:52:16,438 [Worker-1681] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:52:16,439 [Worker-1681] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:52:16,439 [Worker-1681] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:53:54,030 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:53:54,056 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:53:54,058 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:53:54,058 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 13:59:26,700 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:59:26,729 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 13:59:26,730 [Worker-1471] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 13:59:26,731 [Worker-1471] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 14:10:34,881 [Worker-1690] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:10:34,916 [Worker-1690] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 14:10:34,917 [Worker-1690] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:10:34,917 [Worker-1690] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 14:11:39,458 [Worker-1691] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:11:39,493 [Worker-1691] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 14:11:39,559 [Worker-1691] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:11:39,559 [Worker-1691] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 14:22:17,341 [Worker-1697] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:22:17,383 [Worker-1697] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 14:22:17,385 [Worker-1697] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 14:22:17,385 [Worker-1697] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 15:17:56,995 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-06-07 15:19:37,093 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2017-06-07 15:19:38,300 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:19:38,300 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 15:19:38,303 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:19:38,316 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 15:29:59,779 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:29:59,780 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 15:29:59,781 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:29:59,782 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 15:42:29,041 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:42:29,082 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 15:42:29,085 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 15:42:29,086 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 16:33:15,877 [Worker-47] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 16:33:15,897 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 16:33:15,899 [Worker-47] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 16:33:15,901 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 16:47:34,892 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 16:47:34,892 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 16:47:34,894 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 16:47:34,895 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 17:22:20,789 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 17:22:20,812 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 17:22:20,814 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 17:22:20,815 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 18:08:43,327 [Worker-123] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:08:43,350 [Worker-123] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 18:08:43,352 [Worker-123] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:08:43,352 [Worker-123] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 18:28:32,718 [Worker-135] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:28:32,718 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 18:28:32,719 [Worker-135] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:28:32,719 [Worker-135] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 18:36:44,893 [Worker-143] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:36:44,914 [Worker-143] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 18:36:44,916 [Worker-143] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:36:44,916 [Worker-143] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 18:45:40,029 [Worker-158] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:45:40,054 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 18:45:40,056 [Worker-158] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 18:45:40,057 [Worker-158] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 19:03:46,810 [Worker-167] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:03:46,830 [Worker-167] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 19:03:46,832 [Worker-167] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:03:46,832 [Worker-167] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 19:39:22,226 [Worker-188] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:39:22,253 [Worker-188] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 19:39:22,255 [Worker-188] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:39:22,256 [Worker-188] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 19:45:09,743 [Worker-193] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:45:09,767 [Worker-193] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 19:45:09,768 [Worker-193] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:45:09,769 [Worker-193] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 19:50:41,868 [Worker-185] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:50:41,890 [Worker-185] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 19:50:41,893 [Worker-185] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 19:50:41,894 [Worker-185] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 20:41:49,138 [Worker-221] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:41:49,139 [Worker-221] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 20:41:49,140 [Worker-221] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:41:49,140 [Worker-221] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 20:42:45,665 [Worker-223] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:42:45,666 [Worker-223] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 20:42:45,668 [Worker-223] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 20:42:45,669 [Worker-223] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:19:22,139 [Worker-279] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:19:22,162 [Worker-279] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:19:22,165 [Worker-279] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:19:22,165 [Worker-279] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:19:27,741 [Worker-281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:19:27,741 [Worker-281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:19:27,743 [Worker-281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:19:27,744 [Worker-281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:21:51,612 [Worker-281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:21:51,613 [Worker-281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:21:51,614 [Worker-281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:21:51,614 [Worker-281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:30:37,483 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-06-07 22:30:53,730 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2017-06-07 22:30:55,145 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:30:55,146 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:30:55,148 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:30:55,149 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:31:21,989 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:31:21,999 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:31:22,001 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:31:22,023 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:44:23,372 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:44:23,373 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:44:23,375 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:44:23,375 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:52:36,514 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:52:36,515 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:52:36,517 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:52:36,518 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:52:59,664 [Worker-29] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:52:59,665 [Worker-29] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:52:59,667 [Worker-29] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:52:59,667 [Worker-29] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 22:56:27,742 [Worker-31] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:56:27,743 [Worker-31] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 22:56:27,745 [Worker-31] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 22:56:27,745 [Worker-31] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:06:54,533 [Worker-44] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:06:54,534 [Worker-44] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:06:54,535 [Worker-44] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:06:54,535 [Worker-44] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:07:04,368 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:07:04,369 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:07:04,371 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:07:04,372 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:28:08,261 [Worker-48] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:28:08,292 [Worker-48] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:28:08,293 [Worker-48] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:28:08,294 [Worker-48] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:41:52,446 [Worker-58] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:41:52,475 [Worker-58] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:41:52,476 [Worker-58] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:41:52,477 [Worker-58] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:44:14,325 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:44:14,326 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:44:14,327 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:44:14,328 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-07 23:46:19,647 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:46:19,673 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-07 23:46:19,674 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-07 23:46:19,675 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 00:12:03,995 [Worker-76] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:12:03,995 [Worker-76] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 00:12:03,996 [Worker-76] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:12:03,997 [Worker-76] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 00:21:31,632 [Worker-85] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:21:31,633 [Worker-85] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 00:21:31,635 [Worker-85] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:21:31,635 [Worker-85] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 00:32:36,754 [Worker-90] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:32:36,754 [Worker-90] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 00:32:36,756 [Worker-90] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 00:32:36,757 [Worker-90] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 01:27:15,720 [Worker-108] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 01:27:15,745 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 01:27:15,748 [Worker-108] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 01:27:15,748 [Worker-108] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 02:23:07,579 [Worker-146] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:23:07,610 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 02:23:07,611 [Worker-146] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:23:07,612 [Worker-146] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 02:24:35,623 [Worker-150] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:24:35,651 [Worker-150] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 02:24:35,652 [Worker-150] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:24:35,653 [Worker-150] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 02:32:10,397 [Start Help Server] INFO  org.eclipse.jetty.util.log - Logging initialized @14510269ms
+2017-06-08 02:32:10,749 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.v20160517
+2017-06-08 02:32:10,877 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@60972384{/help,null,AVAILABLE}
+2017-06-08 02:32:10,902 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@d232224{HTTP/1.1,[http/1.1]}{127.0.0.1:58986}
+2017-06-08 02:32:10,902 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started @14510774ms
+2017-06-08 02:34:34,101 [Worker-154] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:34:34,101 [Worker-154] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 02:34:34,103 [Worker-154] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 02:34:34,103 [Worker-154] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 12:47:31,074 [Worker-274] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 12:47:31,127 [Worker-274] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 12:47:31,128 [Worker-274] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 12:47:31,129 [Worker-274] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 12:59:42,476 [Worker-288] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 12:59:42,503 [Worker-288] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 12:59:42,504 [Worker-288] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 12:59:42,504 [Worker-288] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 13:00:25,109 [Worker-288] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:00:25,109 [Worker-288] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 13:00:25,111 [Worker-288] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:00:25,111 [Worker-288] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 13:39:32,523 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:39:32,548 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 13:39:32,550 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:39:32,550 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 13:39:50,938 [Worker-313] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:39:50,938 [Worker-313] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 13:39:50,940 [Worker-313] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:39:50,940 [Worker-313] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 13:43:16,395 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:43:16,396 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 13:43:16,397 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:43:16,398 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 13:46:45,723 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:46:45,745 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 13:46:45,747 [Worker-314] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 13:46:45,748 [Worker-314] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 14:32:33,162 [Worker-340] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 14:32:33,383 [Worker-340] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 14:32:33,384 [Worker-340] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 14:32:33,384 [Worker-340] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 14:43:43,864 [Worker-346] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 14:43:43,878 [Worker-346] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 14:43:43,880 [Worker-346] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 14:43:43,880 [Worker-346] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:01:44,912 [Worker-351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:01:44,938 [Worker-351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:01:44,941 [Worker-351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:01:44,942 [Worker-351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:15:31,514 [Worker-361] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:15:31,515 [Worker-361] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:15:31,516 [Worker-361] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:15:31,516 [Worker-361] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:24:02,598 [Worker-363] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:24:02,625 [Worker-363] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:24:02,626 [Worker-363] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:24:02,627 [Worker-363] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:35:10,647 [Worker-351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:35:10,647 [Worker-351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:35:10,649 [Worker-351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:35:10,649 [Worker-351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:35:23,529 [Worker-365] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:35:23,530 [Worker-365] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:35:23,530 [Worker-365] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:35:23,531 [Worker-365] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:38:16,862 [Worker-370] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:38:16,862 [Worker-370] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:38:16,864 [Worker-370] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:38:16,864 [Worker-370] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:45:38,513 [Worker-376] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:45:38,514 [Worker-376] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:45:38,515 [Worker-376] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:45:38,515 [Worker-376] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 15:59:57,592 [Worker-386] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:59:57,619 [Worker-386] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 15:59:57,620 [Worker-386] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 15:59:57,620 [Worker-386] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 16:02:30,712 [Worker-389] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:02:30,712 [Worker-389] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 16:02:30,713 [Worker-389] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:02:30,713 [Worker-389] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 16:50:25,282 [Worker-409] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:50:25,283 [Worker-409] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 16:50:25,284 [Worker-409] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:50:25,285 [Worker-409] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 16:50:36,657 [Worker-408] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:50:36,658 [Worker-408] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 16:50:36,659 [Worker-408] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 16:50:36,659 [Worker-408] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 17:01:31,858 [Worker-411] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:01:31,859 [Worker-411] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 17:01:31,860 [Worker-411] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:01:31,861 [Worker-411] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 17:05:36,753 [Worker-415] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:05:36,754 [Worker-415] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 17:05:36,755 [Worker-415] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:05:36,755 [Worker-415] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 17:31:57,057 [Worker-430] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:31:57,057 [Worker-430] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 17:31:57,059 [Worker-430] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:31:57,059 [Worker-430] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 17:35:36,751 [Worker-432] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:35:36,752 [Worker-432] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 17:35:36,754 [Worker-432] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:35:36,755 [Worker-432] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 17:37:49,174 [Worker-437] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:37:49,175 [Worker-437] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 17:37:49,176 [Worker-437] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 17:37:49,177 [Worker-437] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 18:03:23,785 [Worker-451] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:03:23,810 [Worker-451] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 18:03:23,812 [Worker-451] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:03:23,813 [Worker-451] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 18:20:31,976 [Worker-460] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:20:31,977 [Worker-460] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 18:20:31,978 [Worker-460] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:20:31,978 [Worker-460] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-08 18:20:52,904 [Worker-458] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:20:52,905 [Worker-458] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-08 18:20:52,906 [Worker-458] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-08 18:20:52,907 [Worker-458] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-09 14:01:48,984 [Worker-740] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 14:01:49,025 [Worker-740] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-09 14:01:49,026 [Worker-740] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 14:01:49,026 [Worker-740] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-09 14:34:12,795 [Worker-764] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 14:34:12,833 [Worker-764] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-09 14:34:12,835 [Worker-764] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-09 14:34:12,835 [Worker-764] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 02:35:56,268 [Worker-1111] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 02:35:56,293 [Worker-1111] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 02:35:56,295 [Worker-1111] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 02:35:56,295 [Worker-1111] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 03:30:51,112 [Worker-1142] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 03:30:51,145 [Worker-1142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 03:30:51,147 [Worker-1142] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 03:30:51,147 [Worker-1142] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 04:18:41,911 [Worker-1165] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:18:41,936 [Worker-1165] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 04:18:41,938 [Worker-1165] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:18:41,938 [Worker-1165] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 04:18:52,029 [Worker-1169] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:18:52,029 [Worker-1169] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 04:18:52,030 [Worker-1169] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:18:52,042 [Worker-1169] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 04:38:44,316 [Worker-1183] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:38:44,344 [Worker-1183] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 04:38:44,346 [Worker-1183] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 04:38:44,346 [Worker-1183] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 05:53:32,507 [Worker-1223] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 05:53:32,537 [Worker-1223] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 05:53:32,539 [Worker-1223] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 05:53:32,540 [Worker-1223] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 06:30:19,378 [Worker-1225] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 06:30:19,401 [Worker-1225] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 06:30:19,403 [Worker-1225] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 06:30:19,422 [Worker-1225] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 06:40:29,745 [Worker-1225] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 06:40:29,772 [Worker-1225] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 06:40:29,791 [Worker-1225] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 06:40:29,791 [Worker-1225] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 07:07:22,255 [Worker-1264] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:07:22,275 [Worker-1264] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 07:07:22,276 [Worker-1264] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:07:22,290 [Worker-1264] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 07:11:09,466 [Worker-1264] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:11:09,494 [Worker-1264] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 07:11:09,495 [Worker-1264] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:11:09,496 [Worker-1264] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 07:13:37,183 [Worker-1267] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:13:37,230 [Worker-1267] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 07:13:37,232 [Worker-1267] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:13:37,232 [Worker-1267] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 07:23:31,948 [Worker-1269] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:23:31,978 [Worker-1269] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 07:23:31,979 [Worker-1269] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:23:31,979 [Worker-1269] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 07:29:26,192 [Worker-1279] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:29:26,217 [Worker-1279] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 07:29:26,218 [Worker-1279] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 07:29:26,218 [Worker-1279] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 14:19:54,660 [Worker-1281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:19:54,686 [Worker-1281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 14:19:54,687 [Worker-1281] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:19:54,688 [Worker-1281] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 14:28:18,425 [Worker-1300] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:28:18,453 [Worker-1300] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 14:28:18,455 [Worker-1300] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:28:18,455 [Worker-1300] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 14:36:17,390 [Worker-1306] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:36:17,415 [Worker-1306] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 14:36:17,418 [Worker-1306] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:36:17,418 [Worker-1306] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 14:53:22,182 [Worker-1312] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:53:22,210 [Worker-1312] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 14:53:22,211 [Worker-1312] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:53:22,212 [Worker-1312] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 14:58:37,987 [Worker-1317] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:58:38,007 [Worker-1317] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 14:58:38,008 [Worker-1317] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 14:58:38,028 [Worker-1317] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:02:09,172 [Worker-1322] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:02:09,200 [Worker-1322] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:02:09,201 [Worker-1322] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:02:09,201 [Worker-1322] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:06:02,364 [Worker-1326] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:06:02,382 [Worker-1326] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:06:02,383 [Worker-1326] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:06:02,384 [Worker-1326] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:23:08,791 [Worker-1330] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:23:08,817 [Worker-1330] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:23:08,818 [Worker-1330] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:23:08,818 [Worker-1330] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:29:29,450 [Worker-1338] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:29:29,450 [Worker-1338] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:29:29,451 [Worker-1338] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:29:29,451 [Worker-1338] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:34:12,574 [Worker-1340] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:34:12,600 [Worker-1340] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:34:12,601 [Worker-1340] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:34:12,602 [Worker-1340] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 15:48:39,794 [Worker-1351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:48:39,822 [Worker-1351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 15:48:39,824 [Worker-1351] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 15:48:39,824 [Worker-1351] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-10 22:21:56,201 [Worker-1582] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 22:21:56,246 [Worker-1582] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-10 22:21:56,247 [Worker-1582] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-10 22:21:56,248 [Worker-1582] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 00:56:02,599 [Worker-1600] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 00:56:02,629 [Worker-1600] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 00:56:02,630 [Worker-1600] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 00:56:02,631 [Worker-1600] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 01:04:37,213 [Worker-1602] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:04:37,235 [Worker-1602] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 01:04:37,236 [Worker-1602] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:04:37,237 [Worker-1602] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 01:09:59,411 [Worker-1608] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:09:59,439 [Worker-1608] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 01:09:59,440 [Worker-1608] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:09:59,441 [Worker-1608] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 01:15:04,186 [Worker-1606] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:15:04,213 [Worker-1606] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 01:15:04,215 [Worker-1606] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 01:15:04,215 [Worker-1606] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 13:15:14,378 [Worker-1625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 13:15:14,414 [Worker-1625] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 13:15:14,415 [Worker-1625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 13:15:14,416 [Worker-1625] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 13:15:17,330 [Worker-1625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 13:15:17,331 [Worker-1625] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 13:15:17,333 [Worker-1625] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 13:15:17,403 [Worker-1625] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 14:18:28,880 [Worker-1628] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:18:28,914 [Worker-1628] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 14:18:28,916 [Worker-1628] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:18:28,916 [Worker-1628] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 14:38:43,663 [Worker-1642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:38:43,699 [Worker-1642] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 14:38:43,702 [Worker-1642] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:38:43,702 [Worker-1642] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 14:48:26,706 [Worker-1635] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:48:26,729 [Worker-1635] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 14:48:26,731 [Worker-1635] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 14:48:26,731 [Worker-1635] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 15:04:06,586 [Worker-1653] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:06,586 [Worker-1653] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 15:04:06,587 [Worker-1653] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:06,588 [Worker-1653] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 15:04:32,424 [Worker-1654] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:32,425 [Worker-1654] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 15:04:32,425 [Worker-1654] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:32,426 [Worker-1654] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 15:04:55,340 [Worker-1648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:55,340 [Worker-1648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 15:04:55,341 [Worker-1648] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:04:55,341 [Worker-1648] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 15:07:08,950 [Worker-1654] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:07:08,951 [Worker-1654] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 15:07:08,951 [Worker-1654] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:07:08,952 [Worker-1654] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 15:48:47,577 [Worker-1671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:48:47,593 [Worker-1671] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 15:48:47,594 [Worker-1671] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 15:48:47,595 [Worker-1671] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 17:59:17,776 [Worker-1706] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 17:59:17,807 [Worker-1706] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 17:59:17,808 [Worker-1706] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 17:59:17,809 [Worker-1706] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:16:51,726 [Worker-1704] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:16:51,757 [Worker-1704] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:16:51,768 [Worker-1704] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:16:51,769 [Worker-1704] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:35:40,588 [Worker-1711] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:35:40,621 [Worker-1711] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:35:40,622 [Worker-1711] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:35:40,623 [Worker-1711] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:36:26,302 [Worker-1711] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:36:26,332 [Worker-1711] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:36:26,333 [Worker-1711] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:36:26,334 [Worker-1711] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:37:48,979 [Worker-1718] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:37:49,005 [Worker-1718] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:37:49,006 [Worker-1718] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:37:49,007 [Worker-1718] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:39:15,959 [Worker-1713] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:39:15,967 [Worker-1713] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:39:15,969 [Worker-1713] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:39:15,969 [Worker-1713] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:41:02,394 [Worker-1713] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:41:02,416 [Worker-1713] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:41:02,417 [Worker-1713] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:41:02,417 [Worker-1713] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:44:05,231 [Worker-1719] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:44:05,256 [Worker-1719] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:44:05,257 [Worker-1719] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:44:05,258 [Worker-1719] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 18:54:20,538 [Worker-1718] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:54:20,580 [Worker-1718] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 18:54:20,582 [Worker-1718] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 18:54:20,582 [Worker-1718] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 21:06:07,618 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 21:06:07,642 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 21:06:07,644 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 21:06:07,644 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 21:44:17,957 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 21:44:18,001 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 21:44:18,003 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 21:44:18,003 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 22:58:51,026 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 22:58:51,059 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 22:58:51,060 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 22:58:51,061 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 23:09:17,308 [Worker-1860] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 23:09:17,359 [Worker-1860] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 23:09:17,361 [Worker-1860] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 23:09:17,361 [Worker-1860] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-11 23:44:52,089 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 23:44:52,138 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-11 23:44:52,141 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-11 23:44:52,142 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:19:50,174 [Worker-1877] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:19:50,209 [Worker-1877] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:19:50,210 [Worker-1877] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:19:50,228 [Worker-1877] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:21:01,966 [Worker-1868] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:21:01,994 [Worker-1868] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:21:01,995 [Worker-1868] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:21:01,996 [Worker-1868] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:22:13,137 [Worker-1879] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:22:13,194 [Worker-1879] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:22:13,195 [Worker-1879] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:22:13,219 [Worker-1879] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:30:29,826 [Worker-1884] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:30:29,839 [Worker-1884] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:30:29,841 [Worker-1884] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:30:29,841 [Worker-1884] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:30:35,330 [Worker-1885] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:30:35,331 [Worker-1885] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:30:35,332 [Worker-1885] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:30:35,332 [Worker-1885] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:34:53,893 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:34:53,893 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:34:53,894 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:34:53,894 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:34:57,875 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:34:57,876 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:34:57,876 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:34:57,877 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:35:06,804 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:35:06,804 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:35:06,805 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:35:06,805 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:56:56,539 [Worker-1885] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:56:56,574 [Worker-1885] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:56:56,576 [Worker-1885] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:56:56,576 [Worker-1885] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 09:57:07,016 [Worker-1890] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:57:07,017 [Worker-1890] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 09:57:07,018 [Worker-1890] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 09:57:07,019 [Worker-1890] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:03:21,082 [Worker-1894] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:03:21,111 [Worker-1894] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:03:21,113 [Worker-1894] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:03:21,113 [Worker-1894] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:04:22,481 [Worker-1892] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:22,481 [Worker-1892] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:04:22,483 [Worker-1892] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:22,483 [Worker-1892] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:04:31,223 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:31,224 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:04:31,226 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:31,226 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:04:37,664 [Worker-1892] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:37,664 [Worker-1892] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:04:37,665 [Worker-1892] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:04:37,665 [Worker-1892] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:13:56,600 [Worker-1898] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:13:56,627 [Worker-1898] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:13:56,628 [Worker-1898] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:13:56,629 [Worker-1898] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources
+2017-06-12 10:14:47,926 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:14:47,960 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/main/resources
+2017-06-12 10:14:47,962 [Worker-1760] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-06-12 10:14:47,962 [Worker-1760] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/test/resources

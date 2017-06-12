@@ -9,14 +9,13 @@ import edu.cwi.espionage.util.IdleTimeTable;
 import edu.cwi.espionage.util.Utils;
 
 public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
-	private static final long MINIMUM_IDLE_TIME = 600000; //10 minutes as default.
 	private String caseId;
 	private List<Event> events;
 	private long startTime;
 	private long idleTime;
 	private Event lastEvent;
 	private IdleTimeTable idleTimeTable;
-	
+
 	public ProcessCase(String caseId) {
 		this.events = new ArrayList<Event>();
 		this.setCaseId(caseId);
@@ -56,6 +55,8 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 		for (Event event : events) {
 			processTime += event.getElapstime();
 		}
+		System.out.println("Global Time = "+processTime );
+		System.out.println("Idle Time = "+getIdleTime() );
 		return DateManipulator.diff(processTime,getIdleTime()) * 1000;
 	}
 	
@@ -88,10 +89,6 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 					if(pcTemp.getEvents().isEmpty()){
 						pcTemp.setStartTime(e.getTimestamp().getTime()/1000);
 					}
-					else{
-						calculateIdleTime(pcTemp, e);
-						
-					}
 					
 					if(isDateRangeNull(upper, lower) || isDateBetwwenRange(upper, lower, e.getTimestamp())){
 						pcTemp.addEvents(e);
@@ -106,6 +103,7 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 				String formatedDate = DateManipulator.getFormatedDate(pcTemp.getLastEvent().getTimestamp(), "dd/MM/yyyy");
 				Long lookupIdleTime = new Long(0);
 				if(isDateRangeNull(upper, lower)){
+					
 					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, 1, 24);
 				}else{
 					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, DateManipulator.getHourFromDate(lower), DateManipulator.getHourFromDate(upper));
@@ -130,37 +128,6 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 		return false;
 	}
 
-	private void calculateIdleTime(ProcessCase pcTemp, Event e) {
-		Event event2 = pcTemp.getEvents().get(pcTemp.getEvents().size()-1);
-		if (IsInactive(event2, e)) {
-			long idleTime = getInactiveTime(e, event2);
-			pcTemp.getIdleTimeTable().add(DateManipulator.getFormatedDate(e.getTimestamp(), "dd/MM/yyyy"),DateManipulator.getHourFromDate(e.getTimestamp()),idleTime);
-		}
-	}
-	
-	/**
-	 * To calculate inactive time:
-	 * CONTEXT: The fluorite log all developers events. 
-	 * METHOD : Visualizing Developer Interactions by  Roberto Minelli, Andrea Mocci, Michele Lanza and Lorenzo Baracchi
-	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
-	 * 			that the user is inactive.
-	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
-	 * @param Event e1
-	 * @param Event e2
-	 * 
-	 * @return
-	 */
-	private long getInactiveTime(Event e1, Event e2){
-		return Math.abs(e2.getTimestamp().getTime() - e1.getTimestamp().getTime());
-	}
-	
-	private boolean IsInactive(Event e1, Event e2){
-		boolean isInactive = false;
-		if(getInactiveTime(e1,e2) > MINIMUM_IDLE_TIME){
-			isInactive = true;
-		}
-		return isInactive;
-	}
 	
 	@Override
 	public String toString() {
@@ -190,6 +157,7 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 	public void setIdleTimeTable(IdleTimeTable idleTimeTable) {
 		this.idleTimeTable = idleTimeTable;
 	}
+
 
 	@Override
 	public int compareTo(ProcessCase p) {

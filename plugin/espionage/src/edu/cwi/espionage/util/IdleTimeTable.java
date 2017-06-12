@@ -24,15 +24,10 @@ public class IdleTimeTable {
 		
 		if(contains(date)){
 			if(containHour(date, hour)){
-//				System.out.println("Before idleTimeTable = "+idleTimeTable);
 				Long lookup = DateManipulator.add(lookupIdleTime(date,hour), idleTime);
-//				System.out.println("lookupIdleTime(date,hour) = "+lookupIdleTime(date,hour));
-//				System.out.println("The Idle = "+idleTime);
-//				System.out.println("Lookup total = "+lookup);
 				HashMap<Integer,Long> hLookup = idleTimeTable.get(date);
 				hLookup.put(hour, lookup);
 				idleTimeTable.put(date, hLookup);
-//				System.out.println("After idleTimeTable = "+idleTimeTable);
 			}
 			
 		}else{
@@ -57,10 +52,6 @@ public class IdleTimeTable {
 		}
 		return new Long(0);
 	}
-//
-//	public Boolean isEmpty() {
-//		return idleTimeTable.isEmpty();
-//	}
 	
 	public Long total() {
 		Long total = new Long(0);
@@ -77,7 +68,6 @@ public class IdleTimeTable {
 		Long lookupIdleTime = new Long(0);
 		for (int i = lower; i < upper; i++) {
 			 lookupIdleTime += lookupIdleTime(formatedDate, i);
-			 System.out.println("Total = "+lookupIdleTime+" <=> "+" Hour = "+i);
 		}
 		return lookupIdleTime;
 	}

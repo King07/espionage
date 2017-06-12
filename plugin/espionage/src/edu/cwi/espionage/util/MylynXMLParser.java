@@ -48,23 +48,20 @@ public class MylynXMLParser extends FileParser {
 
 				NodeList cmds = document.getElementsByTagName("InteractionEvent");
 				List<Node> commands = sortNodeList(cmds);
-				System.out.println("commands.size() = " + commands.size());
-				System.out.println("cmds.getLength() = " + cmds.getLength());
 				ProcessCase processCase = null;
 				for (int i = 0; i < commands.size(); i++) {
 					Element theNode = (Element) commands.get(i);
 
-					String startDate = ((Element) commands.get(0)).getAttribute("StartDate");
-					long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime()/ 1000);
-					String sCurrDate = theNode.getAttribute("StartDate");
-					long currDate = (DateManipulator.getDateFromString(sCurrDate, "yyyy-MM-dd HH:mm:ss.S Z").getTime()/ 1000);
+					String startDate = ((Element) commands.get(0)).getAttribute("StartDate").substring(0, 19);
+					long fDate = (DateManipulator.getDateFromString(startDate, "yyyy-MM-dd HH:mm:ss").getTime()/ 1000);
+					String sCurrDate = theNode.getAttribute("StartDate").substring(0, 19);
+					long currDate = (DateManipulator.getDateFromString(sCurrDate, "yyyy-MM-dd HH:mm:ss").getTime()/ 1000);
 					String typeKind = theNode.getAttribute("Kind");
 					String caseId = Utils.regexChecker("\\{\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("{", "");
 					if (caseId.isEmpty()) {
 						caseId = Utils.regexChecker("\\/\\w+\\.java", theNode.getAttribute("StructureHandle")).replace("/", "");
 					}
 					String projectName = this.files[n].split("\\_")[0];
-					// ProcessCase processCase = null;
 
 					if (!caseId.isEmpty() && !projectName.isEmpty()) {
 						cases = getProjectCase(projects, projectName);
@@ -74,13 +71,14 @@ public class MylynXMLParser extends FileParser {
 							processCase = projects.get(projectName).get(caseId);
 							cases = projects.get(projectName);
 							//TODO verify that (if statement) working fine 
+							
 							if(!lastCaseId.equals(caseId)){
-								long nDate = processCase.getLastEvent().getTimestamp().getTime() / 1000;
-								long idleTime = DateManipulator.diff(nDate, currDate);
+								long idleTime = DateManipulator.diff(processCase.getStartTime(), currDate);
 								long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
 								Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
 								processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatCurrDate),  idleTime);
 								processCase.setIdleTime(incrIdleTime);
+								
 							}
 							
 						} else {
@@ -100,27 +98,45 @@ public class MylynXMLParser extends FileParser {
 
 						Event event = new Event(processTimestamp, elapseTime, typeKind);
 						event.setCaseId(caseId);
-						lastCaseId = caseId;
 						if (!processCase.getEvents().isEmpty()) {
 							long cElapseTime = DateManipulator.diff(processCase.getLastEvent().getTimestamp().getTime(),Date.from(Instant.ofEpochSecond(fDate)).getTime()) / 1000;
-							event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
+//							event.setElapstime(cElapseTime);
+							long fElapsed = DateManipulator.diff(cElapseTime, elapseTime);
+							event.setElapstime(fElapsed);
 						}
+							
+						if(!processCase.getEvents().isEmpty() && !lastCaseId.equals(caseId) & !caseId.isEmpty()){
+							long elapstime = DateManipulator.diff(processCase.getStartTime(), currDate);
+							event.setElapstime(elapstime);
+								
+						}
+						
+						if(processCase.getEvents().size() > 0){
+							long inactiveIdle = this.calculateIdleInactiveTime(processCase.getEvents().get(processCase.getEvents().size()-1), event);
+							String formatedDate = DateManipulator.getFormatedDate(event.getTimestamp(), "dd/MM/yyyy");
+							Integer hourFromDate = DateManipulator.getHourFromDate(event.getTimestamp());
+							processCase.getIdleTimeTable().add(formatedDate, hourFromDate, inactiveIdle);
+						}
+							
 						processCase.addEvents(event);
 						processCase.setLastEvent(event);
 						cases.put(processCase.getCaseId(), processCase);
 						projects.put(projectName, cases);
-
+						if(!caseId.isEmpty()){
+							lastCaseId = caseId;
+						}
 					}
 
 				}
 
 			} catch (ParserConfigurationException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			} catch (SAXException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
+			lastCaseId = "";
 
 		}
 		return projects;

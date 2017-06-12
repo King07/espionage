@@ -1,0 +1,8 @@
+1496845994974	Extract local variable 'fElapsed'
+1496853279675	Rename local variable 'newFile'
+1496921971437	Extract local variable 'formatedDate'
+1496921990467	Extract local variable 'hourFromDate'
+1496922190560	Rename method 'calculateIdleTime'
+1496928506039	Extract local variable 'inactiveTime'
+1496934010899	Rename local variable 'event2'
+1496934030649	Rename local variable 'e'

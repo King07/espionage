@@ -3,9 +3,12 @@ package edu.cwi.espionage.util;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.cwi.espionage.model.Event;
 import edu.cwi.espionage.model.ProcessCase;
 
 public abstract class FileParser {
+	private static final long MINIMUM_IDLE_TIME = 600; //10 minutes as default.
 	public String[] files;
 
 	public FileParser(String logPath) {
@@ -17,4 +20,57 @@ public abstract class FileParser {
 	}
 	
 	public abstract Map<String, HashMap<String, ProcessCase>> getProject();
+	
+	public Long calculateIdleInactiveTime(Event e1, Event e2) {
+		if (IsInactive(e2, e1)) {
+			
+			long idleTime = DateManipulator.getSecondsFromDiff(getInactiveTime(e1, e2));
+			return idleTime;
+			
+		}
+		return new Long(0);
+	}
+	
+	/**
+	 * To calculate inactive time:
+	 * CONTEXT: The fluorite log all developers events. 
+	 * METHOD : Visualizing Developer Interactions by  Roberto Minelli, Andrea Mocci, Michele Lanza and Lorenzo Baracchi
+	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
+	 * 			that the user is inactive.
+	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
+	 * @param Event e1
+	 * @param Event e2
+	 * 
+	 * @return
+	 */
+	private long getInactiveTime(Event e1, Event e2){
+		Event firstEvent = e1;
+		Event secondEvent = e2;
+		if(e1.getTimestamp().after(e2.getTimestamp())){
+			firstEvent = e2;
+			secondEvent = e1;
+		}
+		
+		return Math.abs(secondEvent.getTimestamp().getTime() - firstEvent.getTimestamp().getTime());
+	}
+	
+	private boolean IsInactive(Event e1, Event e2){
+		Event firstEvent = e1;
+		Event secondEvent = e2;
+		if(e1.getTimestamp().after(e2.getTimestamp())){
+			firstEvent = e2;
+			secondEvent = e1;
+		}
+		
+		boolean isInactive = false;
+		long inactiveTime = getInactiveTime(firstEvent,secondEvent);
+		long inactiveTimeSeconds = inactiveTime/1000;
+		if(inactiveTimeSeconds > MINIMUM_IDLE_TIME && inactiveTimeSeconds == secondEvent.getElapstime() ){
+			System.out.println("inactiveTimeSeconds <=> "+inactiveTimeSeconds);
+			System.out.println("E1 <=> "+firstEvent);
+			System.out.println("E2 <=> "+secondEvent);
+			isInactive = true;
+		}
+		return isInactive;
+	}
 }

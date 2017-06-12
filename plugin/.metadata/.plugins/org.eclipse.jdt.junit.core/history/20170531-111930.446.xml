@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ProcessCaseTest" project="espionage" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="edu.cwi.espionage.tests.ProcessCaseTest" time="0.068">
-    <testcase name="test_total_time" classname="edu.cwi.espionage.tests.ProcessCaseTest" time="0.0"/>
-    <testcase name="test_idle_time" classname="edu.cwi.espionage.tests.ProcessCaseTest" time="0.068"/>
-  </testsuite>
-</testrun>

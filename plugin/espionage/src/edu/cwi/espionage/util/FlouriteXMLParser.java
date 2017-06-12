@@ -33,6 +33,7 @@ public class FlouriteXMLParser extends FileParser {
 			return projects;
 		}
 		HashMap<String, ProcessCase> cases = null;
+		String lastCaseId = "";
 		for (int n = 0; n < this.files.length; n++) {
 			String aLogFile = Utils.getFullPath(this.files[n], FLUORITE_LOGS_PATH);
 			System.out.println(aLogFile);
@@ -76,12 +77,13 @@ public class FlouriteXMLParser extends FileParser {
 									
 									processCase = projects.get(projectName).get(caseId);
 									cases = projects.get(projectName);
-									long nDate = processCase.getLastEvent().getTimestamp().getTime()/1000;
-									long idleTime = DateManipulator.diff(nDate, currDate);
-									long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
-									Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
-									processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatCurrDate),idleTime);
-									processCase.setIdleTime(incrIdleTime);
+									if(!lastCaseId.equals(caseId)){
+										long idleTime = DateManipulator.diff(processCase.getStartTime(), currDate);
+										long incrIdleTime = DateManipulator.add(processCase.getIdleTime(), idleTime);
+										Date formatCurrDate = Date.from(Instant.ofEpochSecond(currDate));
+										processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"), DateManipulator.getHourFromDate(formatCurrDate),idleTime);
+										processCase.setIdleTime(incrIdleTime);
+									}
 								} else {
 									long idleTime = DateManipulator.diff(initDate, currDate);
 									processCase = new ProcessCase(caseId);
@@ -114,21 +116,38 @@ public class FlouriteXMLParser extends FileParser {
 							event.setElapstime(DateManipulator.diff(cElapseTime, elapseTime));
 						}
 						
+						if(!processCase.getEvents().isEmpty() && !lastCaseId.equals(caseId) & !caseId.isEmpty()){
+							long elapstime = DateManipulator.diff(processCase.getStartTime(), epochSecond);
+							event.setElapstime(elapstime);
+								
+						}
+						
+						if(processCase.getEvents().size() > 0){
+							long inactiveIdle = this.calculateIdleInactiveTime(processCase.getEvents().get(processCase.getEvents().size()-1), event);
+							String formatedDate = DateManipulator.getFormatedDate(event.getTimestamp(), "dd/MM/yyyy");
+							Integer hourFromDate = DateManipulator.getHourFromDate(event.getTimestamp());
+							processCase.getIdleTimeTable().add(formatedDate, hourFromDate, inactiveIdle);
+						}
+						
 						processCase.addEvents(event);
 						processCase.setLastEvent(event);
 						cases.put(processCase.getCaseId(), processCase);
 						projects.put(projectName, cases);
+						if(!caseId.isEmpty()){
+							lastCaseId = caseId;
+						}
 
 					}
 
 				}
 			} catch (ParserConfigurationException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			} catch (SAXException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
+			lastCaseId = "";
 
 		}
 		return projects;

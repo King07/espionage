@@ -1,7 +1,0 @@
-package edu.cwi.espionage.interfaces;
-
-import edu.cwi.espionage.views.HourSelection;
-
-public interface SelectedHourListener {
-	public void hourSelected(HourSelection hour);
-}
