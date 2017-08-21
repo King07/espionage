@@ -34,9 +34,13 @@ public class FlouriteXMLParser extends FileParser {
 		}
 		HashMap<String, ProcessCase> cases = null;
 		String lastCaseId = "";
+		String projectName = "";
 		for (int n = 0; n < this.files.length; n++) {
 			String aLogFile = Utils.getFullPath(this.files[n], FLUORITE_LOGS_PATH);
 			System.out.println(aLogFile);
+			if(aLogFile.contains("DS_Store")){
+				continue;
+			}
 			try {
 				
 				Document document = this.getDocument(aLogFile);
@@ -48,7 +52,6 @@ public class FlouriteXMLParser extends FileParser {
 
 				NodeList commands = document.getElementsByTagName("Command");
 				ProcessCase processCase = null;
-				String projectName = "";
 				for (int i = 0; i < commands.getLength(); i++) {
 					System.out.println("Progess: ==> "+i+"/"+commands.getLength());
 					Node aNode = commands.item(i);
@@ -62,10 +65,16 @@ public class FlouriteXMLParser extends FileParser {
 							caseId = Utils.getClassName(getCharacterDataFromElement(ceNode), "/");
 							if (caseId.compareTo("") != 0) {
 								String tString = comChElem.getAttribute("timestamp");
-								long ts = Long.parseLong(tString.substring(0, tString.length() - 3));
+								long ts = new Long(0);
+								if(tString.length() > 3){
+									ts = Long.parseLong(tString.substring(0, tString.length() - 3));
+								}
 								long initDate = Long.parseLong(startTime);
 								long currDate = DateManipulator.add(initDate, ts);
 								projectName = comChElem.getAttribute("projectName");
+								if(projectName.equals("null")){
+									continue;
+								}
 								if (projects.containsKey(projectName)) {
 									cases = projects.get(projectName);
 								} else {
@@ -98,7 +107,7 @@ public class FlouriteXMLParser extends FileParser {
 						}
 					}
 						
-					if (aNode.getNodeType() == Node.ELEMENT_NODE && processCase != null) {
+					if (aNode.getNodeType() == Node.ELEMENT_NODE && processCase != null && !projectName.equals("null")) {
 						Element theNode = (Element) aNode;
 						String activity = theNode.getAttribute("_type");
 
@@ -106,7 +115,10 @@ public class FlouriteXMLParser extends FileParser {
 							continue;
 						}
 						String timestamp = theNode.getAttribute("timestamp");
-						long elapseTime = Long.parseLong(timestamp.substring(0, timestamp.length() - 3));
+						long elapseTime = new Long(0);
+						if(timestamp.length() > 3){
+							elapseTime = Long.parseLong(timestamp.substring(0, timestamp.length() - 3));
+						}
 						long epochSecond = (elapseTime + Long.parseLong(startTime));
 						Date processTimestamp = Date.from(Instant.ofEpochSecond(epochSecond));
 					

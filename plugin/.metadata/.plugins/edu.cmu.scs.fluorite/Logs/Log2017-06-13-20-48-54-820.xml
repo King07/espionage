@@ -1,0 +1,73 @@
+<Events startTimestamp="1497379734820" logVersion="0.11.0.201706131909" osName="Mac OS X" osVersion="10.11.6" lineSeparator="\n" numMonitors="1" monitorBounds="[0, 0, 1280, 800]">
+  <Command __id="0" _type="ShellBoundsCommand" bounds="[0, 36, 1066, 709]" timestamp="88" />
+  <Command __id="1" _type="FileOpenCommand" docASTNodeCount="315" docActiveCodeLength="1679" docExpressionCount="225" docLength="1927" projectName="espionage" timestamp="135">
+    <filePath><![CDATA[/Users/user/Documents/workspace/dev/espionage/plugin/espionage/src/edu/cwi/espionage/views/EspionageView.java]]></filePath>
+    <snapshot><![CDATA[package edu.cwi.espionage.views;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.part.*;
+
+import edu.cwi.espionage.model.ProcessCase;
+import edu.cwi.espionage.util.DateManipulator;
+import edu.cwi.espionage.util.FileLogManager;
+import edu.cwi.espionage.util.FileType;
+import edu.cwi.espionage.util.FileUtils;
+import edu.cwi.espionage.util.Utils;
+
+import java.awt.Frame;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
+
+public class EspionageView extends ViewPart {
+
+	/**
+	 * The ID of the view as specified by the extension.
+	 */
+	public static final String ID = "edu.cwi.espionage.views.SampleView";
+
+	/**
+	 * The constructor.
+	 */
+	public EspionageView() {
+	}
+
+	/**
+	 * This is a callback that will allow us to create the viewer and initialize
+	 * it.
+	 */
+	public void createPartControl(Composite parent) {
+		FileLogManager logManager = new FileLogManager();
+		Map<String, HashMap<String, ProcessCase>> project = logManager.getProject(FileType.MIMEC_CSV);
+		writeProjectToFile(project,FileType.MYLYN_XML);
+		Composite composite = new Composite(parent, SWT.EMBEDDED | SWT.NO_BACKGROUND);
+		Frame frame = SWT_AWT.new_Frame(composite);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				TreeDisplay.createAndShowGUI(frame, project);
+			}
+		});
+	}
+
+	private void writeProjectToFile(Map<String, HashMap<String, ProcessCase>> project, FileType fileType) {
+		String currentDate = DateManipulator.getFormatedDate(Calendar.getInstance().getTime(), "yyyy-MM-dd_HH-mm-ss");
+		PrintWriter projectOutput = FileUtils.createFile(Utils.getFullPath("/dataset/"+fileType+"_"+currentDate+".csv"));
+		FileUtils.createProject(project, projectOutput);
+		projectOutput.close();
+	}
+
+	/**
+	 * Passing the focus request to the viewer's control.
+	 */
+	public void setFocus() {
+	}
+}
+]]></snapshot>
+  </Command>
+  <Command __id="2" _type="MoveCaretCommand" caretOffset="1281" docOffset="1758" timestamp="521" />
+  <Command __id="3" _type="MoveCaretCommand" caretOffset="823" docOffset="1300" timestamp="745480" />
+  <Command __id="4" _type="MoveCaretCommand" caretOffset="430" docOffset="907" timestamp="747574" />
+</Events>

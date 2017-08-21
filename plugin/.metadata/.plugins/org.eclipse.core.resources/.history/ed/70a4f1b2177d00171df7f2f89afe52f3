@@ -1,0 +1,63 @@
+package edu.cwi.espionage.util;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.cwi.espionage.model.Event;
+import edu.cwi.espionage.model.ProcessCase;
+
+public abstract class FileParser {
+	private static final long MINIMUM_IDLE_TIME = 600; //10 minutes as default.
+	public String[] files;
+
+	public FileParser(String logPath) {
+		// create a file that is really a directory
+	    File aDirectory = new File(Utils.getFullPath(logPath));
+		this.files = aDirectory.list();
+		System.out.println(files);
+
+	}
+	
+	public abstract Map<String, HashMap<String, ProcessCase>> getProject();
+	
+	public Long calculateIdleInactiveTime(Event e1, Event e2) {
+		Event firstEvent = e1;
+		Event secondEvent = e2;
+		if(e1.getTimestamp().after(e2.getTimestamp())){
+			firstEvent = e2;
+			secondEvent = e1;
+		}
+		if (IsInactive(firstEvent, secondEvent)) {
+			return secondEvent.getElapstime();
+			
+		}
+		return new Long(0);
+	}
+	
+	/**
+	 * To calculate inactive time:
+	 * CONTEXT: The fluorite log all developers events. 
+	 * METHOD : Visualizing Developer Interactions by  Roberto Minelli, Andrea Mocci, Michele Lanza and Lorenzo Baracchi
+	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
+	 * 			that the user is inactive.
+	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
+	 * @param Event firstEvent
+	 * @param Event secondEvent
+	 * 
+	 * @return
+	 */
+	private long getElapsedTime(Event firstEvent, Event secondEvent){
+		return Math.abs(secondEvent.getTimestamp().getTime() - firstEvent.getTimestamp().getTime());
+	}
+	
+	private boolean IsInactive(Event firstEvent, Event secondEvent){
+		boolean isInactive = false;
+		long elapsedTime = getElapsedTime(firstEvent,secondEvent);
+		long elapsedTimeSeconds = elapsedTime/1000;
+		if(elapsedTimeSeconds > MINIMUM_IDLE_TIME && elapsedTimeSeconds >= secondEvent.getElapstime() ){
+			isInactive = true;
+		}
+		return isInactive;
+	}
+}

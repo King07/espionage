@@ -13,8 +13,8 @@ import edu.cwi.espionage.model.Event;
 import edu.cwi.espionage.model.ProcessCase;
 
 public class MimecCSVParser extends FileParser {
-	
-	private static final String MIMEC_LOGS_PATH = "/.metadata/.plugins/mimec/";
+	//TODO This should be in the configuration / setting page
+	private static final String MIMEC_LOGS_PATH = "/.metadata/.plugins/mimec/dev5/";
 
 	public MimecCSVParser() {
 		super(MIMEC_LOGS_PATH);
@@ -78,8 +78,13 @@ public class MimecCSVParser extends FileParser {
 							processCase = new ProcessCase(caseId);
 							processCase.setStartTime(fDate);
 							processCase.setIdleTime(idleTime);
-							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatFDate, "dd/MM/yyyy"),DateManipulator.getHourFromDate(formatFDate), idleTime);
-//							
+							processCase.getIdleTimeTable().add(DateManipulator.getFormatedDate(formatCurrDate, "dd/MM/yyyy"),DateManipulator.getHourFromDate(formatCurrDate), idleTime);
+//							if("TableRenderer.java".equals(processCase.getCaseId()) && "halogen".equals(projectName)){
+//								System.out.println(startDate);
+//								System.out.println(formatFDate);
+//								System.out.println(formatCurrDate);
+//								System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+//						}
 						}
 					}
 						
@@ -101,10 +106,27 @@ public class MimecCSVParser extends FileParser {
 									
 							}
 							if(processCase.getEvents().size() > 0){
+//								if("TableRenderer.java".equals(processCase.getCaseId()) && "halogen".equals(projectName)){
+//									System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+//									System.out.println(processCase.getCaseId());
+//									System.out.println("Last => "+processCase.getEvents().get(processCase.getEvents().size()-1));
+//									System.out.println("Current => "+event);
+//									System.out.println(processCase.getIdleTimeTable());
+//									System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+//								}
+								
 								long inactiveIdle = this.calculateIdleInactiveTime(processCase.getEvents().get(processCase.getEvents().size()-1), event);
 								String formatedDate = DateManipulator.getFormatedDate(event.getTimestamp(), "dd/MM/yyyy");
 								Integer hourFromDate = DateManipulator.getHourFromDate(event.getTimestamp());
 								processCase.getIdleTimeTable().add(formatedDate, hourFromDate, inactiveIdle);
+//								if("TableRenderer.java".equals(processCase.getCaseId()) && "halogen".equals(projectName)){
+//									
+//									System.out.println(formatedDate);
+//									System.out.println(hourFromDate);
+//									System.out.println(inactiveIdle);
+//									System.out.println(processCase.getIdleTimeTable());
+//									System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+//								}
 							}
 							
 							processCase.addEvents(event);
@@ -147,8 +169,17 @@ public class MimecCSVParser extends FileParser {
 	}
 
 	public String getProjectName(String line) {
-		String pNameRaw = Utils.regexChecker("no(.*?)\\{", line).replace("{", "");
-		return pNameRaw != "" ? pNameRaw.split("\\.")[1] : pNameRaw;
+//		System.out.println("@@@@@@@@@@@@@");
+//		System.out.println(line);
+		line = line.replace("\\/", ".");
+		line = line.replace("/", ".");
+		line = line.replace(".src.", "/src<");
+		line = line.replace(".src<", "/src<");
+		line = line.replace(".Des", "/Des");
+//		System.out.println(line);
+		String pNameRaw = Utils.regexChecker("src(.*?)\\{", line).replace("{", "");
+//		System.out.println(pNameRaw.split("\\.").length > 1 ? pNameRaw.split("\\.")[1] : "");
+		return pNameRaw.split("\\.").length > 1 ? pNameRaw.split("\\.")[1] : "";
 	}
 
 }

@@ -39,7 +39,7 @@ public class IdleTimeTable {
 	}
 
 	private void setDefaultHours(HashMap<Integer, Long> hLookup) {
-		for (int i = 1; i <= 24; i++) {
+		for (int i = 0; i <= 24; i++) {
 			hLookup.put(i, new Long(0));
 		}
 	}
@@ -66,7 +66,7 @@ public class IdleTimeTable {
 	
 	public Long total(String formatedDate,Integer lower, Integer upper) {
 		Long lookupIdleTime = new Long(0);
-		for (int i = lower; i < upper; i++) {
+		for (int i = lower; i <= upper; i++) {
 			 lookupIdleTime += lookupIdleTime(formatedDate, i);
 		}
 		return lookupIdleTime;

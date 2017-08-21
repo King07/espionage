@@ -21,15 +21,6 @@ public abstract class FileParser {
 	
 	public abstract Map<String, HashMap<String, ProcessCase>> getProject();
 	
-	public Long calculateIdleInactiveTime(Event e1, Event e2) {
-		if (IsInactive(e2, e1)) {
-			
-			long idleTime = DateManipulator.getSecondsFromDiff(getInactiveTime(e1, e2));
-			return idleTime;
-			
-		}
-		return new Long(0);
-	}
 	
 	/**
 	 * To calculate inactive time:
@@ -38,39 +29,36 @@ public abstract class FileParser {
 	 * 			idle time = event2 - event1 => if idle time is more than “minimum  idle  time (10 minutes)”, Then it suggest
 	 * 			that the user is inactive.
 	 * {@link http://conferences.computer.org/vissoft/2014/papers/6150a147.pdf } 
-	 * @param Event e1
-	 * @param Event e2
+	 * @param Event firstEvent
+	 * @param Event secondEvent
 	 * 
 	 * @return
 	 */
-	private long getInactiveTime(Event e1, Event e2){
-		Event firstEvent = e1;
-		Event secondEvent = e2;
-		if(e1.getTimestamp().after(e2.getTimestamp())){
-			firstEvent = e2;
-			secondEvent = e1;
-		}
-		
+	private Long getElapsedTime(Event firstEvent, Event secondEvent){
 		return Math.abs(secondEvent.getTimestamp().getTime() - firstEvent.getTimestamp().getTime());
 	}
 	
-	private boolean IsInactive(Event e1, Event e2){
+	private Boolean IsInactive(Event firstEvent, Event secondEvent){
+		boolean isInactive = false;
+		long elapsedTime = getElapsedTime(firstEvent,secondEvent);
+		long elapsedTimeSeconds = elapsedTime/1000;
+		if(elapsedTimeSeconds > MINIMUM_IDLE_TIME && elapsedTimeSeconds >= secondEvent.getElapstime() ){
+			isInactive = true;
+		}
+		return isInactive;
+	}
+	
+	public Long calculateIdleInactiveTime(Event e1, Event e2) {
 		Event firstEvent = e1;
 		Event secondEvent = e2;
 		if(e1.getTimestamp().after(e2.getTimestamp())){
 			firstEvent = e2;
 			secondEvent = e1;
 		}
-		
-		boolean isInactive = false;
-		long inactiveTime = getInactiveTime(firstEvent,secondEvent);
-		long inactiveTimeSeconds = inactiveTime/1000;
-		if(inactiveTimeSeconds > MINIMUM_IDLE_TIME && inactiveTimeSeconds == secondEvent.getElapstime() ){
-			System.out.println("inactiveTimeSeconds <=> "+inactiveTimeSeconds);
-			System.out.println("E1 <=> "+firstEvent);
-			System.out.println("E2 <=> "+secondEvent);
-			isInactive = true;
+		if (IsInactive(firstEvent, secondEvent)) {
+			return secondEvent.getElapstime();
+			
 		}
-		return isInactive;
+		return new Long(0);
 	}
 }

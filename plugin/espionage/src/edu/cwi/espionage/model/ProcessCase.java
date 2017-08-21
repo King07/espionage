@@ -104,7 +104,7 @@ public class ProcessCase implements Comparable<ProcessCase>, Cloneable{
 				Long lookupIdleTime = new Long(0);
 				if(isDateRangeNull(upper, lower)){
 					
-					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, 1, 24);
+					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, 0, 23);
 				}else{
 					 lookupIdleTime = this.getIdleTimeTable().total(formatedDate, DateManipulator.getHourFromDate(lower), DateManipulator.getHourFromDate(upper));
 				}

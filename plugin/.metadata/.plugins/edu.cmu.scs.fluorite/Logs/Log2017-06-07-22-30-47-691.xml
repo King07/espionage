@@ -9373,3 +9373,40 @@ public abstract class FileParser {
   <Command __id="7029" _type="RunCommand" kind="Create" projectName="null" timestamp="387790445" type="Run" />
   <Command __id="7030" _type="RunCommand" exitValue="143" kind="Terminate" projectName="null" timestamp="387833921" type="Run" />
   <Command __id="7031" _type="MoveCaretCommand" caretOffset="630" docOffset="1107" timestamp="387836629" />
+  <DocumentChange __id="7032" _type="Delete" docASTNodeCount="315" docActiveCodeLength="1682" docExpressionCount="225" docLength="1930" endLine="40" length="2" offset="1097" startLine="40" timestamp="387838318">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="7033" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.toggle.comment" timestamp="387838387" />
+  <Command __id="7034" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="387839619" />
+  <Command __id="7035" _type="MoveCaretCommand" caretOffset="623" docOffset="1100" timestamp="388159543" />
+  <Command __id="7036" _type="MoveCaretCommand" caretOffset="622" docOffset="1099" timestamp="388160537" />
+  <Command __id="7037" _type="MoveCaretCommand" caretOffset="612" docOffset="1089" timestamp="388250436" />
+  <Command __id="7038" _type="SelectTextCommand" caretOffset="617" docEnd="1094" docOffset="1094" docStart="1082" end="617" start="605" timestamp="388250535" />
+  <DocumentChange __id="7039" _type="Replace" docASTNodeCount="315" docActiveCodeLength="1672" docExpressionCount="225" docLength="1920" endLine="39" insertionLength="2" int_docASTNodeCount="315" int_docActiveCodeLength="1670" int_docExpressionCount="224" int_docLength="1918" length="12" offset="1082" repeat="2" startLine="39" timestamp="388251417" timestamp2="388252238">
+    <deletedText><![CDATA[FLOURITE_XML]]></deletedText>
+    <insertedText><![CDATA[Mi]]></insertedText>
+  </DocumentChange>
+  <Command __id="7040" _type="InsertStringCommand" repeat="4" timestamp="388251441" timestamp2="388252253">
+    <data><![CDATA[MMii]]></data>
+  </Command>
+  <Command __id="7045" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="START" timestamp="388252511" />
+  <DocumentChange __id="7046" _type="Replace" docASTNodeCount="315" docActiveCodeLength="1679" docExpressionCount="225" docLength="1927" endLine="39" insertionLength="8" int_docASTNodeCount="315" int_docActiveCodeLength="1671" int_docExpressionCount="225" int_docLength="1919" length="1" offset="1083" startLine="39" timestamp="388252535">
+    <deletedText><![CDATA[i]]></deletedText>
+    <insertedText><![CDATA[IMEC_CSV]]></insertedText>
+  </DocumentChange>
+  <Command __id="7047" _type="AssistCommand" assist_type="CONTENT_ASSIST" auto_activated="false" start_end="END" timestamp="388252541" />
+  <Command __id="7048" _type="EclipseCommand" commandID="org.eclipse.ui.edit.text.contentAssist.proposals" timestamp="388252543" />
+  <Command __id="7049" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="388254238" />
+  <Command __id="7050" _type="MoveCaretCommand" caretOffset="651" docOffset="1128" timestamp="388255369" />
+  <DocumentChange __id="7051" _type="Insert" docASTNodeCount="308" docActiveCodeLength="1630" docExpressionCount="219" docLength="1929" length="2" offset="1094" timestamp="388256275">
+    <text><![CDATA[//]]></text>
+  </DocumentChange>
+  <Command __id="7052" _type="EclipseCommand" commandID="org.eclipse.jdt.ui.edit.text.java.toggle.comment" timestamp="388256325" />
+  <Command __id="7053" _type="EclipseCommand" commandID="org.eclipse.ui.file.save" timestamp="388256741" />
+  <Command __id="7054" _type="RunCommand" kind="Create" projectName="null" timestamp="388264343" type="Run" />
+  <Command __id="7055" _type="RunCommand" exitValue="143" kind="Terminate" projectName="null" timestamp="413104854" type="Run" />
+  <Command __id="7056" _type="ShellBoundsCommand" bounds="[0, 0, 1920, 1080]" timestamp="414789710" />
+  <Command __id="7057" _type="ShellBoundsCommand" bounds="[0, 280, 1280, 800]" repeat="3" timestamp="414796596" timestamp2="414799697" />
+  <Command __id="7060" _type="MoveCaretCommand" caretOffset="937" docOffset="1414" timestamp="478088890" />
+  <Command __id="7061" _type="ShellBoundsCommand" bounds="[0, 23, 1066, 717]" repeat="5" timestamp="478095471" timestamp2="478096089" />
+  <Command __id="7066" _type="EclipseCommand" commandID="org.eclipse.ui.help.aboutAction" timestamp="481574147" />

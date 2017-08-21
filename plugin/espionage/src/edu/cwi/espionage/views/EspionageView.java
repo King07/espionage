@@ -37,8 +37,8 @@ public class EspionageView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		FileLogManager logManager = new FileLogManager();
-		Map<String, HashMap<String, ProcessCase>> project = logManager.getProject(FileType.FLOURITE_XML);
-		writeProjectToFile(project,FileType.MYLYN_XML);
+		Map<String, HashMap<String, ProcessCase>> project = logManager.getProject(FileType.MIMEC_CSV);
+		writeProjectToFile(project,FileType.MIMEC_CSV);
 		Composite composite = new Composite(parent, SWT.EMBEDDED | SWT.NO_BACKGROUND);
 		Frame frame = SWT_AWT.new_Frame(composite);
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
