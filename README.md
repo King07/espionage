@@ -10,7 +10,17 @@ One major contribution of this thesis is that it demonstrates that activity logs
 
 ## Replication Package
 
-### Dataset
+### Dataset for Research Question 1
+```
+How accurate can file-level effort measurements be when based on IDE activity logs analysis?
+```
+The dataset used to answer this question can be found [here](http://bit.ly/2vE9F77)
+
+### Dataset for Research Question 2
+```
+Can we effectively use previously measured SLOC and CC of a class to estimate/predict future
+maintenance effort on source code at class level?
+```
 To perform the study in this research, we use the same dataset from two previous studies from
 Soh et al. [55] and Sjøberg et al. [52] in which the impact of code smell on maintenance effort was
 studied. Both of these studies used the same dataset. However, the difference is that Sjøberg et al.
@@ -28,5 +38,6 @@ During maintenance task, Mimec [36] was used to record the IDE activity logs.
 * And removed all classes with zero effort.
 #### Step 3
 * We merged step 2 together to create one full dataset of the developers.
+* [The full dataset](https://github.com/King07/espionage/tree/master/dataset)
 
 
