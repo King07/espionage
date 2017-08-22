@@ -6,6 +6,8 @@ To accomplish this goal, we reused a dataset acquired from a different study on 
 
 One major contribution of this thesis is that it demonstrates that activity logs are reliable data sources for measuring software maintenance effort. That could lead to more focus on collecting and analyzing activity logs to support better estimations on maintenance effort.
 
+[Read the full master thesis](https://www.overleaf.com/read/mgspqmgggxyw)
+
 ## Replication Package
 
 ### Dataset
